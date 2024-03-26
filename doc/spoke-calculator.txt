@@ -1,0 +1,655 @@
+Spoke Calculator
+
+A spoke length calculator for bicycle wheels.
+
+                                                                         [Class]
+axle
+   Not documented.
+
+                                                                         [Class]
+component
+   Not documented.
+
+                                                                         [Class]
+hub
+   Not documented.
+
+                                                                         [Class]
+nipple
+   Not documented.
+
+                                                                         [Class]
+rim
+   Not documented.
+
+                                                                         [Class]
+spoke
+   Not documented.
+
+                                                                         [Class]
+straight-pull-hub
+   Not documented.
+
+                                                                         [Class]
+thru-axle
+   Not documented.
+
+                                                                         [Class]
+washer
+   Not documented.
+
+                                                              [Special Variable]
+*data*
+   The latest result data set.
+
+                                                              [Special Variable]
+*default-nipple*
+   The default nipple.
+
+                                                              [Special Variable]
+*default-spoke*
+   The default spoke.
+
+                                                              [Special Variable]
+*elastic-modulus*
+   Modulus of elasticity in megapascal.
+
+   The value of this special variable is used if no spoke material
+   is defined.  Most spokes are made of stainless steel according
+   to ISO 6931-1, i.e. spring wire in the cold drawn condition with
+   a modulus of elasticity of 180 MPa.
+
+                                                              [Special Variable]
+*html-template*
+   The HTML template file.
+
+   The template file is coded up by the user.  The ‘report’ function uses
+   Edi Weitz's HTML-TEMPLATE library for filling in the documentation
+   strings.  Below is the list of template tags together with their
+   meaning.
+
+                                                              [Special Variable]
+*output-directory*
+   The default directory for saving a report.
+
+                                                              [Special Variable]
+*output-name*
+   The default file name of a report.
+
+                                                                      [Function]
+area-of-circle (diameter)
+   Calculate the area of a circle.
+
+                                                                      [Function]
+area-of-ellipse (width height)
+   Calculate the area of an ellipse.
+
+                                                                      [Function]
+area-of-rectangle (width height &optional radius)
+   Calculate the area of a rounded rectangle.
+
+                                                              [Generic Function]
+axle-diameter (object)
+   Not documented.
+
+                                                                        [Method]
+axle-diameter ((axle axle))
+   The diameter of the wheel axle.
+
+                                                              [Generic Function]
+axle-length (object)
+   Not documented.
+
+                                                                        [Method]
+axle-length ((hub hub))
+   The over locknut distance of the wheel axle, i.e. the distance between the dropouts.
+
+                                                                        [Method]
+axle-length ((axle axle))
+   The over locknut distance of the wheel axle, i.e. the distance between the dropouts.
+
+                                                              [Generic Function]
+axle-thread (object)
+   Not documented.
+
+                                                                        [Method]
+axle-thread ((thru-axle thru-axle))
+   The thread specification.
+
+                                                              [Generic Function]
+base-diameter (object)
+   Not documented.
+
+                                                                        [Method]
+base-diameter ((rim rim))
+   The base diameter, i.e. pitch circle diameter, of the spoke holes on the rim.
+
+                                                                      [Function]
+calculate (&key hub rim washer spoke nipple spoke-count spoke-crossings
+           spoke-tension spoke-tension-method rim-offset-orientation
+           nipple-head-extent)
+   Calculate the spoke lengths for a wheel assembly.
+
+   Keyword arguments HUB, RIM, WASHER, SPOKE, and NIPPLE define the
+    components of the wheel assembly.  Only HUB and RIM are mandatory.
+    If WASHER is a number, it defines the thickness of the washer in
+    millimeter.
+   Keyword argument SPOKE-COUNT is the number of spokes.  Value is
+    either 20, 24, 28, 32, or 36.  Default is 32.
+   Keyword argument SPOKE-CROSSINGS is the number of spoke crossings.
+    Value is either 0 (radial), 1, 2, 3, or 4.  Default is 3.
+   Keyword argument SPOKE-TENSION is the spoke tension in kilogram
+    when truing the wheel.  Value has to be a non-negative number.
+    Default is 120 kilogram.  The spoke tension is used to estimate
+    the elongation of the spokes.  This information can be used to
+    adjust the actual spoke length.
+   Keyword argument SPOKE-TENSION-METHOD defines how to apply the
+    SPOKE-TENSION parameter.  Value is either ‘:max’, ‘:min’, or
+    ‘:mean’ to apply the spoke tension as the maximum, minimum,
+    or mean spoke tension respectively.  Default is ‘:max’.
+   Keyword argument RIM-OFFSET-ORIENTATION defines the orientation of
+    an asymmetric rim.  Value is either ‘:left’, ‘:right’, or ‘:auto’.
+    Default is ‘:auto’.  A value of ‘:left’ means, that the spoke holes
+    are to the left of the middle of the rim.  A value of ‘:right’ means,
+    that the the spoke holes are to the right of the middle of the rim.
+    A value of ‘:auto’ means, that the rim orientation is selected in
+    such a way that the tension ratio is improved.
+   Keyword argument NIPPLE-HEAD-EXTENT is the additional spoke length in
+    millimeter that extends from the rim (washer) contact point into the
+    nipple head.  Value has to be a number.  Default is 2 millimeter.
+    DT Swiss uses 2 millimeter for their ERD calculation.
+
+   The value of the SPOKE, NIPPLE, SPOKE-COUNT, and SPOKE-CROSSINGS
+   argument is either an object as documented above or a cons cell where
+   the ‘car’ denotes the left-hand side object and the ‘cdr’ denotes the
+   right-hand side object.  The SPOKE-COUNT and SPOKE-CROSSINGS values
+   define the spoke's lacing pattern.
+
+   See also ‘hub’, ‘rim’, ‘washer’, ‘spoke’, and ‘nipple’.
+
+                                                              [Generic Function]
+component-name (object)
+   Not documented.
+
+                                                                        [Method]
+component-name ((component component))
+   A short description of the component.
+
+                                                                      [Function]
+cosd (number)
+   Return the cosine of NUMBER given in degree angle.
+
+                                                                      [Function]
+define-material (name &rest options &key elastic-modulus)
+   Not documented.
+
+                                                                      [Function]
+degree-from-radian (rad)
+   Convert a plane angle from radian to degree.
+
+   Argument RAD is the angle given in radian.
+
+   Value is the corresponding angle given in degree.
+
+                                                              [Special Variable]
+dtswiss-aero-comp
+   Not documented.
+
+                                                              [Special Variable]
+dtswiss-aerolite
+   Not documented.
+
+                                                              [Special Variable]
+dtswiss-alpine
+   Not documented.
+
+                                                              [Special Variable]
+dtswiss-alpine-iii
+   Not documented.
+
+                                                              [Special Variable]
+dtswiss-competition
+   Not documented.
+
+                                                              [Special Variable]
+dtswiss-competition-race
+   Not documented.
+
+                                                              [Special Variable]
+dtswiss-hidden
+   Not documented.
+
+                                                              [Special Variable]
+dtswiss-phr
+   Not documented.
+
+                                                              [Special Variable]
+dtswiss-pro-head
+   Not documented.
+
+                                                              [Special Variable]
+dtswiss-pro-head-14
+   Not documented.
+
+                                                              [Special Variable]
+dtswiss-revolite
+   Not documented.
+
+                                                              [Special Variable]
+dtswiss-revolution
+   Not documented.
+
+                                                              [Special Variable]
+dtswiss-squorx
+   Not documented.
+
+                                                              [Special Variable]
+dtswiss-standard
+   Not documented.
+
+                                                              [Special Variable]
+dtswiss-standard-14
+   Not documented.
+
+                                                              [Special Variable]
+dtswiss-standard-14.5
+   Not documented.
+
+                                                              [Special Variable]
+dtswiss-standard-16
+   Not documented.
+
+                                                              [Generic Function]
+elastic-modulus (object)
+   Not documented.
+
+                                                                        [Method]
+elastic-modulus ((object null))
+   Not documented.
+
+                                                                        [Method]
+elastic-modulus ((material material))
+   Modulus of elasticity in megapascal.
+
+                                                                      [Function]
+find-material (name)
+   Not documented.
+
+                                                              [Generic Function]
+first-spoke-hole (object)
+   Not documented.
+
+                                                                        [Method]
+first-spoke-hole ((rim rim))
+   The orientation of the first spoke hole.
+
+                                                                      [Constant]
+gn
+   Standard acceleration of gravity.
+
+                                                                      [Function]
+hypot (x y)
+   Return the distance between a point and the origin
+   in a two-dimensional Cartesian coordinate system.
+
+   Arguments X and Y have to be real numbers.
+
+                                                                      [Function]
+hypot3 (x y z)
+   Return the distance between a point and the origin
+   in a three-dimensional Cartesian coordinate system.
+
+   Arguments X, Y, and Z have to be real numbers.
+
+                                                                      [Function]
+left (object)
+   Return the left-hand side object.
+
+                                                                      [Function]
+make-hub-from-measurements (class &rest arguments &key axle-length
+                            flange-distance flange-thickness &allow-other-keys)
+   Create a hub object from measured values.
+
+   First argument CLASS is the class of the hub.  Value is a symbol and
+    must be a sub-type of ‘hub’.
+   Keyword argument AXLE-LENGTH is the installation width of the hub,
+    i.e. the distance between the dropouts.
+   Keyword argument FLANGE-DISTANCE is the distance from the flange to
+    the adjacent dropout.
+   Keyword argument FLANGE-THICKNESS is the thickness of the flanges at
+    the pitch circle diameter.
+   Remaining arguments are initialization arguments of CLASS.
+
+   Return value is a hub object.
+
+                                                                      [Function]
+make-rim-from-measurements (class &rest arguments &key inner-diameter thickness
+                            &allow-other-keys)
+   Create a rim object from measured values.
+
+   First argument CLASS is the class of the rim.  Value is a symbol and
+    must be a sub-type of ‘rim’.
+   Keyword argument INNER-DIAMETER is the inner diameter of the rim.
+    If the spoke holes have eyelets, the height of the eyelets has to
+    be excluded.
+   Keyword argument THICKNESS is the thickness of the rim at the spoke
+    holes.  If the spoke holes have eyelets, the outer height of the
+    eyelets has to be included.
+   Remaining arguments are initialization arguments of CLASS.
+
+   Return value is a rim object.
+
+                                                              [Generic Function]
+material-name (object)
+   Not documented.
+
+                                                                        [Method]
+material-name ((object null))
+   Not documented.
+
+                                                                        [Method]
+material-name ((material material))
+   The material name.
+
+                                                              [Generic Function]
+nipple-head-height (object)
+   Not documented.
+
+                                                                        [Method]
+nipple-head-height ((nipple nipple))
+   The height of the nipple head.
+
+                                                              [Generic Function]
+nipple-length (object)
+   Not documented.
+
+                                                                        [Method]
+nipple-length ((nipple nipple))
+   The length of the nipple.
+
+                                                              [Generic Function]
+pitch-circle-diameter (object)
+   Not documented.
+
+                                                                        [Method]
+pitch-circle-diameter ((hub hub))
+   The pitch circle diameter of the spoke holes on the flange.
+
+                                                              [Generic Function]
+pitch-circle-distance (object)
+   Not documented.
+
+                                                                        [Method]
+pitch-circle-distance ((rim rim))
+   The distance from the middle of the rim to the pitch circle.
+
+                                                                        [Method]
+pitch-circle-distance ((hub hub))
+   The distance from the middle of the hub to the pitch circle.
+
+                                                              [Special Variable]
+quick-release-5x100
+   Not documented.
+
+                                                              [Special Variable]
+quick-release-5x130
+   Not documented.
+
+                                                              [Special Variable]
+quick-release-5x135
+   Not documented.
+
+                                                                      [Function]
+radian-from-degree (deg)
+   Convert a plane angle from degree to radian.
+
+   Argument DEG is the angle given in degree.
+
+   Value is the corresponding angle given in radian.
+
+                                                                      [Function]
+report (data &key output format)
+   Generate a report.
+
+   First argument DATA is a result data set of the ‘calculate’ function.
+   Keyword argument OUTPUT specifies the destination.  Value is either
+    a stream, a pathname, or a string.  The special value ‘t’ means
+    ‘*standard-output*’ and ‘nil’ returns a string.  If OUTPUT is a
+    pathname, the special variables ‘*output-directory*’ and
+    ‘*output-name*’ have an effect.
+   Keyword argument FORMAT specifies the file format of the report.
+    Value is either ‘:text’ or ‘:html’.
+
+                                                                      [Function]
+right (object)
+   Return the right-hand side object.
+
+                                                                      [Function]
+round-down (number &optional divisor)
+   Round towards negative infinity.
+
+                                                                      [Function]
+round-near (number &optional divisor)
+   Round to the nearest multiple.
+
+                                                                      [Function]
+round-up (number &optional divisor)
+   Round towards positive infinity.
+
+                                                              [Special Variable]
+sapim-cx-ray
+   Not documented.
+
+                                                              [Special Variable]
+sapim-cx-sprint
+   Not documented.
+
+                                                              [Special Variable]
+sapim-d-light
+   Not documented.
+
+                                                              [Special Variable]
+sapim-double-square
+   Not documented.
+
+                                                              [Special Variable]
+sapim-flat
+   Not documented.
+
+                                                              [Special Variable]
+sapim-flat-head
+   Not documented.
+
+                                                              [Special Variable]
+sapim-hm
+   Not documented.
+
+                                                              [Special Variable]
+sapim-laser
+   Not documented.
+
+                                                              [Special Variable]
+sapim-mg
+   Not documented.
+
+                                                              [Special Variable]
+sapim-ms
+   Not documented.
+
+                                                              [Special Variable]
+sapim-oval-large
+   Not documented.
+
+                                                              [Special Variable]
+sapim-oval-small
+   Not documented.
+
+                                                              [Special Variable]
+sapim-polyax
+   Not documented.
+
+                                                              [Special Variable]
+sapim-race
+   Not documented.
+
+                                                              [Special Variable]
+sapim-round-head
+   Not documented.
+
+                                                              [Special Variable]
+sapim-strong
+   Not documented.
+
+                                                              [Special Variable]
+sapim-up-side-down
+   Not documented.
+
+                                                                      [Function]
+sind (number)
+   Return the sine of NUMBER given in degree angle.
+
+                                                              [Generic Function]
+spoke-area (object)
+   Not documented.
+
+                                                                        [Method]
+spoke-area ((spoke spoke))
+   The cross-sectional area of the spoke on the middle section.
+
+                                                              [Generic Function]
+spoke-diameter (object)
+   Not documented.
+
+                                                                        [Method]
+spoke-diameter ((spoke spoke))
+   The diameter of the spoke at the head.
+
+                                                                      [Function]
+spoke-elongation (spoke length tension)
+   Calculate the elongation of a spoke under tension load.
+
+   First argument SPOKE is a ‘spoke’ object.
+   Second argument LENGTH is the length of the spoke in millimeter.
+   Third argument TENSION is the spoke tension in kilogram.  Value
+    has to be a non-negative number.
+
+   The cross-sectional area and the length of the spoke's middle section
+   and the material of the spoke must be defined.  See the ‘spoke-area’,
+   ‘spoke-middle-section’, and ‘spoke-material’ methods of the ‘spoke’
+   class.
+
+   Primary value is the elongation of the spoke in millimeter.  Secondary
+   value is true if the corresponding stress is less than or equal to the
+   spoke's strength.
+
+                                                              [Generic Function]
+spoke-hole-diameter (object)
+   Not documented.
+
+                                                                        [Method]
+spoke-hole-diameter ((hub hub))
+   The diameter of the spoke holes.
+
+                                                              [Generic Function]
+spoke-hole-offset (object)
+   Not documented.
+
+                                                                        [Method]
+spoke-hole-offset ((straight-pull-hub straight-pull-hub))
+   The spoke length correction for straight pull hubs.
+
+                                                              [Generic Function]
+spoke-material (object)
+   Not documented.
+
+                                                                        [Method]
+spoke-material ((spoke spoke))
+   The material identifier.
+
+                                                              [Generic Function]
+spoke-middle-section (object)
+   Not documented.
+
+                                                                        [Method]
+spoke-middle-section ((spoke spoke))
+   The length of the middle section.
+
+                                                              [Generic Function]
+spoke-strength (object)
+   Not documented.
+
+                                                                        [Method]
+spoke-strength ((spoke spoke))
+   The strength of the spoke on the middle section.
+
+                                                              [Generic Function]
+spoke-thread (object)
+   Not documented.
+
+                                                                        [Method]
+spoke-thread ((spoke spoke))
+   The thread specification.
+
+                                                              [Special Variable]
+syntace-x12-100
+   Not documented.
+
+                                                              [Special Variable]
+syntace-x12-142
+   Not documented.
+
+                                                              [Special Variable]
+syntace-x12-148
+   Not documented.
+
+                                                              [Special Variable]
+syntace-x12-157
+   Not documented.
+
+                                                              [Special Variable]
+thru-axle-12x100
+   Not documented.
+
+                                                              [Special Variable]
+thru-axle-12x142
+   Not documented.
+
+                                                              [Special Variable]
+thru-axle-12x148
+   Not documented.
+
+                                                              [Special Variable]
+thru-axle-12x157
+   Not documented.
+
+                                                              [Special Variable]
+thru-axle-15x100
+   Not documented.
+
+                                                              [Special Variable]
+thru-axle-15x110
+   Not documented.
+
+                                                              [Special Variable]
+thru-axle-20x100
+   Not documented.
+
+                                                              [Special Variable]
+thru-axle-20x110
+   Not documented.
+
+                                                              [Generic Function]
+washer-thickness (object)
+   Not documented.
+
+                                                                        [Method]
+washer-thickness ((washer washer))
+   The thickness of the washer.
+
+                                                              [Generic Function]
+wheel-axle (object)
+   Not documented.
+
+                                                                        [Method]
+wheel-axle ((hub hub))
+   The wheel axle standard.

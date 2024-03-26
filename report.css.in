@@ -1,0 +1,245 @@
+/* -*- mode: css -*- */
+
+/* Perceptually uniform colors, i.e. the primary colors red, green,
+   and blue have similar lightness in the CIE L*a*b* color space.
+   Likewise for the secondary colors cyan, magenta and yellow.  */
+@red:     #d82f00;
+@green:   #007c00;
+@blue:    #2754ff;
+@cyan:    #27d0ff;
+@magenta: #ff83ff;
+@yellow:  #d8ab00;
+@gray1:   #6c6c6c;
+@gray2:   #b6b6b6;
+@gray3:   #919191;
+
+/* Material Design color palette.  */
+@background: #F5F5F5; /* grey 100 */
+@lightgray:  #E0E0E0; /* grey 300 */
+@gray:       #9E9E9E; /* grey 500 */
+@darkgray:   #616161; /* grey 700 */
+@foreground: #212121; /* grey 900 */
+
+* {
+  margin: 0px;
+  border: 0px;
+  padding: 0px;
+}
+
+body {
+  color: @foreground;
+  background-color: @background;
+  font-size: 16px;
+  font-family: sans-serif;
+  margin: 2em;
+}
+
+a {
+  color: inherit;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+div#header {
+  margin: 1em;
+}
+
+div#data {
+  float: left;
+  margin: 1em;
+}
+
+div#graphics {
+  float: left;
+  margin: 1em;
+}
+
+table {
+  border-collapse: collapse;
+  width: 722px;
+}
+
+table, th, td {
+  border: 1px solid @gray;
+}
+
+th, td {
+  text-align: left;
+  vertical-align: baseline;
+  padding: 6px;
+}
+
+td.unit, td.value {
+  text-align: center;
+  white-space: nowrap;
+}
+td.unit {
+  width: 4em;
+}
+td.value {
+  width: 8em;
+}
+
+/* The tooltip container (a ‘div’ or ‘span’ element).  */
+.info {
+  position: relative;
+}
+.info:hover .info-text {
+  display: block;
+}
+/* The tooltip text box.  */
+.info-text {
+  position: absolute;
+  /* Show the tooltip above the content of the tooltip container.  */
+  z-index: 1;
+  /* Align the left edges.  */
+  left: 0%;
+  /* Place the bottom edge of the tooltip above the tooltip container.  */
+  bottom: 100%;
+  /* Add some extra space between the tooltip and the content of the
+     tooltip container.  */
+  margin-bottom: 12px;
+  /* Style the tooltip text box.  */
+  width: 20em;
+  color: @foreground;
+  background: @lightgray;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: smaller;
+  text-align: left;
+  /* Initially hidden.  */
+  display: none;
+}
+/* Add a call out arrow.  */
+.info-text:after {
+  content: "";
+  position: absolute;
+  /* Horizontal position.  */
+  left: 24px;
+  /* Place the top edge of the arrow below the tooltip.  */
+  bottom: -24px;
+  /* Draw the triangle, i.e. the top border of an empty box.  */
+  border-width: 12px;
+  border-style: solid;
+  border-color: @lightgray transparent transparent transparent;
+}
+
+/* SVG elements.
+
+   See ‹https://developer.mozilla.org/en-US/docs/Web/SVG›.  */
+svg {
+  border: 1px solid @gray;
+}
+
+text.title {
+  font-weight: bold;
+  text-anchor: middle;
+  text-align: center;
+}
+
+/* Center lines.  */
+line.center {
+  stroke: black;
+  stroke-width: 0.5;
+  stroke-dasharray: 6 1.5 0.25 1.5;
+}
+circle.center {
+  stroke: black;
+  stroke-width: 0.5;
+  stroke-dasharray: 6 1.5 0.25 1.5;
+  fill: transparent;
+}
+
+/* Spokes.  */
+line.spoke-left-trailing, line.spoke-left-radial {
+  stroke: @blue;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+line.spoke-left-leading {
+  stroke: @magenta;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+line.spoke-right-trailing, line.spoke-right-radial {
+  stroke: @red;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+line.spoke-right-leading {
+  stroke: @yellow;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+/* Spoke heads.  */
+circle.spoke-left-trailing, circle.spoke-left-radial {
+  stroke: black;
+  stroke-width: 0.25;
+  fill: @blue;
+}
+circle.spoke-left-leading {
+  stroke: black;
+  stroke-width: 0.25;
+  fill: @magenta;
+}
+circle.spoke-right-trailing, circle.spoke-right-radial {
+  stroke: black;
+  stroke-width: 0.25;
+  fill: @red;
+}
+circle.spoke-right-leading {
+  stroke: black;
+  stroke-width: 0.25;
+  fill: @yellow;
+}
+
+/* Wheel axle.  */
+circle.axle {
+  stroke: black;
+  stroke-width: 0.5;
+  fill: @background;
+}
+
+/* Hub flanges.  Radius is the pitch circle.  */
+circle.hub-flange {
+  stroke: @gray3;
+  stroke-width: 8;
+  fill: @gray3;
+}
+
+/* Rim.  Radius is the pitch circle.  */
+circle.rim-base {
+  stroke: @gray3;
+  stroke-width: 4;
+  fill: transparent;
+}
+
+/* Valve.  */
+line.valve {
+  stroke: @gray3;
+  stroke-width: 6;
+  stroke-linecap: butt;
+}
+
+/* Background lines.  */
+g.back {
+  line.spoke-left-trailing, line.spoke-left-radial,
+  line.spoke-right-trailing, line.spoke-right-radial {
+    stroke: @gray1;
+  }
+  line.spoke-left-leading,
+  line.spoke-right-leading {
+    stroke: @gray2;
+  }
+  circle.spoke-left-trailing, circle.spoke-left-radial,
+  circle.spoke-right-trailing, circle.spoke-right-radial {
+    fill: @gray1;
+  }
+  circle.spoke-left-leading,
+  circle.spoke-right-leading {
+    fill: @gray2;
+  }
+  line.center, circle.center {
+    stroke: @gray3;
+  }
+}

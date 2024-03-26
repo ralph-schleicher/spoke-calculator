@@ -1,0 +1,3834 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8"/>
+  <title>Spoke Calculator</title>
+  <style type="text/css">
+   *{margin:0;border:0;padding:0}
+   body{color:#000;background-color:#fff;font-family:sans-serif;padding:1em;min-width:46em}
+   a{color:inherit;background-color:transparent;text-decoration:none}
+   table{border-collapse:collapse}
+   div.title{padding:1em}
+   div.subtitle{padding:1em}
+   div.prologue{padding:1em}
+   div.epilogue{padding:1em}
+   span.category{color:#212121;font-style:italic}
+   span.package,span.symbol{color:#212121;font-weight:700;white-space:nowrap}
+   span.lambda-list{color:#616161}
+   span.lambda-list-keyword{color:#388E3C;white-space:nowrap}
+   span.keyword{color:#212121;white-space:nowrap}
+   span.variable{color:#212121;font-style:italic;white-space:nowrap}
+   span.init-form{white-space:nowrap}
+   span.method-specializers{color:#616161}
+   span.method-specializer{color:#212121;white-space:nowrap}
+   span.method-qualifier{color:#212121;white-space:nowrap}
+   span.error{color:#f57c00}
+   div.contents{padding:1em}
+   div.contents-listing{padding:1em}
+   div.contents-listing ul{list-style-type:none}
+   @media all and (min-width:68em){div.contents-listing{column-count:2;column-gap:2em}}
+   div.definition{padding:1em}
+   div.signature{background-color:#F5F5F5;padding:1ex 1em}
+   table.signature td.symbol{text-align:left;vertical-align:baseline;white-space:nowrap;padding-right:.5em}
+   table.signature td.lambda-list{text-align:left;vertical-align:baseline;width:100%}
+   table.signature td.category{text-align:right;vertical-align:baseline;white-space:nowrap;padding-left:1.5em}
+   div.documentation{padding:1em}
+  </style>
+ </head>
+ <body>
+  <div class="title">
+   <h1>Spoke Calculator</h1>
+  </div>
+  <div class="prologue">
+   <pre>A spoke length calculator for bicycle wheels.</pre>
+  </div>
+  <div class="contents" id="contents">
+   <h2>Contents</h2>
+   <div class="contents-listing">
+    <ul>
+     <li>
+      <a href="#jfaa2hyf">
+       <span class="category">Class</span>
+       <span class="symbol">axle</span>
+      </a>
+     </li>
+     <li>
+      <a href="#udmoccvr">
+       <span class="category">Class</span>
+       <span class="symbol">component</span>
+      </a>
+     </li>
+     <li>
+      <a href="#smlax2hs">
+       <span class="category">Class</span>
+       <span class="symbol">hub</span>
+      </a>
+     </li>
+     <li>
+      <a href="#yooqozcm">
+       <span class="category">Class</span>
+       <span class="symbol">nipple</span>
+      </a>
+     </li>
+     <li>
+      <a href="#ejyj7hju">
+       <span class="category">Class</span>
+       <span class="symbol">rim</span>
+      </a>
+     </li>
+     <li>
+      <a href="#tozvxukr">
+       <span class="category">Class</span>
+       <span class="symbol">spoke</span>
+      </a>
+     </li>
+     <li>
+      <a href="#dwtuqk4t">
+       <span class="category">Class</span>
+       <span class="symbol">straight-pull-hub</span>
+      </a>
+     </li>
+     <li>
+      <a href="#a8wr3kya">
+       <span class="category">Class</span>
+       <span class="symbol">thru-axle</span>
+      </a>
+     </li>
+     <li>
+      <a href="#olkxplry">
+       <span class="category">Class</span>
+       <span class="symbol">washer</span>
+      </a>
+     </li>
+     <li>
+      <a href="#hdgdwxga">
+       <span class="category">Special Variable</span>
+       <span class="symbol">*data*</span>
+      </a>
+     </li>
+     <li>
+      <a href="#ulkbci38">
+       <span class="category">Special Variable</span>
+       <span class="symbol">*default-nipple*</span>
+      </a>
+     </li>
+     <li>
+      <a href="#uaq28woa">
+       <span class="category">Special Variable</span>
+       <span class="symbol">*default-spoke*</span>
+      </a>
+     </li>
+     <li>
+      <a href="#yoen4kcw">
+       <span class="category">Special Variable</span>
+       <span class="symbol">*elastic-modulus*</span>
+      </a>
+     </li>
+     <li>
+      <a href="#injoetjp">
+       <span class="category">Special Variable</span>
+       <span class="symbol">*html-template*</span>
+      </a>
+     </li>
+     <li>
+      <a href="#eisc4onn">
+       <span class="category">Special Variable</span>
+       <span class="symbol">*output-directory*</span>
+      </a>
+     </li>
+     <li>
+      <a href="#m3nqrm4f">
+       <span class="category">Special Variable</span>
+       <span class="symbol">*output-name*</span>
+      </a>
+     </li>
+     <li>
+      <a href="#xgsbio7a">
+       <span class="category">Function</span>
+       <span class="symbol">area-of-circle</span>
+      </a>
+     </li>
+     <li>
+      <a href="#v2zi4pqt">
+       <span class="category">Function</span>
+       <span class="symbol">area-of-ellipse</span>
+      </a>
+     </li>
+     <li>
+      <a href="#qq8ey4xf">
+       <span class="category">Function</span>
+       <span class="symbol">area-of-rectangle</span>
+      </a>
+     </li>
+     <li>
+      <a href="#tzid2kgv">
+       <span class="category">Generic Function</span>
+       <span class="symbol">axle-diameter</span>
+      </a>
+     </li>
+     <li>
+      <a href="#ju7nr5yz">
+       <span class="category">Method</span>
+       <span class="symbol">axle-diameter</span>
+       <span class="method-specializers">(<span class="method-specializer">axle</span>)</span>
+      </a>
+     </li>
+     <li>
+      <a href="#ps3qwhdc">
+       <span class="category">Generic Function</span>
+       <span class="symbol">axle-length</span>
+      </a>
+     </li>
+     <li>
+      <a href="#z3jj8wtc">
+       <span class="category">Method</span>
+       <span class="symbol">axle-length</span>
+       <span class="method-specializers">(<span class="method-specializer">hub</span>)</span>
+      </a>
+     </li>
+     <li>
+      <a href="#otrdqepp">
+       <span class="category">Method</span>
+       <span class="symbol">axle-length</span>
+       <span class="method-specializers">(<span class="method-specializer">axle</span>)</span>
+      </a>
+     </li>
+     <li>
+      <a href="#ajud85fl">
+       <span class="category">Generic Function</span>
+       <span class="symbol">axle-thread</span>
+      </a>
+     </li>
+     <li>
+      <a href="#ntfmrpbp">
+       <span class="category">Method</span>
+       <span class="symbol">axle-thread</span>
+       <span class="method-specializers">(<span class="method-specializer">thru-axle</span>)</span>
+      </a>
+     </li>
+     <li>
+      <a href="#d2p8y24g">
+       <span class="category">Generic Function</span>
+       <span class="symbol">base-diameter</span>
+      </a>
+     </li>
+     <li>
+      <a href="#w7tdjftl">
+       <span class="category">Method</span>
+       <span class="symbol">base-diameter</span>
+       <span class="method-specializers">(<span class="method-specializer">rim</span>)</span>
+      </a>
+     </li>
+     <li>
+      <a href="#ogd5qrgr">
+       <span class="category">Function</span>
+       <span class="symbol">calculate</span>
+      </a>
+     </li>
+     <li>
+      <a href="#nt2fp2v2">
+       <span class="category">Generic Function</span>
+       <span class="symbol">component-name</span>
+      </a>
+     </li>
+     <li>
+      <a href="#wqoyxcnm">
+       <span class="category">Method</span>
+       <span class="symbol">component-name</span>
+       <span class="method-specializers">(<span class="method-specializer">component</span>)</span>
+      </a>
+     </li>
+     <li>
+      <a href="#ieqf5zcv">
+       <span class="category">Function</span>
+       <span class="symbol">cosd</span>
+      </a>
+     </li>
+     <li>
+      <a href="#gbl5ddm4">
+       <span class="category">Function</span>
+       <span class="symbol">define-material</span>
+      </a>
+     </li>
+     <li>
+      <a href="#pa7pg37e">
+       <span class="category">Function</span>
+       <span class="symbol">degree-from-radian</span>
+      </a>
+     </li>
+     <li>
+      <a href="#stqkp7fg">
+       <span class="category">Special Variable</span>
+       <span class="symbol">dtswiss-aero-comp</span>
+      </a>
+     </li>
+     <li>
+      <a href="#cblazkpx">
+       <span class="category">Special Variable</span>
+       <span class="symbol">dtswiss-aerolite</span>
+      </a>
+     </li>
+     <li>
+      <a href="#ahlsskrj">
+       <span class="category">Special Variable</span>
+       <span class="symbol">dtswiss-alpine</span>
+      </a>
+     </li>
+     <li>
+      <a href="#sve2wl7u">
+       <span class="category">Special Variable</span>
+       <span class="symbol">dtswiss-alpine-iii</span>
+      </a>
+     </li>
+     <li>
+      <a href="#xqsmjzo5">
+       <span class="category">Special Variable</span>
+       <span class="symbol">dtswiss-competition</span>
+      </a>
+     </li>
+     <li>
+      <a href="#zjfawijr">
+       <span class="category">Special Variable</span>
+       <span class="symbol">dtswiss-competition-race</span>
+      </a>
+     </li>
+     <li>
+      <a href="#q5suq3ub">
+       <span class="category">Special Variable</span>
+       <span class="symbol">dtswiss-hidden</span>
+      </a>
+     </li>
+     <li>
+      <a href="#ewy4c45x">
+       <span class="category">Special Variable</span>
+       <span class="symbol">dtswiss-phr</span>
+      </a>
+     </li>
+     <li>
+      <a href="#pupxiuyx">
+       <span class="category">Special Variable</span>
+       <span class="symbol">dtswiss-pro-head</span>
+      </a>
+     </li>
+     <li>
+      <a href="#dysblb5s">
+       <span class="category">Special Variable</span>
+       <span class="symbol">dtswiss-pro-head-14</span>
+      </a>
+     </li>
+     <li>
+      <a href="#as4lcbl5">
+       <span class="category">Special Variable</span>
+       <span class="symbol">dtswiss-revolite</span>
+      </a>
+     </li>
+     <li>
+      <a href="#tcrytmr3">
+       <span class="category">Special Variable</span>
+       <span class="symbol">dtswiss-revolution</span>
+      </a>
+     </li>
+     <li>
+      <a href="#slu5tzcx">
+       <span class="category">Special Variable</span>
+       <span class="symbol">dtswiss-squorx</span>
+      </a>
+     </li>
+     <li>
+      <a href="#guacym3t">
+       <span class="category">Special Variable</span>
+       <span class="symbol">dtswiss-standard</span>
+      </a>
+     </li>
+     <li>
+      <a href="#pb3syhiw">
+       <span class="category">Special Variable</span>
+       <span class="symbol">dtswiss-standard-14</span>
+      </a>
+     </li>
+     <li>
+      <a href="#p7bjvnpa">
+       <span class="category">Special Variable</span>
+       <span class="symbol">dtswiss-standard-14.5</span>
+      </a>
+     </li>
+     <li>
+      <a href="#uztbrkb5">
+       <span class="category">Special Variable</span>
+       <span class="symbol">dtswiss-standard-16</span>
+      </a>
+     </li>
+     <li>
+      <a href="#trzmjcoq">
+       <span class="category">Generic Function</span>
+       <span class="symbol">elastic-modulus</span>
+      </a>
+     </li>
+     <li>
+      <a href="#urtec8mr">
+       <span class="category">Method</span>
+       <span class="symbol">elastic-modulus</span>
+       <span class="method-specializers">(<span class="method-specializer">null</span>)</span>
+      </a>
+     </li>
+     <li>
+      <a href="#v5bdtsx5">
+       <span class="category">Method</span>
+       <span class="symbol">elastic-modulus</span>
+       <span class="method-specializers">(<span class="method-specializer">material</span>)</span>
+      </a>
+     </li>
+     <li>
+      <a href="#vfhjdpzw">
+       <span class="category">Function</span>
+       <span class="symbol">find-material</span>
+      </a>
+     </li>
+     <li>
+      <a href="#qbmwnlkk">
+       <span class="category">Generic Function</span>
+       <span class="symbol">first-spoke-hole</span>
+      </a>
+     </li>
+     <li>
+      <a href="#rzxbd3t2">
+       <span class="category">Method</span>
+       <span class="symbol">first-spoke-hole</span>
+       <span class="method-specializers">(<span class="method-specializer">rim</span>)</span>
+      </a>
+     </li>
+     <li>
+      <a href="#krvcou8e">
+       <span class="category">Constant</span>
+       <span class="symbol">gn</span>
+      </a>
+     </li>
+     <li>
+      <a href="#ywq5n5oj">
+       <span class="category">Function</span>
+       <span class="symbol">hypot</span>
+      </a>
+     </li>
+     <li>
+      <a href="#pmvzvguz">
+       <span class="category">Function</span>
+       <span class="symbol">hypot3</span>
+      </a>
+     </li>
+     <li>
+      <a href="#f47my3bk">
+       <span class="category">Function</span>
+       <span class="symbol">left</span>
+      </a>
+     </li>
+     <li>
+      <a href="#bki7pnrj">
+       <span class="category">Function</span>
+       <span class="symbol">make-hub-from-measurements</span>
+      </a>
+     </li>
+     <li>
+      <a href="#ixky5gmp">
+       <span class="category">Function</span>
+       <span class="symbol">make-rim-from-measurements</span>
+      </a>
+     </li>
+     <li>
+      <a href="#abckuiuw">
+       <span class="category">Generic Function</span>
+       <span class="symbol">material-name</span>
+      </a>
+     </li>
+     <li>
+      <a href="#ped4omvr">
+       <span class="category">Method</span>
+       <span class="symbol">material-name</span>
+       <span class="method-specializers">(<span class="method-specializer">null</span>)</span>
+      </a>
+     </li>
+     <li>
+      <a href="#ru7ixow3">
+       <span class="category">Method</span>
+       <span class="symbol">material-name</span>
+       <span class="method-specializers">(<span class="method-specializer">material</span>)</span>
+      </a>
+     </li>
+     <li>
+      <a href="#lcfdvakw">
+       <span class="category">Generic Function</span>
+       <span class="symbol">nipple-head-height</span>
+      </a>
+     </li>
+     <li>
+      <a href="#we8h7kye">
+       <span class="category">Method</span>
+       <span class="symbol">nipple-head-height</span>
+       <span class="method-specializers">(<span class="method-specializer">nipple</span>)</span>
+      </a>
+     </li>
+     <li>
+      <a href="#z5geiph3">
+       <span class="category">Generic Function</span>
+       <span class="symbol">nipple-length</span>
+      </a>
+     </li>
+     <li>
+      <a href="#uuauvfbx">
+       <span class="category">Method</span>
+       <span class="symbol">nipple-length</span>
+       <span class="method-specializers">(<span class="method-specializer">nipple</span>)</span>
+      </a>
+     </li>
+     <li>
+      <a href="#fn2r2784">
+       <span class="category">Generic Function</span>
+       <span class="symbol">pitch-circle-diameter</span>
+      </a>
+     </li>
+     <li>
+      <a href="#vbv387ig">
+       <span class="category">Method</span>
+       <span class="symbol">pitch-circle-diameter</span>
+       <span class="method-specializers">(<span class="method-specializer">hub</span>)</span>
+      </a>
+     </li>
+     <li>
+      <a href="#sthkcdhb">
+       <span class="category">Generic Function</span>
+       <span class="symbol">pitch-circle-distance</span>
+      </a>
+     </li>
+     <li>
+      <a href="#xfgmilqo">
+       <span class="category">Method</span>
+       <span class="symbol">pitch-circle-distance</span>
+       <span class="method-specializers">(<span class="method-specializer">rim</span>)</span>
+      </a>
+     </li>
+     <li>
+      <a href="#l8np84oj">
+       <span class="category">Method</span>
+       <span class="symbol">pitch-circle-distance</span>
+       <span class="method-specializers">(<span class="method-specializer">hub</span>)</span>
+      </a>
+     </li>
+     <li>
+      <a href="#qxw52yrh">
+       <span class="category">Special Variable</span>
+       <span class="symbol">quick-release-5x100</span>
+      </a>
+     </li>
+     <li>
+      <a href="#samwonv7">
+       <span class="category">Special Variable</span>
+       <span class="symbol">quick-release-5x130</span>
+      </a>
+     </li>
+     <li>
+      <a href="#rgu7hoz4">
+       <span class="category">Special Variable</span>
+       <span class="symbol">quick-release-5x135</span>
+      </a>
+     </li>
+     <li>
+      <a href="#zbcra2ve">
+       <span class="category">Function</span>
+       <span class="symbol">radian-from-degree</span>
+      </a>
+     </li>
+     <li>
+      <a href="#y5rkqvz7">
+       <span class="category">Function</span>
+       <span class="symbol">report</span>
+      </a>
+     </li>
+     <li>
+      <a href="#xd5nltyq">
+       <span class="category">Function</span>
+       <span class="symbol">right</span>
+      </a>
+     </li>
+     <li>
+      <a href="#qnapb2uu">
+       <span class="category">Function</span>
+       <span class="symbol">round-down</span>
+      </a>
+     </li>
+     <li>
+      <a href="#wu3fal72">
+       <span class="category">Function</span>
+       <span class="symbol">round-near</span>
+      </a>
+     </li>
+     <li>
+      <a href="#vkxi3gep">
+       <span class="category">Function</span>
+       <span class="symbol">round-up</span>
+      </a>
+     </li>
+     <li>
+      <a href="#mivmxpmv">
+       <span class="category">Special Variable</span>
+       <span class="symbol">sapim-cx-ray</span>
+      </a>
+     </li>
+     <li>
+      <a href="#xo3r4g3m">
+       <span class="category">Special Variable</span>
+       <span class="symbol">sapim-cx-sprint</span>
+      </a>
+     </li>
+     <li>
+      <a href="#mecqqean">
+       <span class="category">Special Variable</span>
+       <span class="symbol">sapim-d-light</span>
+      </a>
+     </li>
+     <li>
+      <a href="#srhh5vzl">
+       <span class="category">Special Variable</span>
+       <span class="symbol">sapim-double-square</span>
+      </a>
+     </li>
+     <li>
+      <a href="#piz8h7bs">
+       <span class="category">Special Variable</span>
+       <span class="symbol">sapim-flat</span>
+      </a>
+     </li>
+     <li>
+      <a href="#kue5vpm3">
+       <span class="category">Special Variable</span>
+       <span class="symbol">sapim-flat-head</span>
+      </a>
+     </li>
+     <li>
+      <a href="#ppu2m3ol">
+       <span class="category">Special Variable</span>
+       <span class="symbol">sapim-hm</span>
+      </a>
+     </li>
+     <li>
+      <a href="#vg3ome4a">
+       <span class="category">Special Variable</span>
+       <span class="symbol">sapim-laser</span>
+      </a>
+     </li>
+     <li>
+      <a href="#ykndqbay">
+       <span class="category">Special Variable</span>
+       <span class="symbol">sapim-mg</span>
+      </a>
+     </li>
+     <li>
+      <a href="#e8qwuomv">
+       <span class="category">Special Variable</span>
+       <span class="symbol">sapim-ms</span>
+      </a>
+     </li>
+     <li>
+      <a href="#lfimsjqo">
+       <span class="category">Special Variable</span>
+       <span class="symbol">sapim-oval-large</span>
+      </a>
+     </li>
+     <li>
+      <a href="#qv2czace">
+       <span class="category">Special Variable</span>
+       <span class="symbol">sapim-oval-small</span>
+      </a>
+     </li>
+     <li>
+      <a href="#tgnvi8vw">
+       <span class="category">Special Variable</span>
+       <span class="symbol">sapim-polyax</span>
+      </a>
+     </li>
+     <li>
+      <a href="#yqzioiuf">
+       <span class="category">Special Variable</span>
+       <span class="symbol">sapim-race</span>
+      </a>
+     </li>
+     <li>
+      <a href="#gtp8zlzw">
+       <span class="category">Special Variable</span>
+       <span class="symbol">sapim-round-head</span>
+      </a>
+     </li>
+     <li>
+      <a href="#llfym8vm">
+       <span class="category">Special Variable</span>
+       <span class="symbol">sapim-strong</span>
+      </a>
+     </li>
+     <li>
+      <a href="#ebw7wxqp">
+       <span class="category">Special Variable</span>
+       <span class="symbol">sapim-up-side-down</span>
+      </a>
+     </li>
+     <li>
+      <a href="#p8cgjol5">
+       <span class="category">Function</span>
+       <span class="symbol">sind</span>
+      </a>
+     </li>
+     <li>
+      <a href="#yee87t4f">
+       <span class="category">Generic Function</span>
+       <span class="symbol">spoke-area</span>
+      </a>
+     </li>
+     <li>
+      <a href="#cxchxrov">
+       <span class="category">Method</span>
+       <span class="symbol">spoke-area</span>
+       <span class="method-specializers">(<span class="method-specializer">spoke</span>)</span>
+      </a>
+     </li>
+     <li>
+      <a href="#lyr7leln">
+       <span class="category">Generic Function</span>
+       <span class="symbol">spoke-diameter</span>
+      </a>
+     </li>
+     <li>
+      <a href="#wpuyk7z5">
+       <span class="category">Method</span>
+       <span class="symbol">spoke-diameter</span>
+       <span class="method-specializers">(<span class="method-specializer">spoke</span>)</span>
+      </a>
+     </li>
+     <li>
+      <a href="#bjgmepy4">
+       <span class="category">Function</span>
+       <span class="symbol">spoke-elongation</span>
+      </a>
+     </li>
+     <li>
+      <a href="#ydc8538y">
+       <span class="category">Generic Function</span>
+       <span class="symbol">spoke-hole-diameter</span>
+      </a>
+     </li>
+     <li>
+      <a href="#l8huanqb">
+       <span class="category">Method</span>
+       <span class="symbol">spoke-hole-diameter</span>
+       <span class="method-specializers">(<span class="method-specializer">hub</span>)</span>
+      </a>
+     </li>
+     <li>
+      <a href="#wygvgyrs">
+       <span class="category">Generic Function</span>
+       <span class="symbol">spoke-hole-offset</span>
+      </a>
+     </li>
+     <li>
+      <a href="#xn7gj54x">
+       <span class="category">Method</span>
+       <span class="symbol">spoke-hole-offset</span>
+       <span class="method-specializers">(<span class="method-specializer">straight-pull-hub</span>)</span>
+      </a>
+     </li>
+     <li>
+      <a href="#wyqajl7c">
+       <span class="category">Generic Function</span>
+       <span class="symbol">spoke-material</span>
+      </a>
+     </li>
+     <li>
+      <a href="#tkbpypic">
+       <span class="category">Method</span>
+       <span class="symbol">spoke-material</span>
+       <span class="method-specializers">(<span class="method-specializer">spoke</span>)</span>
+      </a>
+     </li>
+     <li>
+      <a href="#aydqyjfq">
+       <span class="category">Generic Function</span>
+       <span class="symbol">spoke-middle-section</span>
+      </a>
+     </li>
+     <li>
+      <a href="#pepsi8fc">
+       <span class="category">Method</span>
+       <span class="symbol">spoke-middle-section</span>
+       <span class="method-specializers">(<span class="method-specializer">spoke</span>)</span>
+      </a>
+     </li>
+     <li>
+      <a href="#buj47ktj">
+       <span class="category">Generic Function</span>
+       <span class="symbol">spoke-strength</span>
+      </a>
+     </li>
+     <li>
+      <a href="#w27owlsq">
+       <span class="category">Method</span>
+       <span class="symbol">spoke-strength</span>
+       <span class="method-specializers">(<span class="method-specializer">spoke</span>)</span>
+      </a>
+     </li>
+     <li>
+      <a href="#rl4fdfql">
+       <span class="category">Generic Function</span>
+       <span class="symbol">spoke-thread</span>
+      </a>
+     </li>
+     <li>
+      <a href="#xj2toum5">
+       <span class="category">Method</span>
+       <span class="symbol">spoke-thread</span>
+       <span class="method-specializers">(<span class="method-specializer">spoke</span>)</span>
+      </a>
+     </li>
+     <li>
+      <a href="#yiwp8ct3">
+       <span class="category">Special Variable</span>
+       <span class="symbol">syntace-x12-100</span>
+      </a>
+     </li>
+     <li>
+      <a href="#eu3gktyt">
+       <span class="category">Special Variable</span>
+       <span class="symbol">syntace-x12-142</span>
+      </a>
+     </li>
+     <li>
+      <a href="#q4oxaskk">
+       <span class="category">Special Variable</span>
+       <span class="symbol">syntace-x12-148</span>
+      </a>
+     </li>
+     <li>
+      <a href="#zvc3zdgx">
+       <span class="category">Special Variable</span>
+       <span class="symbol">syntace-x12-157</span>
+      </a>
+     </li>
+     <li>
+      <a href="#pveuxpws">
+       <span class="category">Special Variable</span>
+       <span class="symbol">thru-axle-12x100</span>
+      </a>
+     </li>
+     <li>
+      <a href="#u4iasj84">
+       <span class="category">Special Variable</span>
+       <span class="symbol">thru-axle-12x142</span>
+      </a>
+     </li>
+     <li>
+      <a href="#dwbnxkoh">
+       <span class="category">Special Variable</span>
+       <span class="symbol">thru-axle-12x148</span>
+      </a>
+     </li>
+     <li>
+      <a href="#cmfwqeaq">
+       <span class="category">Special Variable</span>
+       <span class="symbol">thru-axle-12x157</span>
+      </a>
+     </li>
+     <li>
+      <a href="#trrq8saz">
+       <span class="category">Special Variable</span>
+       <span class="symbol">thru-axle-15x100</span>
+      </a>
+     </li>
+     <li>
+      <a href="#g4oad8ec">
+       <span class="category">Special Variable</span>
+       <span class="symbol">thru-axle-15x110</span>
+      </a>
+     </li>
+     <li>
+      <a href="#ljpuxvuu">
+       <span class="category">Special Variable</span>
+       <span class="symbol">thru-axle-20x100</span>
+      </a>
+     </li>
+     <li>
+      <a href="#dsiq53zi">
+       <span class="category">Special Variable</span>
+       <span class="symbol">thru-axle-20x110</span>
+      </a>
+     </li>
+     <li>
+      <a href="#veas8mcr">
+       <span class="category">Generic Function</span>
+       <span class="symbol">washer-thickness</span>
+      </a>
+     </li>
+     <li>
+      <a href="#ncupl2lb">
+       <span class="category">Method</span>
+       <span class="symbol">washer-thickness</span>
+       <span class="method-specializers">(<span class="method-specializer">washer</span>)</span>
+      </a>
+     </li>
+     <li>
+      <a href="#qyxk5mno">
+       <span class="category">Generic Function</span>
+       <span class="symbol">wheel-axle</span>
+      </a>
+     </li>
+     <li>
+      <a href="#svr3uhav">
+       <span class="category">Method</span>
+       <span class="symbol">wheel-axle</span>
+       <span class="method-specializers">(<span class="method-specializer">hub</span>)</span>
+      </a>
+     </li>
+    </ul>
+   </div>
+  </div>
+  <div class="dictionary">
+   <div class="definition" id="jfaa2hyf">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">axle</span></a></td>
+	<td class="lambda-list"></td>
+	<td class="category"><span class="category">Class</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="udmoccvr">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">component</span></a></td>
+	<td class="lambda-list"></td>
+	<td class="category"><span class="category">Class</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="smlax2hs">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">hub</span></a></td>
+	<td class="lambda-list"></td>
+	<td class="category"><span class="category">Class</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="yooqozcm">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">nipple</span></a></td>
+	<td class="lambda-list"></td>
+	<td class="category"><span class="category">Class</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="ejyj7hju">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">rim</span></a></td>
+	<td class="lambda-list"></td>
+	<td class="category"><span class="category">Class</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="tozvxukr">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">spoke</span></a></td>
+	<td class="lambda-list"></td>
+	<td class="category"><span class="category">Class</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="dwtuqk4t">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">straight-pull-hub</span></a></td>
+	<td class="lambda-list"></td>
+	<td class="category"><span class="category">Class</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="a8wr3kya">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">thru-axle</span></a></td>
+	<td class="lambda-list"></td>
+	<td class="category"><span class="category">Class</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="olkxplry">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">washer</span></a></td>
+	<td class="lambda-list"></td>
+	<td class="category"><span class="category">Class</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="hdgdwxga">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">*data*</span></a></td>
+	<td class="lambda-list"></td>
+	<td class="category"><span class="category">Special Variable</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>The latest result data set.</pre>
+    </div>
+   </div>
+   <div class="definition" id="ulkbci38">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">*default-nipple*</span></a></td>
+	<td class="lambda-list"></td>
+	<td class="category"><span class="category">Special Variable</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>The default nipple.</pre>
+    </div>
+   </div>
+   <div class="definition" id="uaq28woa">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">*default-spoke*</span></a></td>
+	<td class="lambda-list"></td>
+	<td class="category"><span class="category">Special Variable</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>The default spoke.</pre>
+    </div>
+   </div>
+   <div class="definition" id="yoen4kcw">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">*elastic-modulus*</span></a></td>
+	<td class="lambda-list"></td>
+	<td class="category"><span class="category">Special Variable</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Modulus of elasticity in megapascal.
+
+The value of this special variable is used if no spoke material
+is defined.  Most spokes are made of stainless steel according
+to ISO 6931-1, i.e. spring wire in the cold drawn condition with
+a modulus of elasticity of 180 MPa.</pre>
+    </div>
+   </div>
+   <div class="definition" id="injoetjp">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">*html-template*</span></a></td>
+	<td class="lambda-list"></td>
+	<td class="category"><span class="category">Special Variable</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>The HTML template file.
+
+The template file is coded up by the user.  The ‘<a href="#y5rkqvz7"><span class="symbol">report</span></a>’ function uses
+Edi Weitz's HTML-TEMPLATE library for filling in the documentation
+strings.  Below is the list of template tags together with their
+meaning.</pre>
+    </div>
+   </div>
+   <div class="definition" id="eisc4onn">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">*output-directory*</span></a></td>
+	<td class="lambda-list"></td>
+	<td class="category"><span class="category">Special Variable</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>The default directory for saving a report.</pre>
+    </div>
+   </div>
+   <div class="definition" id="m3nqrm4f">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">*output-name*</span></a></td>
+	<td class="lambda-list"></td>
+	<td class="category"><span class="category">Special Variable</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>The default file name of a report.</pre>
+    </div>
+   </div>
+   <div class="definition" id="xgsbio7a">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">area-of-circle</span></a></td>
+	<td class="lambda-list"><span class="lambda-list">(<span class="variable">diameter</span>)</span></td>
+	<td class="category"><span class="category">Function</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Calculate the area of a circle.</pre>
+    </div>
+   </div>
+   <div class="definition" id="v2zi4pqt">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">area-of-ellipse</span></a></td>
+	<td class="lambda-list"><span class="lambda-list">(<span class="variable">width</span> <span class="variable">height</span>)</span></td>
+	<td class="category"><span class="category">Function</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Calculate the area of an ellipse.</pre>
+    </div>
+   </div>
+   <div class="definition" id="qq8ey4xf">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">area-of-rectangle</span></a></td>
+	<td class="lambda-list"><span class="lambda-list">(<span class="variable">width</span> <span class="variable">height</span> <span class="lambda-list-keyword">&amp;optional</span> <span class="variable">radius</span>)</span></td>
+	<td class="category"><span class="category">Function</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Calculate the area of a rounded rectangle.</pre>
+    </div>
+   </div>
+   <div class="definition" id="tzid2kgv">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">axle-diameter</span></a></td>
+	<td class="lambda-list"><span class="lambda-list">(<span class="variable">object</span>)</span></td>
+	<td class="category"><span class="category">Generic Function</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="ju7nr5yz">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">axle-diameter</span></a></td>
+	<td class="lambda-list"><span class="lambda-list">((<span class="variable">axle</span>&nbsp;<span class="method-specializer">axle</span>))</span></td>
+	<td class="category"><span class="category">Method</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>The diameter of the wheel axle.</pre>
+    </div>
+   </div>
+   <div class="definition" id="ps3qwhdc">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">axle-length</span></a></td>
+	<td class="lambda-list"><span class="lambda-list">(<span class="variable">object</span>)</span></td>
+	<td class="category"><span class="category">Generic Function</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="z3jj8wtc">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">axle-length</span></a></td>
+	<td class="lambda-list"><span class="lambda-list">((<span class="variable">hub</span>&nbsp;<span class="method-specializer">hub</span>))</span></td>
+	<td class="category"><span class="category">Method</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>The over locknut distance of the wheel axle, i.e. the distance between the dropouts.</pre>
+    </div>
+   </div>
+   <div class="definition" id="otrdqepp">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">axle-length</span></a></td>
+	<td class="lambda-list"><span class="lambda-list">((<span class="variable">axle</span>&nbsp;<span class="method-specializer">axle</span>))</span></td>
+	<td class="category"><span class="category">Method</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>The over locknut distance of the wheel axle, i.e. the distance between the dropouts.</pre>
+    </div>
+   </div>
+   <div class="definition" id="ajud85fl">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">axle-thread</span></a></td>
+	<td class="lambda-list"><span class="lambda-list">(<span class="variable">object</span>)</span></td>
+	<td class="category"><span class="category">Generic Function</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="ntfmrpbp">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">axle-thread</span></a></td>
+	<td class="lambda-list"><span class="lambda-list">((<span class="variable">thru-axle</span>&nbsp;<span class="method-specializer">thru-axle</span>))</span></td>
+	<td class="category"><span class="category">Method</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>The thread specification.</pre>
+    </div>
+   </div>
+   <div class="definition" id="d2p8y24g">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">base-diameter</span></a></td>
+	<td class="lambda-list"><span class="lambda-list">(<span class="variable">object</span>)</span></td>
+	<td class="category"><span class="category">Generic Function</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="w7tdjftl">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">base-diameter</span></a></td>
+	<td class="lambda-list"><span class="lambda-list">((<span class="variable">rim</span>&nbsp;<span class="method-specializer">rim</span>))</span></td>
+	<td class="category"><span class="category">Method</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>The base diameter, i.e. pitch circle diameter, of the spoke holes on the rim.</pre>
+    </div>
+   </div>
+   <div class="definition" id="ogd5qrgr">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">calculate</span></a></td>
+	<td class="lambda-list"><span class="lambda-list">(<span class="lambda-list-keyword">&amp;key</span> <span class="variable">hub</span> <span class="variable">rim</span> <span class="variable">washer</span> <span class="variable">spoke</span> <span class="variable">nipple</span> <span class="variable">spoke-count</span> <span class="variable">spoke-crossings</span> <span class="variable">spoke-tension</span> <span class="variable">spoke-tension-method</span> <span class="variable">rim-offset-orientation</span> <span class="variable">nipple-head-extent</span>)</span></td>
+	<td class="category"><span class="category">Function</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Calculate the spoke lengths for a wheel assembly.
+
+Keyword arguments HUB, RIM, WASHER, SPOKE, and NIPPLE define the
+ components of the wheel assembly.  Only HUB and RIM are mandatory.
+ If WASHER is a number, it defines the thickness of the washer in
+ millimeter.
+Keyword argument SPOKE-COUNT is the number of spokes.  Value is
+ either 20, 24, 28, 32, or 36.  Default is 32.
+Keyword argument SPOKE-CROSSINGS is the number of spoke crossings.
+ Value is either 0 (radial), 1, 2, 3, or 4.  Default is 3.
+Keyword argument SPOKE-TENSION is the spoke tension in kilogram
+ when truing the wheel.  Value has to be a non-negative number.
+ Default is 120 kilogram.  The spoke tension is used to estimate
+ the elongation of the spokes.  This information can be used to
+ adjust the actual spoke length.
+Keyword argument SPOKE-TENSION-METHOD defines how to apply the
+ SPOKE-TENSION parameter.  Value is either ‘:max’, ‘:min’, or
+ ‘:mean’ to apply the spoke tension as the maximum, minimum,
+ or mean spoke tension respectively.  Default is ‘:max’.
+Keyword argument RIM-OFFSET-ORIENTATION defines the orientation of
+ an asymmetric rim.  Value is either ‘:left’, ‘:right’, or ‘:auto’.
+ Default is ‘:auto’.  A value of ‘:left’ means, that the spoke holes
+ are to the left of the middle of the rim.  A value of ‘:right’ means,
+ that the the spoke holes are to the right of the middle of the rim.
+ A value of ‘:auto’ means, that the rim orientation is selected in
+ such a way that the tension ratio is improved.
+Keyword argument NIPPLE-HEAD-EXTENT is the additional spoke length in
+ millimeter that extends from the rim (washer) contact point into the
+ nipple head.  Value has to be a number.  Default is 2 millimeter.
+ DT Swiss uses 2 millimeter for their ERD calculation.
+
+The value of the SPOKE, NIPPLE, SPOKE-COUNT, and SPOKE-CROSSINGS
+argument is either an object as documented above or a cons cell where
+the ‘car’ denotes the left-hand side object and the ‘cdr’ denotes the
+right-hand side object.  The SPOKE-COUNT and SPOKE-CROSSINGS values
+define the spoke's lacing pattern.
+
+See also ‘<a href="#smlax2hs"><span class="symbol">hub</span></a>’, ‘<a href="#ejyj7hju"><span class="symbol">rim</span></a>’, ‘<a href="#olkxplry"><span class="symbol">washer</span></a>’, ‘<a href="#tozvxukr"><span class="symbol">spoke</span></a>’, and ‘<a href="#yooqozcm"><span class="symbol">nipple</span></a>’.</pre>
+    </div>
+   </div>
+   <div class="definition" id="nt2fp2v2">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">component-name</span></a></td>
+	<td class="lambda-list"><span class="lambda-list">(<span class="variable">object</span>)</span></td>
+	<td class="category"><span class="category">Generic Function</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="wqoyxcnm">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">component-name</span></a></td>
+	<td class="lambda-list"><span class="lambda-list">((<span class="variable">component</span>&nbsp;<span class="method-specializer">component</span>))</span></td>
+	<td class="category"><span class="category">Method</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>A short description of the component.</pre>
+    </div>
+   </div>
+   <div class="definition" id="ieqf5zcv">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">cosd</span></a></td>
+	<td class="lambda-list"><span class="lambda-list">(<span class="variable">number</span>)</span></td>
+	<td class="category"><span class="category">Function</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Return the cosine of NUMBER given in degree angle.</pre>
+    </div>
+   </div>
+   <div class="definition" id="gbl5ddm4">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">define-material</span></a></td>
+	<td class="lambda-list"><span class="lambda-list">(<span class="variable">name</span> <span class="lambda-list-keyword">&amp;rest</span> <span class="variable">options</span> <span class="lambda-list-keyword">&amp;key</span> <span class="variable">elastic-modulus</span>)</span></td>
+	<td class="category"><span class="category">Function</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="pa7pg37e">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">degree-from-radian</span></a></td>
+	<td class="lambda-list"><span class="lambda-list">(<span class="variable">rad</span>)</span></td>
+	<td class="category"><span class="category">Function</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Convert a plane angle from radian to degree.
+
+Argument RAD is the angle given in radian.
+
+Value is the corresponding angle given in degree.</pre>
+    </div>
+   </div>
+   <div class="definition" id="stqkp7fg">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">dtswiss-aero-comp</span></a></td>
+	<td class="lambda-list"></td>
+	<td class="category"><span class="category">Special Variable</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="cblazkpx">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">dtswiss-aerolite</span></a></td>
+	<td class="lambda-list"></td>
+	<td class="category"><span class="category">Special Variable</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="ahlsskrj">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">dtswiss-alpine</span></a></td>
+	<td class="lambda-list"></td>
+	<td class="category"><span class="category">Special Variable</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="sve2wl7u">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">dtswiss-alpine-iii</span></a></td>
+	<td class="lambda-list"></td>
+	<td class="category"><span class="category">Special Variable</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="xqsmjzo5">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">dtswiss-competition</span></a></td>
+	<td class="lambda-list"></td>
+	<td class="category"><span class="category">Special Variable</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="zjfawijr">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">dtswiss-competition-race</span></a></td>
+	<td class="lambda-list"></td>
+	<td class="category"><span class="category">Special Variable</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="q5suq3ub">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">dtswiss-hidden</span></a></td>
+	<td class="lambda-list"></td>
+	<td class="category"><span class="category">Special Variable</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="ewy4c45x">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">dtswiss-phr</span></a></td>
+	<td class="lambda-list"></td>
+	<td class="category"><span class="category">Special Variable</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="pupxiuyx">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">dtswiss-pro-head</span></a></td>
+	<td class="lambda-list"></td>
+	<td class="category"><span class="category">Special Variable</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="dysblb5s">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">dtswiss-pro-head-14</span></a></td>
+	<td class="lambda-list"></td>
+	<td class="category"><span class="category">Special Variable</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="as4lcbl5">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">dtswiss-revolite</span></a></td>
+	<td class="lambda-list"></td>
+	<td class="category"><span class="category">Special Variable</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="tcrytmr3">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">dtswiss-revolution</span></a></td>
+	<td class="lambda-list"></td>
+	<td class="category"><span class="category">Special Variable</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="slu5tzcx">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">dtswiss-squorx</span></a></td>
+	<td class="lambda-list"></td>
+	<td class="category"><span class="category">Special Variable</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="guacym3t">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">dtswiss-standard</span></a></td>
+	<td class="lambda-list"></td>
+	<td class="category"><span class="category">Special Variable</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="pb3syhiw">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">dtswiss-standard-14</span></a></td>
+	<td class="lambda-list"></td>
+	<td class="category"><span class="category">Special Variable</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="p7bjvnpa">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">dtswiss-standard-14.5</span></a></td>
+	<td class="lambda-list"></td>
+	<td class="category"><span class="category">Special Variable</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="uztbrkb5">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">dtswiss-standard-16</span></a></td>
+	<td class="lambda-list"></td>
+	<td class="category"><span class="category">Special Variable</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="trzmjcoq">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">elastic-modulus</span></a></td>
+	<td class="lambda-list"><span class="lambda-list">(<span class="variable">object</span>)</span></td>
+	<td class="category"><span class="category">Generic Function</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="urtec8mr">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">elastic-modulus</span></a></td>
+	<td class="lambda-list"><span class="lambda-list">((<span class="variable">object</span>&nbsp;<span class="method-specializer">null</span>))</span></td>
+	<td class="category"><span class="category">Method</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="v5bdtsx5">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">elastic-modulus</span></a></td>
+	<td class="lambda-list"><span class="lambda-list">((<span class="variable">material</span>&nbsp;<span class="method-specializer">material</span>))</span></td>
+	<td class="category"><span class="category">Method</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Modulus of elasticity in megapascal.</pre>
+    </div>
+   </div>
+   <div class="definition" id="vfhjdpzw">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">find-material</span></a></td>
+	<td class="lambda-list"><span class="lambda-list">(<span class="variable">name</span>)</span></td>
+	<td class="category"><span class="category">Function</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="qbmwnlkk">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">first-spoke-hole</span></a></td>
+	<td class="lambda-list"><span class="lambda-list">(<span class="variable">object</span>)</span></td>
+	<td class="category"><span class="category">Generic Function</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="rzxbd3t2">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">first-spoke-hole</span></a></td>
+	<td class="lambda-list"><span class="lambda-list">((<span class="variable">rim</span>&nbsp;<span class="method-specializer">rim</span>))</span></td>
+	<td class="category"><span class="category">Method</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>The orientation of the first spoke hole.</pre>
+    </div>
+   </div>
+   <div class="definition" id="krvcou8e">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">gn</span></a></td>
+	<td class="lambda-list"></td>
+	<td class="category"><span class="category">Constant</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Standard acceleration of gravity.</pre>
+    </div>
+   </div>
+   <div class="definition" id="ywq5n5oj">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">hypot</span></a></td>
+	<td class="lambda-list"><span class="lambda-list">(<span class="variable">x</span> <span class="variable">y</span>)</span></td>
+	<td class="category"><span class="category">Function</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Return the distance between a point and the origin
+in a two-dimensional Cartesian coordinate system.
+
+Arguments X and Y have to be real numbers.</pre>
+    </div>
+   </div>
+   <div class="definition" id="pmvzvguz">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">hypot3</span></a></td>
+	<td class="lambda-list"><span class="lambda-list">(<span class="variable">x</span> <span class="variable">y</span> <span class="variable">z</span>)</span></td>
+	<td class="category"><span class="category">Function</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Return the distance between a point and the origin
+in a three-dimensional Cartesian coordinate system.
+
+Arguments X, Y, and Z have to be real numbers.</pre>
+    </div>
+   </div>
+   <div class="definition" id="f47my3bk">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">left</span></a></td>
+	<td class="lambda-list"><span class="lambda-list">(<span class="variable">object</span>)</span></td>
+	<td class="category"><span class="category">Function</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Return the left-hand side object.</pre>
+    </div>
+   </div>
+   <div class="definition" id="bki7pnrj">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">make-hub-from-measurements</span></a></td>
+	<td class="lambda-list"><span class="lambda-list">(<span class="variable">class</span> <span class="lambda-list-keyword">&amp;rest</span> <span class="variable">arguments</span> <span class="lambda-list-keyword">&amp;key</span> <span class="variable">axle-length</span> <span class="variable">flange-distance</span> <span class="variable">flange-thickness</span> <span class="lambda-list-keyword">&amp;allow-other-keys</span>)</span></td>
+	<td class="category"><span class="category">Function</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Create a hub object from measured values.
+
+First argument CLASS is the class of the hub.  Value is a symbol and
+ must be a sub-type of ‘<a href="#smlax2hs"><span class="symbol">hub</span></a>’.
+Keyword argument AXLE-LENGTH is the installation width of the hub,
+ i.e. the distance between the dropouts.
+Keyword argument FLANGE-DISTANCE is the distance from the flange to
+ the adjacent dropout.
+Keyword argument FLANGE-THICKNESS is the thickness of the flanges at
+ the pitch circle diameter.
+Remaining arguments are initialization arguments of CLASS.
+
+Return value is a hub object.</pre>
+    </div>
+   </div>
+   <div class="definition" id="ixky5gmp">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">make-rim-from-measurements</span></a></td>
+	<td class="lambda-list"><span class="lambda-list">(<span class="variable">class</span> <span class="lambda-list-keyword">&amp;rest</span> <span class="variable">arguments</span> <span class="lambda-list-keyword">&amp;key</span> <span class="variable">inner-diameter</span> <span class="variable">thickness</span> <span class="lambda-list-keyword">&amp;allow-other-keys</span>)</span></td>
+	<td class="category"><span class="category">Function</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Create a rim object from measured values.
+
+First argument CLASS is the class of the rim.  Value is a symbol and
+ must be a sub-type of ‘<a href="#ejyj7hju"><span class="symbol">rim</span></a>’.
+Keyword argument INNER-DIAMETER is the inner diameter of the rim.
+ If the spoke holes have eyelets, the height of the eyelets has to
+ be excluded.
+Keyword argument THICKNESS is the thickness of the rim at the spoke
+ holes.  If the spoke holes have eyelets, the outer height of the
+ eyelets has to be included.
+Remaining arguments are initialization arguments of CLASS.
+
+Return value is a rim object.</pre>
+    </div>
+   </div>
+   <div class="definition" id="abckuiuw">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">material-name</span></a></td>
+	<td class="lambda-list"><span class="lambda-list">(<span class="variable">object</span>)</span></td>
+	<td class="category"><span class="category">Generic Function</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="ped4omvr">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">material-name</span></a></td>
+	<td class="lambda-list"><span class="lambda-list">((<span class="variable">object</span>&nbsp;<span class="method-specializer">null</span>))</span></td>
+	<td class="category"><span class="category">Method</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="ru7ixow3">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">material-name</span></a></td>
+	<td class="lambda-list"><span class="lambda-list">((<span class="variable">material</span>&nbsp;<span class="method-specializer">material</span>))</span></td>
+	<td class="category"><span class="category">Method</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>The material name.</pre>
+    </div>
+   </div>
+   <div class="definition" id="lcfdvakw">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">nipple-head-height</span></a></td>
+	<td class="lambda-list"><span class="lambda-list">(<span class="variable">object</span>)</span></td>
+	<td class="category"><span class="category">Generic Function</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="we8h7kye">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">nipple-head-height</span></a></td>
+	<td class="lambda-list"><span class="lambda-list">((<span class="variable">nipple</span>&nbsp;<span class="method-specializer">nipple</span>))</span></td>
+	<td class="category"><span class="category">Method</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>The height of the nipple head.</pre>
+    </div>
+   </div>
+   <div class="definition" id="z5geiph3">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">nipple-length</span></a></td>
+	<td class="lambda-list"><span class="lambda-list">(<span class="variable">object</span>)</span></td>
+	<td class="category"><span class="category">Generic Function</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="uuauvfbx">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">nipple-length</span></a></td>
+	<td class="lambda-list"><span class="lambda-list">((<span class="variable">nipple</span>&nbsp;<span class="method-specializer">nipple</span>))</span></td>
+	<td class="category"><span class="category">Method</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>The length of the nipple.</pre>
+    </div>
+   </div>
+   <div class="definition" id="fn2r2784">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">pitch-circle-diameter</span></a></td>
+	<td class="lambda-list"><span class="lambda-list">(<span class="variable">object</span>)</span></td>
+	<td class="category"><span class="category">Generic Function</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="vbv387ig">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">pitch-circle-diameter</span></a></td>
+	<td class="lambda-list"><span class="lambda-list">((<span class="variable">hub</span>&nbsp;<span class="method-specializer">hub</span>))</span></td>
+	<td class="category"><span class="category">Method</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>The pitch circle diameter of the spoke holes on the flange.</pre>
+    </div>
+   </div>
+   <div class="definition" id="sthkcdhb">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">pitch-circle-distance</span></a></td>
+	<td class="lambda-list"><span class="lambda-list">(<span class="variable">object</span>)</span></td>
+	<td class="category"><span class="category">Generic Function</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="xfgmilqo">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">pitch-circle-distance</span></a></td>
+	<td class="lambda-list"><span class="lambda-list">((<span class="variable">rim</span>&nbsp;<span class="method-specializer">rim</span>))</span></td>
+	<td class="category"><span class="category">Method</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>The distance from the middle of the rim to the pitch circle.</pre>
+    </div>
+   </div>
+   <div class="definition" id="l8np84oj">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">pitch-circle-distance</span></a></td>
+	<td class="lambda-list"><span class="lambda-list">((<span class="variable">hub</span>&nbsp;<span class="method-specializer">hub</span>))</span></td>
+	<td class="category"><span class="category">Method</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>The distance from the middle of the hub to the pitch circle.</pre>
+    </div>
+   </div>
+   <div class="definition" id="qxw52yrh">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">quick-release-5x100</span></a></td>
+	<td class="lambda-list"></td>
+	<td class="category"><span class="category">Special Variable</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="samwonv7">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">quick-release-5x130</span></a></td>
+	<td class="lambda-list"></td>
+	<td class="category"><span class="category">Special Variable</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="rgu7hoz4">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">quick-release-5x135</span></a></td>
+	<td class="lambda-list"></td>
+	<td class="category"><span class="category">Special Variable</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="zbcra2ve">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">radian-from-degree</span></a></td>
+	<td class="lambda-list"><span class="lambda-list">(<span class="variable">deg</span>)</span></td>
+	<td class="category"><span class="category">Function</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Convert a plane angle from degree to radian.
+
+Argument DEG is the angle given in degree.
+
+Value is the corresponding angle given in radian.</pre>
+    </div>
+   </div>
+   <div class="definition" id="y5rkqvz7">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">report</span></a></td>
+	<td class="lambda-list"><span class="lambda-list">(<span class="variable">data</span> <span class="lambda-list-keyword">&amp;key</span> <span class="variable">output</span> <span class="variable">format</span>)</span></td>
+	<td class="category"><span class="category">Function</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Generate a report.
+
+First argument DATA is a result data set of the ‘<a href="#ogd5qrgr"><span class="symbol">calculate</span></a>’ function.
+Keyword argument OUTPUT specifies the destination.  Value is either
+ a stream, a pathname, or a string.  The special value ‘t’ means
+ ‘*standard-output*’ and ‘nil’ returns a string.  If OUTPUT is a
+ pathname, the special variables ‘<a href="#eisc4onn"><span class="symbol">*output-directory*</span></a>’ and
+ ‘<a href="#m3nqrm4f"><span class="symbol">*output-name*</span></a>’ have an effect.
+Keyword argument FORMAT specifies the file format of the report.
+ Value is either ‘:text’ or ‘:html’.</pre>
+    </div>
+   </div>
+   <div class="definition" id="xd5nltyq">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">right</span></a></td>
+	<td class="lambda-list"><span class="lambda-list">(<span class="variable">object</span>)</span></td>
+	<td class="category"><span class="category">Function</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Return the right-hand side object.</pre>
+    </div>
+   </div>
+   <div class="definition" id="qnapb2uu">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">round-down</span></a></td>
+	<td class="lambda-list"><span class="lambda-list">(<span class="variable">number</span> <span class="lambda-list-keyword">&amp;optional</span> <span class="variable">divisor</span>)</span></td>
+	<td class="category"><span class="category">Function</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Round towards negative infinity.</pre>
+    </div>
+   </div>
+   <div class="definition" id="wu3fal72">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">round-near</span></a></td>
+	<td class="lambda-list"><span class="lambda-list">(<span class="variable">number</span> <span class="lambda-list-keyword">&amp;optional</span> <span class="variable">divisor</span>)</span></td>
+	<td class="category"><span class="category">Function</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Round to the nearest multiple.</pre>
+    </div>
+   </div>
+   <div class="definition" id="vkxi3gep">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">round-up</span></a></td>
+	<td class="lambda-list"><span class="lambda-list">(<span class="variable">number</span> <span class="lambda-list-keyword">&amp;optional</span> <span class="variable">divisor</span>)</span></td>
+	<td class="category"><span class="category">Function</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Round towards positive infinity.</pre>
+    </div>
+   </div>
+   <div class="definition" id="mivmxpmv">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">sapim-cx-ray</span></a></td>
+	<td class="lambda-list"></td>
+	<td class="category"><span class="category">Special Variable</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="xo3r4g3m">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">sapim-cx-sprint</span></a></td>
+	<td class="lambda-list"></td>
+	<td class="category"><span class="category">Special Variable</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="mecqqean">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">sapim-d-light</span></a></td>
+	<td class="lambda-list"></td>
+	<td class="category"><span class="category">Special Variable</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="srhh5vzl">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">sapim-double-square</span></a></td>
+	<td class="lambda-list"></td>
+	<td class="category"><span class="category">Special Variable</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="piz8h7bs">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">sapim-flat</span></a></td>
+	<td class="lambda-list"></td>
+	<td class="category"><span class="category">Special Variable</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="kue5vpm3">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">sapim-flat-head</span></a></td>
+	<td class="lambda-list"></td>
+	<td class="category"><span class="category">Special Variable</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="ppu2m3ol">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">sapim-hm</span></a></td>
+	<td class="lambda-list"></td>
+	<td class="category"><span class="category">Special Variable</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="vg3ome4a">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">sapim-laser</span></a></td>
+	<td class="lambda-list"></td>
+	<td class="category"><span class="category">Special Variable</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="ykndqbay">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">sapim-mg</span></a></td>
+	<td class="lambda-list"></td>
+	<td class="category"><span class="category">Special Variable</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="e8qwuomv">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">sapim-ms</span></a></td>
+	<td class="lambda-list"></td>
+	<td class="category"><span class="category">Special Variable</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="lfimsjqo">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">sapim-oval-large</span></a></td>
+	<td class="lambda-list"></td>
+	<td class="category"><span class="category">Special Variable</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="qv2czace">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">sapim-oval-small</span></a></td>
+	<td class="lambda-list"></td>
+	<td class="category"><span class="category">Special Variable</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="tgnvi8vw">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">sapim-polyax</span></a></td>
+	<td class="lambda-list"></td>
+	<td class="category"><span class="category">Special Variable</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="yqzioiuf">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">sapim-race</span></a></td>
+	<td class="lambda-list"></td>
+	<td class="category"><span class="category">Special Variable</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="gtp8zlzw">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">sapim-round-head</span></a></td>
+	<td class="lambda-list"></td>
+	<td class="category"><span class="category">Special Variable</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="llfym8vm">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">sapim-strong</span></a></td>
+	<td class="lambda-list"></td>
+	<td class="category"><span class="category">Special Variable</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="ebw7wxqp">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">sapim-up-side-down</span></a></td>
+	<td class="lambda-list"></td>
+	<td class="category"><span class="category">Special Variable</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="p8cgjol5">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">sind</span></a></td>
+	<td class="lambda-list"><span class="lambda-list">(<span class="variable">number</span>)</span></td>
+	<td class="category"><span class="category">Function</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Return the sine of NUMBER given in degree angle.</pre>
+    </div>
+   </div>
+   <div class="definition" id="yee87t4f">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">spoke-area</span></a></td>
+	<td class="lambda-list"><span class="lambda-list">(<span class="variable">object</span>)</span></td>
+	<td class="category"><span class="category">Generic Function</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="cxchxrov">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">spoke-area</span></a></td>
+	<td class="lambda-list"><span class="lambda-list">((<span class="variable">spoke</span>&nbsp;<span class="method-specializer">spoke</span>))</span></td>
+	<td class="category"><span class="category">Method</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>The cross-sectional area of the spoke on the middle section.</pre>
+    </div>
+   </div>
+   <div class="definition" id="lyr7leln">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">spoke-diameter</span></a></td>
+	<td class="lambda-list"><span class="lambda-list">(<span class="variable">object</span>)</span></td>
+	<td class="category"><span class="category">Generic Function</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="wpuyk7z5">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">spoke-diameter</span></a></td>
+	<td class="lambda-list"><span class="lambda-list">((<span class="variable">spoke</span>&nbsp;<span class="method-specializer">spoke</span>))</span></td>
+	<td class="category"><span class="category">Method</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>The diameter of the spoke at the head.</pre>
+    </div>
+   </div>
+   <div class="definition" id="bjgmepy4">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">spoke-elongation</span></a></td>
+	<td class="lambda-list"><span class="lambda-list">(<span class="variable">spoke</span> <span class="variable">length</span> <span class="variable">tension</span>)</span></td>
+	<td class="category"><span class="category">Function</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Calculate the elongation of a spoke under tension load.
+
+First argument SPOKE is a ‘<a href="#tozvxukr"><span class="symbol">spoke</span></a>’ object.
+Second argument LENGTH is the length of the spoke in millimeter.
+Third argument TENSION is the spoke tension in kilogram.  Value
+ has to be a non-negative number.
+
+The cross-sectional area and the length of the spoke's middle section
+and the material of the spoke must be defined.  See the ‘<a href="#cxchxrov"><span class="symbol">spoke-area</span></a>’,
+‘<a href="#pepsi8fc"><span class="symbol">spoke-middle-section</span></a>’, and ‘<a href="#wyqajl7c"><span class="symbol">spoke-material</span></a>’ methods of the ‘<a href="#tozvxukr"><span class="symbol">spoke</span></a>’
+class.
+
+Primary value is the elongation of the spoke in millimeter.  Secondary
+value is true if the corresponding stress is less than or equal to the
+spoke's strength.</pre>
+    </div>
+   </div>
+   <div class="definition" id="ydc8538y">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">spoke-hole-diameter</span></a></td>
+	<td class="lambda-list"><span class="lambda-list">(<span class="variable">object</span>)</span></td>
+	<td class="category"><span class="category">Generic Function</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="l8huanqb">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">spoke-hole-diameter</span></a></td>
+	<td class="lambda-list"><span class="lambda-list">((<span class="variable">hub</span>&nbsp;<span class="method-specializer">hub</span>))</span></td>
+	<td class="category"><span class="category">Method</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>The diameter of the spoke holes.</pre>
+    </div>
+   </div>
+   <div class="definition" id="wygvgyrs">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">spoke-hole-offset</span></a></td>
+	<td class="lambda-list"><span class="lambda-list">(<span class="variable">object</span>)</span></td>
+	<td class="category"><span class="category">Generic Function</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="xn7gj54x">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">spoke-hole-offset</span></a></td>
+	<td class="lambda-list"><span class="lambda-list">((<span class="variable">straight-pull-hub</span>&nbsp;<span class="method-specializer">straight-pull-hub</span>))</span></td>
+	<td class="category"><span class="category">Method</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>The spoke length correction for straight pull hubs.</pre>
+    </div>
+   </div>
+   <div class="definition" id="wyqajl7c">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">spoke-material</span></a></td>
+	<td class="lambda-list"><span class="lambda-list">(<span class="variable">object</span>)</span></td>
+	<td class="category"><span class="category">Generic Function</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="tkbpypic">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">spoke-material</span></a></td>
+	<td class="lambda-list"><span class="lambda-list">((<span class="variable">spoke</span>&nbsp;<span class="method-specializer">spoke</span>))</span></td>
+	<td class="category"><span class="category">Method</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>The material identifier.</pre>
+    </div>
+   </div>
+   <div class="definition" id="aydqyjfq">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">spoke-middle-section</span></a></td>
+	<td class="lambda-list"><span class="lambda-list">(<span class="variable">object</span>)</span></td>
+	<td class="category"><span class="category">Generic Function</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="pepsi8fc">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">spoke-middle-section</span></a></td>
+	<td class="lambda-list"><span class="lambda-list">((<span class="variable">spoke</span>&nbsp;<span class="method-specializer">spoke</span>))</span></td>
+	<td class="category"><span class="category">Method</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>The length of the middle section.</pre>
+    </div>
+   </div>
+   <div class="definition" id="buj47ktj">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">spoke-strength</span></a></td>
+	<td class="lambda-list"><span class="lambda-list">(<span class="variable">object</span>)</span></td>
+	<td class="category"><span class="category">Generic Function</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="w27owlsq">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">spoke-strength</span></a></td>
+	<td class="lambda-list"><span class="lambda-list">((<span class="variable">spoke</span>&nbsp;<span class="method-specializer">spoke</span>))</span></td>
+	<td class="category"><span class="category">Method</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>The strength of the spoke on the middle section.</pre>
+    </div>
+   </div>
+   <div class="definition" id="rl4fdfql">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">spoke-thread</span></a></td>
+	<td class="lambda-list"><span class="lambda-list">(<span class="variable">object</span>)</span></td>
+	<td class="category"><span class="category">Generic Function</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="xj2toum5">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">spoke-thread</span></a></td>
+	<td class="lambda-list"><span class="lambda-list">((<span class="variable">spoke</span>&nbsp;<span class="method-specializer">spoke</span>))</span></td>
+	<td class="category"><span class="category">Method</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>The thread specification.</pre>
+    </div>
+   </div>
+   <div class="definition" id="yiwp8ct3">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">syntace-x12-100</span></a></td>
+	<td class="lambda-list"></td>
+	<td class="category"><span class="category">Special Variable</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="eu3gktyt">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">syntace-x12-142</span></a></td>
+	<td class="lambda-list"></td>
+	<td class="category"><span class="category">Special Variable</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="q4oxaskk">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">syntace-x12-148</span></a></td>
+	<td class="lambda-list"></td>
+	<td class="category"><span class="category">Special Variable</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="zvc3zdgx">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">syntace-x12-157</span></a></td>
+	<td class="lambda-list"></td>
+	<td class="category"><span class="category">Special Variable</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="pveuxpws">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">thru-axle-12x100</span></a></td>
+	<td class="lambda-list"></td>
+	<td class="category"><span class="category">Special Variable</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="u4iasj84">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">thru-axle-12x142</span></a></td>
+	<td class="lambda-list"></td>
+	<td class="category"><span class="category">Special Variable</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="dwbnxkoh">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">thru-axle-12x148</span></a></td>
+	<td class="lambda-list"></td>
+	<td class="category"><span class="category">Special Variable</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="cmfwqeaq">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">thru-axle-12x157</span></a></td>
+	<td class="lambda-list"></td>
+	<td class="category"><span class="category">Special Variable</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="trrq8saz">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">thru-axle-15x100</span></a></td>
+	<td class="lambda-list"></td>
+	<td class="category"><span class="category">Special Variable</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="g4oad8ec">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">thru-axle-15x110</span></a></td>
+	<td class="lambda-list"></td>
+	<td class="category"><span class="category">Special Variable</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="ljpuxvuu">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">thru-axle-20x100</span></a></td>
+	<td class="lambda-list"></td>
+	<td class="category"><span class="category">Special Variable</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="dsiq53zi">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">thru-axle-20x110</span></a></td>
+	<td class="lambda-list"></td>
+	<td class="category"><span class="category">Special Variable</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="veas8mcr">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">washer-thickness</span></a></td>
+	<td class="lambda-list"><span class="lambda-list">(<span class="variable">object</span>)</span></td>
+	<td class="category"><span class="category">Generic Function</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="ncupl2lb">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">washer-thickness</span></a></td>
+	<td class="lambda-list"><span class="lambda-list">((<span class="variable">washer</span>&nbsp;<span class="method-specializer">washer</span>))</span></td>
+	<td class="category"><span class="category">Method</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>The thickness of the washer.</pre>
+    </div>
+   </div>
+   <div class="definition" id="qyxk5mno">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">wheel-axle</span></a></td>
+	<td class="lambda-list"><span class="lambda-list">(<span class="variable">object</span>)</span></td>
+	<td class="category"><span class="category">Generic Function</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Not documented.</pre>
+    </div>
+   </div>
+   <div class="definition" id="svr3uhav">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">wheel-axle</span></a></td>
+	<td class="lambda-list"><span class="lambda-list">((<span class="variable">hub</span>&nbsp;<span class="method-specializer">hub</span>))</span></td>
+	<td class="category"><span class="category">Method</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>The wheel axle standard.</pre>
+    </div>
+   </div>
+  </div>
+ </body>
+</html>

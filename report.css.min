@@ -1,0 +1,37 @@
+*{margin:0;border:0;padding:0}
+body{color:#212121;background-color:#F5F5F5;font-size:16px;font-family:sans-serif;margin:2em}
+a{color:inherit;background-color:transparent;text-decoration:none}
+div#header{margin:1em}
+div#data{float:left;margin:1em}
+div#graphics{float:left;margin:1em}
+table{border-collapse:collapse;width:722px}
+table,td,th{border:1px solid #9E9E9E}
+td,th{text-align:left;vertical-align:baseline;padding:6px}
+td.unit,td.value{text-align:center;white-space:nowrap}
+td.unit{width:4em}
+td.value{width:8em}
+.info{position:relative}
+.info:hover .info-text{display:block}
+.info-text{position:absolute;z-index:1;left:0;bottom:100%;margin-bottom:12px;width:20em;color:#212121;background:#E0E0E0;border-radius:6px;padding:6px 12px;font-size:smaller;text-align:left;display:none}
+.info-text:after{content:"";position:absolute;left:24px;bottom:-24px;border-width:12px;border-style:solid;border-color:#E0E0E0 transparent transparent transparent}
+svg{border:1px solid #9E9E9E}
+text.title{font-weight:700;text-anchor:middle;text-align:center}
+line.center{stroke:#000;stroke-width:.5;stroke-dasharray:6 1.5 .25 1.5}
+circle.center{stroke:#000;stroke-width:.5;stroke-dasharray:6 1.5 .25 1.5;fill:transparent}
+line.spoke-left-radial,line.spoke-left-trailing{stroke:#2754ff;stroke-width:2;stroke-linecap:round}
+line.spoke-left-leading{stroke:#ff83ff;stroke-width:2;stroke-linecap:round}
+line.spoke-right-radial,line.spoke-right-trailing{stroke:#d82f00;stroke-width:2;stroke-linecap:round}
+line.spoke-right-leading{stroke:#d8ab00;stroke-width:2;stroke-linecap:round}
+circle.spoke-left-radial,circle.spoke-left-trailing{stroke:#000;stroke-width:.25;fill:#2754ff}
+circle.spoke-left-leading{stroke:#000;stroke-width:.25;fill:#ff83ff}
+circle.spoke-right-radial,circle.spoke-right-trailing{stroke:#000;stroke-width:.25;fill:#d82f00}
+circle.spoke-right-leading{stroke:#000;stroke-width:.25;fill:#d8ab00}
+circle.axle{stroke:#000;stroke-width:.5;fill:#F5F5F5}
+circle.hub-flange{stroke:#919191;stroke-width:8;fill:#919191}
+circle.rim-base{stroke:#919191;stroke-width:4;fill:transparent}
+line.valve{stroke:#919191;stroke-width:6;stroke-linecap:butt}
+g.back line.spoke-left-radial,g.back line.spoke-left-trailing,g.back line.spoke-right-radial,g.back line.spoke-right-trailing{stroke:#6c6c6c}
+g.back line.spoke-left-leading,g.back line.spoke-right-leading{stroke:#b6b6b6}
+g.back circle.spoke-left-radial,g.back circle.spoke-left-trailing,g.back circle.spoke-right-radial,g.back circle.spoke-right-trailing{fill:#6c6c6c}
+g.back circle.spoke-left-leading,g.back circle.spoke-right-leading{fill:#b6b6b6}
+g.back circle.center,g.back line.center{stroke:#919191}

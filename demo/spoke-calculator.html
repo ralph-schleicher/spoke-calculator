@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8"/>
+  <title>Ralph's Spoke Calculator</title>
+  <style type="text/css">
+   *{margin:0;border:0;padding:0}
+   body{color:#212121;background-color:#F5F5F5;font-size:16px;font-family:sans-serif;margin:2em}
+   a{color:inherit;background-color:transparent;text-decoration:none}
+   div#header{margin:1em}
+   div#data{float:left;margin:1em}
+   div#graphics{float:left;margin:1em}
+   table{border-collapse:collapse;width:722px}
+   table,td,th{border:1px solid #9E9E9E}
+   td,th{text-align:left;vertical-align:baseline;padding:6px}
+   td.unit,td.value{text-align:center;white-space:nowrap}
+   td.unit{width:4em}
+   td.value{width:8em}
+   .info{position:relative}
+   .info:hover .info-text{display:block}
+   .info-text{position:absolute;z-index:1;left:0;bottom:100%;margin-bottom:12px;width:20em;color:#212121;background:#E0E0E0;border-radius:6px;padding:6px 12px;font-size:smaller;text-align:left;display:none}
+   .info-text:after{content:"";position:absolute;left:24px;bottom:-24px;border-width:12px;border-style:solid;border-color:#E0E0E0 transparent transparent transparent}
+   svg{border:1px solid #9E9E9E}
+   text.title{font-weight:700;text-anchor:middle;text-align:center}
+   line.center{stroke:#000;stroke-width:.5;stroke-dasharray:6 1.5 .25 1.5}
+   circle.center{stroke:#000;stroke-width:.5;stroke-dasharray:6 1.5 .25 1.5;fill:transparent}
+   line.spoke-left-radial,line.spoke-left-trailing{stroke:#2754ff;stroke-width:2;stroke-linecap:round}
+   line.spoke-left-leading{stroke:#ff83ff;stroke-width:2;stroke-linecap:round}
+   line.spoke-right-radial,line.spoke-right-trailing{stroke:#d82f00;stroke-width:2;stroke-linecap:round}
+   line.spoke-right-leading{stroke:#d8ab00;stroke-width:2;stroke-linecap:round}
+   circle.spoke-left-radial,circle.spoke-left-trailing{stroke:#000;stroke-width:.25;fill:#2754ff}
+   circle.spoke-left-leading{stroke:#000;stroke-width:.25;fill:#ff83ff}
+   circle.spoke-right-radial,circle.spoke-right-trailing{stroke:#000;stroke-width:.25;fill:#d82f00}
+   circle.spoke-right-leading{stroke:#000;stroke-width:.25;fill:#d8ab00}
+   circle.axle{stroke:#000;stroke-width:.5;fill:#F5F5F5}
+   circle.hub-flange{stroke:#919191;stroke-width:8;fill:#919191}
+   circle.rim-base{stroke:#919191;stroke-width:4;fill:transparent}
+   line.valve{stroke:#919191;stroke-width:6;stroke-linecap:butt}
+   g.back line.spoke-left-radial,g.back line.spoke-left-trailing,g.back line.spoke-right-radial,g.back line.spoke-right-trailing{stroke:#6c6c6c}
+   g.back line.spoke-left-leading,g.back line.spoke-right-leading{stroke:#b6b6b6}
+   g.back circle.spoke-left-radial,g.back circle.spoke-left-trailing,g.back circle.spoke-right-radial,g.back circle.spoke-right-trailing{fill:#6c6c6c}
+   g.back circle.spoke-left-leading,g.back circle.spoke-right-leading{fill:#b6b6b6}
+   g.back circle.center,g.back line.center{stroke:#919191}
+  </style>
+ </head>
+ <body>
+  <div id="header">
+   <p>Calculated by
+    <a href="https://github.com/ralph-schleicher/spoke-calculator">Ralph's Spoke Calculator</a>
+    (spoke-calculator&nbsp;0.1).</p>
+  </div>
+  <div id="data">
+   <table>
+    <colgroup>
+     <col />
+     <col />
+     <col />
+     <col />
+    </colgroup>
+    <tbody>
+     <tr>
+      <th colspan="4">Hub</th>
+     </tr>
+     <tr>
+      <td class="label">
+       <span class="info">
+	Pitch Circle Diameter
+	<span class="info-text">
+	 The pitch circle diameter of the spoke holes on the flange.
+	</span>
+       </span>
+      </td>
+      <td class="unit">mm</td>
+      <td class="value">56.0</td>
+      <td class="value">54.0</td>
+     </tr>
+     <tr>
+      <td class="label">
+       <span class="info">
+	Pitch Circle Radius
+	<span class="info-text">
+	 The pitch circle radius of the spoke holes on the flange.
+	</span>
+       </span>
+      </td>
+      <td class="unit">mm</td>
+      <td class="value">28.0</td>
+      <td class="value">27.0</td>
+     </tr>
+     <tr>
+      <td class="label">
+       <span class="info">
+	Pitch Circle Distance
+	<span class="info-text">
+	 The distance from the middle of the hub to the pitch circle.
+	</span>
+       </span>
+      </td>
+      <td class="unit">mm</td>
+      <td class="value">32.0</td>
+      <td class="value">21.0</td>
+     </tr>
+     <tr>
+      <td class="label">
+       <span class="info">
+	Spoke Hole Diameter
+	<span class="info-text">
+	 The diameter of the spoke holes.
+	</span>
+       </span>
+      </td>
+      <td class="unit" class="unit">mm</td>
+      <td class="value" colspan="2">2.5</td>
+     </tr>
+     <tr>
+      <th colspan="4">Rim</th>
+     </tr>
+     <tr>
+      <td class="label">
+       <span class="info">
+	Base Diameter
+	<span class="info-text">
+	 The base diameter, i.e. pitch circle diameter, of the spoke
+	 holes on the rim.
+	</span>
+       </span>
+      </td>
+      <td class="unit">mm</td>
+      <td class="value" colspan="2">536.0</td>
+     </tr>
+     <tr>
+      <td class="label">
+       <span class="info">
+	Pitch Circle Diameter
+	<span class="info-text">
+	 The effective pitch circle diameter of the spoke holes on the
+	 rim.
+	</span>
+       </span>
+      </td>
+      <td class="unit">mm</td>
+      <td class="value" colspan="2">536.0</td>
+     </tr>
+     <tr>
+      <td class="label">
+       <span class="info">
+	Pitch Circle Radius
+	<span class="info-text">
+	 The effective pitch circle radius of the spoke holes on the
+	 rim.
+	</span>
+       </span>
+      </td>
+      <td class="unit">mm</td>
+      <td class="value" colspan="2">268.0</td>
+     </tr>
+     <tr>
+      <td class="label">
+       <span class="info">
+	Pitch Circle Distance
+	<span class="info-text">
+	 The distance from the middle of the rim to the pitch circle.
+	 A value of zero means, that the rim is symmetric.  A negative
+	 value means, that the offset is on the non-gear side.  A
+	 positive value means, that the offset is on the gear side.
+	</span>
+       </span>
+      </td>
+      <td class="unit">mm</td>
+      <td class="value" colspan="2">0</td>
+     </tr>
+     <tr>
+      <th colspan="4">Wheel Assembly</th>
+     </tr>
+     <tr>
+      <td class="label">
+       <span class="info">
+	Number of Spokes
+	<span class="info-text">
+	 The total number of spokes.
+	</span>
+       </span>
+      </td>
+      <td class="unit"></td>
+      <td class="value" colspan="2">32</td>
+     </tr>
+     <tr>
+      <td class="label">
+       <span class="info">
+	Spoke Crossings
+	<span class="info-text">
+	 The number of spoke crossings.
+	</span>
+       </span>
+      </td>
+      <td class="unit"></td>
+      <td class="value">3</td>
+      <td class="value">3</td>
+     </tr>
+     <tr>
+      <td class="label">
+       <span class="info">
+	Hub Holes
+	<span class="info-text">
+	 The number of spoke holes on the hub.
+	</span>
+       </span>
+      </td>
+      <td class="unit"></td>
+      <td class="value">16</td>
+      <td class="value">16</td>
+     </tr>
+     <tr>
+      <td class="label">
+       <span class="info">
+	Hub Sector Central Angle
+	<span class="info-text">
+	 The central angle of a hub sector between two adjacent spoke
+	 holes.
+	</span>
+       </span>
+      </td>
+      <td class="unit">°</td>
+      <td class="value">22.5</td>
+      <td class="value">22.5</td>
+     </tr>
+     <tr>
+      <td class="label">
+       <span class="info">
+	Hub Step Size
+	<span class="info-text">
+	 The number of spoke holes (step size) between similar spokes
+	 on the hub.
+	</span>
+       </span>
+      </td>
+      <td class="unit"></td>
+      <td class="value">2</td>
+      <td class="value">2</td>
+     </tr>
+     <tr>
+      <td class="label">
+       <span class="info">
+	Rim Holes
+	<span class="info-text">
+	 The number of spoke holes on the rim.
+	</span>
+       </span>
+      </td>
+      <td class="unit"></td>
+      <td class="value" colspan="2">32</td>
+     </tr>
+     <tr>
+      <td class="label">
+       <span class="info">
+	Rim Sector Central Angle
+	<span class="info-text">
+	 The central angle of a rim sector between two adjacent spoke
+	 holes.
+	</span>
+       </span>
+      </td>
+      <td class="unit">°</td>
+      <td class="value" colspan="2">11.25</td>
+     </tr>
+     <tr>
+      <td class="label">
+       <span class="info">
+	Rim Step Size
+	<span class="info-text">
+	 The number of spoke holes (step size) between similar spokes
+	 on the rim.
+	</span>
+       </span>
+      </td>
+      <td class="unit"></td>
+      <td class="value" colspan="2">4</td>
+     </tr>
+     <tr>
+      <td class="label">
+       <span class="info">
+	Rim Spoke Pair Step Size
+	<span class="info-text">
+	 The number of spoke holes (step size) for a pair of leading
+	 and trailing spokes on the rim.
+	</span>
+       </span>
+      </td>
+      <td class="unit"></td>
+      <td class="value">10</td>
+      <td class="value">10</td>
+     </tr>
+     <tr>
+      <td class="label">
+       <span class="info">
+	Tension Angle
+	<span class="info-text">
+	 The angle between the spokes' tension force and the wheel
+	 plane.
+	</span>
+       </span>
+      </td>
+      <td class="unit">°</td>
+      <td class="value">7.0545897</td>
+      <td class="value">4.637742</td>
+     </tr>
+     <tr>
+      <td class="label">
+       <span class="info">
+	Tension Ratio
+	<span class="info-text">
+	 The ratio of the non-gear side and gear side tension forces
+	 so that the lateral forces in the triange of forces are
+	 equal.
+	</span>
+       </span>
+      </td>
+      <td class="unit">%</td>
+      <td class="value">65.83523</td>
+      <td class="value">151.89436</td>
+     </tr>
+     <tr>
+      <td class="label">
+       <span class="info">
+	Spoke Tension
+	<span class="info-text">
+	 The tension force of a spoke (used to calculate the spoke
+	 elongation).  Can be checked with a spoke tensiometer.
+	 <!-- https://www.pklie.de/tensionmeter.html -->
+	 <!-- https://www.sapim.be/tools/spoke-tensiometer -->
+	 <!-- https://www.dtswiss.com/de/komponenten/proline-wheelbuilding/tensiometer -->
+	</span>
+       </span>
+      </td>
+      <td class="unit">kg</td>
+      <td class="value">79.00227</td>
+      <td class="value">120.0</td>
+     </tr>
+     <tr>
+      <th colspan="4">Spoke&nbsp;Sapim Race</th>
+     </tr>
+     <tr>
+      <td class="label">
+       <span class="info">
+	Spoke Distance
+	<span class="info-text">
+	 The geometric spoke length, i.e. the distance between the
+	 spoke hole center points on the hub and on the rim.
+	</span>
+       </span>
+      </td>
+      <td class="unit">mm</td>
+      <td class="value">260.55457</td>
+      <td class="value">259.72256</td>
+     </tr>
+     <tr>
+      <td class="label">
+       <span class="info">
+	Spoke Length
+	<span class="info-text">
+	 The actual spoke length excluding the nipple head extent.
+	</span>
+       </span>
+      </td>
+      <td class="unit">mm</td>
+      <td class="value">259.30457</td>
+      <td class="value">258.47256</td>
+     </tr>
+     <tr>
+      <td class="label">
+       <span class="info">
+	Spoke Elongation
+	<span class="info-text">
+	 The elongation of the spoke middle section due to the tension
+	 force.
+	</span>
+       </span>
+      </td>
+      <td class="unit">mm</td>
+      <td class="value">0.3743202</td>
+      <td class="value">0.56643367</td>
+     </tr>
+     <tr>
+      <td class="label">
+       <span class="info">
+	Minimum Spoke Length
+	<span class="info-text">
+	 The minimum spoke length considers half of the spoke
+	 elongation and a nipple head extent of 1&nbsp;mm (so that the
+	 thread is not visible with a 12&nbsp;mm standard nipple).
+	</span>
+       </span>
+      </td>
+      <td class="unit">mm</td>
+      <td class="value">260.2</td>
+      <td class="value">259.2</td>
+     </tr>
+     <tr>
+      <td class="label">
+       <span class="info">
+	Maximum Spoke Length
+	<span class="info-text">
+	 The maximum spoke length considers the full spoke elongation
+	 and a nipple head extent of 3.5&nbsp;mm (so there is still
+	 0.5&nbsp;mm, i.e. one round, until the thread blocks).
+	</span>
+       </span>
+      </td>
+      <td class="unit">mm</td>
+      <td class="value">262.4</td>
+      <td class="value">261.4</td>
+     </tr>
+    </tbody>
+   </table>
+  </div>
+  <div id="graphics">
+   <svg xmlns="http://www.w3.org/2000/svg" version="1.1"
+	width="720" height="960">
+    <text class="title" x="360" y="20">&lt;&lt;&lt;&emsp;Left Side&emsp;&lt;&lt;&lt;</text>
+    <g transform="matrix(-2, 0, 0, -2, 360, 720)">
+     <g class="back">
+      <!-- Trailing or radial spokes.  -->
+      <line class="spoke-right-trailing" x1="25.837389" y1="7.837686" x2="26.268593" y2="266.7095" />
+      <line class="spoke-right-trailing" x1="23.811874" y1="-12.727712" x2="207.16681" y2="170.0174" />
+      <line class="spoke-right-trailing" x1="7.837686" y1="-25.837389" x2="266.7095" y2="-26.268593" />
+      <line class="spoke-right-trailing" x1="-12.727712" y1="-23.811874" x2="170.0174" y2="-207.16681" />
+      <line class="spoke-right-trailing" x1="-25.837389" y1="-7.837686" x2="-26.268593" y2="-266.7095" />
+      <line class="spoke-right-trailing" x1="-23.811874" y1="12.727712" x2="-207.16681" y2="-170.0174" />
+      <line class="spoke-right-trailing" x1="-7.837686" y1="25.837389" x2="-266.7095" y2="26.268593" />
+      <line class="spoke-right-trailing" x1="12.727712" y1="23.811874" x2="-170.0174" y2="207.16681" />
+      <!-- Hub flange.  -->
+      <circle class="hub-flange" cx="0" cy="0" r="27.0" />
+      <!-- Trailing or radial spoke heads.  -->
+      <circle class="spoke-right-trailing" cx="25.837389" cy="7.837686" r="2" />
+      <circle class="spoke-right-trailing" cx="23.811874" cy="-12.727712" r="2" />
+      <circle class="spoke-right-trailing" cx="7.837686" cy="-25.837389" r="2" />
+      <circle class="spoke-right-trailing" cx="-12.727712" cy="-23.811874" r="2" />
+      <circle class="spoke-right-trailing" cx="-25.837389" cy="-7.837686" r="2" />
+      <circle class="spoke-right-trailing" cx="-23.811874" cy="12.727712" r="2" />
+      <circle class="spoke-right-trailing" cx="-7.837686" cy="25.837389" r="2" />
+      <circle class="spoke-right-trailing" cx="12.727712" cy="23.811874" r="2" />
+      <!-- Leading spokes.  -->
+      <line class="spoke-right-leading" x1="-17.128618" y1="20.871283" x2="126.33433" y2="236.3549" />
+      <line class="spoke-right-leading" x1="2.6464627" y1="26.869987" x2="256.46002" y2="77.796295" />
+      <line class="spoke-right-leading" x1="20.871283" y1="17.128618" x2="236.3549" y2="-126.33433" />
+      <line class="spoke-right-leading" x1="26.869987" y1="-2.6464627" x2="77.796295" y2="-256.46002" />
+      <line class="spoke-right-leading" x1="17.128618" y1="-20.871283" x2="-126.33433" y2="-236.3549" />
+      <line class="spoke-right-leading" x1="-2.6464627" y1="-26.869987" x2="-256.46002" y2="-77.796295" />
+      <line class="spoke-right-leading" x1="-20.871283" y1="-17.128618" x2="-236.3549" y2="126.33433" />
+      <line class="spoke-right-leading" x1="-26.869987" y1="2.6464627" x2="-77.796295" y2="256.46002" />
+      <!-- Pitch circle.  -->
+      <circle class="center" cx="0" cy="0" r="27.0" />
+     </g>
+     <g class="front">
+      <!-- Leading spokes.  -->
+      <line class="spoke-left-leading" x1="-13.199109" y1="24.693796" x2="170.0174" y2="207.16681" />
+      <line class="spoke-left-leading" x1="8.127971" y1="26.794329" x2="266.7095" y2="26.268593" />
+      <line class="spoke-left-leading" x1="24.693796" y1="13.199109" x2="207.16681" y2="-170.0174" />
+      <line class="spoke-left-leading" x1="26.794329" y1="-8.127971" x2="26.268593" y2="-266.7095" />
+      <line class="spoke-left-leading" x1="13.199109" y1="-24.693796" x2="-170.0174" y2="-207.16681" />
+      <line class="spoke-left-leading" x1="-8.127971" y1="-26.794329" x2="-266.7095" y2="-26.268593" />
+      <line class="spoke-left-leading" x1="-24.693796" y1="-13.199109" x2="-207.16681" y2="170.0174" />
+      <line class="spoke-left-leading" x1="-26.794329" y1="8.127971" x2="-26.268593" y2="266.7095" />
+      <!-- Hub flange.  -->
+      <circle class="hub-flange" cx="0" cy="0" r="28.0" />
+      <!-- Leading spoke heads.  -->
+      <circle class="spoke-left-leading" cx="-13.199109" cy="24.693796" r="2" />
+      <circle class="spoke-left-leading" cx="8.127971" cy="26.794329" r="2" />
+      <circle class="spoke-left-leading" cx="24.693796" cy="13.199109" r="2" />
+      <circle class="spoke-left-leading" cx="26.794329" cy="-8.127971" r="2" />
+      <circle class="spoke-left-leading" cx="13.199109" cy="-24.693796" r="2" />
+      <circle class="spoke-left-leading" cx="-8.127971" cy="-26.794329" r="2" />
+      <circle class="spoke-left-leading" cx="-24.693796" cy="-13.199109" r="2" />
+      <circle class="spoke-left-leading" cx="-26.794329" cy="8.127971" r="2" />
+      <!-- Trailing or radial spokes.  -->
+      <line class="spoke-left-trailing" x1="27.865171" y1="2.74448" x2="77.796295" y2="256.46002" />
+      <line class="spoke-left-trailing" x1="21.644293" y1="-17.763012" x2="236.3549" y2="126.33433" />
+      <line class="spoke-left-trailing" x1="2.74448" y1="-27.865171" x2="256.46002" y2="-77.796295" />
+      <line class="spoke-left-trailing" x1="-17.763012" y1="-21.644293" x2="126.33433" y2="-236.3549" />
+      <line class="spoke-left-trailing" x1="-27.865171" y1="-2.74448" x2="-77.796295" y2="-256.46002" />
+      <line class="spoke-left-trailing" x1="-21.644293" y1="17.763012" x2="-236.3549" y2="-126.33433" />
+      <line class="spoke-left-trailing" x1="-2.74448" y1="27.865171" x2="-256.46002" y2="77.796295" />
+      <line class="spoke-left-trailing" x1="17.763012" y1="21.644293" x2="-126.33433" y2="236.3549" />
+      <!-- Pitch circle.  -->
+      <circle class="center" cx="0" cy="0" r="28.0" />
+     </g>
+     <!-- Wheel axle.  -->
+     <circle class="axle" cx="0" cy="0" r="6" />
+     <!-- Valve.  -->
+     <line class="valve" x1="0" y1="0" x2="0" y2="-30" transform="translate(0, 268.0)" />
+     <!-- Rim.  -->
+     <circle class="rim-base" cx="0" cy="0" r="268.0" />
+     <circle class="center" cx="0" cy="0" r="268.0" />
+    </g>
+   </svg>
+  </div>
+  <div id="graphics">
+   <svg xmlns="http://www.w3.org/2000/svg" version="1.1"
+	width="720" height="960">
+    <text class="title" x="360" y="20">&gt;&gt;&gt;&emsp;Right Side&emsp;&gt;&gt;&gt;</text>
+    <g transform="matrix(2, 0, 0, -2, 360, 720)">
+     <g class="back">
+      <!-- Trailing or radial spokes.  -->
+      <line class="spoke-left-trailing" x1="27.865171" y1="2.74448" x2="77.796295" y2="256.46002" />
+      <line class="spoke-left-trailing" x1="21.644293" y1="-17.763012" x2="236.3549" y2="126.33433" />
+      <line class="spoke-left-trailing" x1="2.74448" y1="-27.865171" x2="256.46002" y2="-77.796295" />
+      <line class="spoke-left-trailing" x1="-17.763012" y1="-21.644293" x2="126.33433" y2="-236.3549" />
+      <line class="spoke-left-trailing" x1="-27.865171" y1="-2.74448" x2="-77.796295" y2="-256.46002" />
+      <line class="spoke-left-trailing" x1="-21.644293" y1="17.763012" x2="-236.3549" y2="-126.33433" />
+      <line class="spoke-left-trailing" x1="-2.74448" y1="27.865171" x2="-256.46002" y2="77.796295" />
+      <line class="spoke-left-trailing" x1="17.763012" y1="21.644293" x2="-126.33433" y2="236.3549" />
+      <!-- Hub flange.  -->
+      <circle class="hub-flange" cx="0" cy="0" r="28.0" />
+      <!-- Trailing or radial spoke heads.  -->
+      <circle class="spoke-left-trailing" cx="27.865171" cy="2.74448" r="2" />
+      <circle class="spoke-left-trailing" cx="21.644293" cy="-17.763012" r="2" />
+      <circle class="spoke-left-trailing" cx="2.74448" cy="-27.865171" r="2" />
+      <circle class="spoke-left-trailing" cx="-17.763012" cy="-21.644293" r="2" />
+      <circle class="spoke-left-trailing" cx="-27.865171" cy="-2.74448" r="2" />
+      <circle class="spoke-left-trailing" cx="-21.644293" cy="17.763012" r="2" />
+      <circle class="spoke-left-trailing" cx="-2.74448" cy="27.865171" r="2" />
+      <circle class="spoke-left-trailing" cx="17.763012" cy="21.644293" r="2" />
+      <!-- Leading spokes.  -->
+      <line class="spoke-left-leading" x1="-13.199109" y1="24.693796" x2="170.0174" y2="207.16681" />
+      <line class="spoke-left-leading" x1="8.127971" y1="26.794329" x2="266.7095" y2="26.268593" />
+      <line class="spoke-left-leading" x1="24.693796" y1="13.199109" x2="207.16681" y2="-170.0174" />
+      <line class="spoke-left-leading" x1="26.794329" y1="-8.127971" x2="26.268593" y2="-266.7095" />
+      <line class="spoke-left-leading" x1="13.199109" y1="-24.693796" x2="-170.0174" y2="-207.16681" />
+      <line class="spoke-left-leading" x1="-8.127971" y1="-26.794329" x2="-266.7095" y2="-26.268593" />
+      <line class="spoke-left-leading" x1="-24.693796" y1="-13.199109" x2="-207.16681" y2="170.0174" />
+      <line class="spoke-left-leading" x1="-26.794329" y1="8.127971" x2="-26.268593" y2="266.7095" />
+      <!-- Pitch circle.  -->
+      <circle class="center" cx="0" cy="0" r="28.0" />
+     </g>
+     <g class="front">
+      <!-- Leading spokes.  -->
+      <line class="spoke-right-leading" x1="-17.128618" y1="20.871283" x2="126.33433" y2="236.3549" />
+      <line class="spoke-right-leading" x1="2.6464627" y1="26.869987" x2="256.46002" y2="77.796295" />
+      <line class="spoke-right-leading" x1="20.871283" y1="17.128618" x2="236.3549" y2="-126.33433" />
+      <line class="spoke-right-leading" x1="26.869987" y1="-2.6464627" x2="77.796295" y2="-256.46002" />
+      <line class="spoke-right-leading" x1="17.128618" y1="-20.871283" x2="-126.33433" y2="-236.3549" />
+      <line class="spoke-right-leading" x1="-2.6464627" y1="-26.869987" x2="-256.46002" y2="-77.796295" />
+      <line class="spoke-right-leading" x1="-20.871283" y1="-17.128618" x2="-236.3549" y2="126.33433" />
+      <line class="spoke-right-leading" x1="-26.869987" y1="2.6464627" x2="-77.796295" y2="256.46002" />
+      <!-- Hub flange.  -->
+      <circle class="hub-flange" cx="0" cy="0" r="27.0" />
+      <!-- Leading spoke heads.  -->
+      <circle class="spoke-right-leading" cx="-17.128618" cy="20.871283" r="2" />
+      <circle class="spoke-right-leading" cx="2.6464627" cy="26.869987" r="2" />
+      <circle class="spoke-right-leading" cx="20.871283" cy="17.128618" r="2" />
+      <circle class="spoke-right-leading" cx="26.869987" cy="-2.6464627" r="2" />
+      <circle class="spoke-right-leading" cx="17.128618" cy="-20.871283" r="2" />
+      <circle class="spoke-right-leading" cx="-2.6464627" cy="-26.869987" r="2" />
+      <circle class="spoke-right-leading" cx="-20.871283" cy="-17.128618" r="2" />
+      <circle class="spoke-right-leading" cx="-26.869987" cy="2.6464627" r="2" />
+      <!-- Trailing or radial spokes.  -->
+      <line class="spoke-right-trailing" x1="25.837389" y1="7.837686" x2="26.268593" y2="266.7095" />
+      <line class="spoke-right-trailing" x1="23.811874" y1="-12.727712" x2="207.16681" y2="170.0174" />
+      <line class="spoke-right-trailing" x1="7.837686" y1="-25.837389" x2="266.7095" y2="-26.268593" />
+      <line class="spoke-right-trailing" x1="-12.727712" y1="-23.811874" x2="170.0174" y2="-207.16681" />
+      <line class="spoke-right-trailing" x1="-25.837389" y1="-7.837686" x2="-26.268593" y2="-266.7095" />
+      <line class="spoke-right-trailing" x1="-23.811874" y1="12.727712" x2="-207.16681" y2="-170.0174" />
+      <line class="spoke-right-trailing" x1="-7.837686" y1="25.837389" x2="-266.7095" y2="26.268593" />
+      <line class="spoke-right-trailing" x1="12.727712" y1="23.811874" x2="-170.0174" y2="207.16681" />
+      <!-- Pitch circle.  -->
+      <circle class="center" cx="0" cy="0" r="27.0" />
+     </g>
+     <!-- Wheel axle.  -->
+     <circle class="axle" cx="0" cy="0" r="6" />
+     <!-- Valve.  -->
+     <line class="valve" x1="0" y1="0" x2="0" y2="-30" transform="translate(0, 268.0)" />
+     <!-- Rim.  -->
+     <circle class="rim-base" cx="0" cy="0" r="268.0" />
+     <circle class="center" cx="0" cy="0" r="268.0" />
+    </g>
+   </svg>
+  </div>
+ </body>
+</html>

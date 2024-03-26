@@ -1,0 +1,68 @@
+* Spoke Calculator
+
+A spoke length calculator for bicycle wheels.
+
+
+** Motivation
+
+I was always a bit unsure about the calculated spoke length of the
+freely available spoke calculators from, for example, Sapim oder DT
+Swiss.  The problem is that there are not many stores where you can
+buy spokes in one millimeter increments.  Most stores only offer two
+millimeter increments.  That's why it is important for me to calculate
+the minimum and maximum spoke length so that I can order the correct
+spoke length.  Since I use my own spoke length calculator, I never
+failed.
+
+
+** Usage
+
+You need the basic dimensions of the hub and the rim and an idea about
+the spoke pattern.
+
+#+BEGIN_SRC lisp
+(in-package :spoke-calculator-user)
+
+(calculate
+ :hub (make-instance 'hub :pitch-circle-diameter (cons 56.0 54.0)
+                          :pitch-circle-distance (cons 32.0 21.0)
+                          :spoke-hole-diameter 2.5)
+ :rim (make-instance 'rim :base-diameter 536.0)
+ :spoke sapim-race
+ :spoke-count 32
+ :spoke-crossings 3)
+
+(report *data* :output (user-homedir-pathname) :format :html)
+#+END_SRC
+
+Open the generated report:
+
+#+BEGIN_EXAMPLE sh
+$ xdg-open ~/spoke-calculator.html
+#+END_EXAMPLE
+
+You should see something like that:
+
+file:doc/spoke-calculator.png
+
+
+** Notes
+
+*** Material Properties
+
+Steel spokes are made of spring wire.  See, e.g. ISO 6931-1 “Stainless
+steels for springs – Part 1: Wire”.
+
+| Name        | Number        | Condition       | Young's Modulus |
+|-------------+---------------+-----------------+-----------------|
+| X10CrNi18-8 | 4310-301-00-I | cold drawn      | 180000 MPa      |
+| X10CrNi18-8 | 4310-301-00-I | stress relieved | 185000 MPa      |
+| X10CrNi18-8 | 4310-301-00-I |                 | 196000 MPa      |
+| X9CrNi18-9  | 4325-302-00-E |                 | 193000 MPa      |
+
+*** Thread Specifications
+
+| Standard Wire Gauge | 15G |   14G |   13G |
+| Wire Diameter / mm  | 1.8 |   2.0 |   2.3 |
+| Thread Pitch / 1/in |  56 |    56 |    56 |
+| DIN 79012           | FG2 | FG2.3 | FG2.6 |

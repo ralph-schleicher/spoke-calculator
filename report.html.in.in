@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8"/>
+  <title><!-- TMPL_VAR software-title --></title>
+  <!-- TMPL_VAR CSS -->
+ </head>
+ <body>
+  <div id="header">
+   <p>Calculated by
+    <a href="<!-- TMPL_VAR software-url -->"><!-- TMPL_VAR software-title --></a>
+    (<!-- TMPL_VAR software-name -->&nbsp;<!-- TMPL_VAR software-version -->).</p>
+  </div>
+
+  <div id="data">
+   <table>
+    <colgroup>
+     <col />
+     <col />
+     <col />
+     <col />
+    </colgroup>
+    <tbody>
+     <tr>
+      <th colspan="4">Hub<!-- TMPL_IF hub-label -->&nbsp;<!-- TMPL_VAR hub-label --><!-- /TMPL_IF --></th>
+     </tr>
+     <!-- TMPL_IF axle-diameter -->
+     <!-- TMPL_IF axle-length -->
+     <tr>
+      <td class="label">
+       <span class="info">
+	Wheel Axle
+	<span class="info-text">
+	 The diameter and length of the wheel axle.
+	</span>
+       </span>
+      </td>
+      <td class="unit">mm</td>
+      <td class="value" colspan="2"><!-- TMPL_VAR axle-diameter --> × <!-- TMPL_VAR axle-length --></td>
+     </tr>
+     <!-- /TMPL_IF -->
+     <!-- /TMPL_IF -->
+     <tr>
+      <td class="label">
+       <span class="info">
+	Pitch Circle Diameter
+	<span class="info-text">
+	 The pitch circle diameter of the spoke holes on the flange.
+	</span>
+       </span>
+      </td>
+      <td class="unit">mm</td>
+      <td class="value"><!-- TMPL_VAR hub-diameter-left --></td>
+      <td class="value"><!-- TMPL_VAR hub-diameter-right --></td>
+     </tr>
+     <tr>
+      <td class="label">
+       <span class="info">
+	Pitch Circle Radius
+	<span class="info-text">
+	 The pitch circle radius of the spoke holes on the flange.
+	</span>
+       </span>
+      </td>
+      <td class="unit">mm</td>
+      <td class="value"><!-- TMPL_VAR hub-radius-left --></td>
+      <td class="value"><!-- TMPL_VAR hub-radius-right --></td>
+     </tr>
+     <tr>
+      <td class="label">
+       <span class="info">
+	Pitch Circle Distance
+	<span class="info-text">
+	 The distance from the middle of the hub to the pitch circle.
+	</span>
+       </span>
+      </td>
+      <td class="unit">mm</td>
+      <td class="value"><!-- TMPL_VAR hub-distance-left --></td>
+      <td class="value"><!-- TMPL_VAR hub-distance-right --></td>
+     </tr>
+     <tr>
+      <td class="label">
+       <span class="info">
+	Spoke Hole Diameter
+	<span class="info-text">
+	 The diameter of the spoke holes.
+	</span>
+       </span>
+      </td>
+      <td class="unit" class="unit">mm</td>
+      <td class="value" colspan="2"><!-- TMPL_VAR hub-spoke-hole-diameter --></td>
+     </tr>
+     <!-- TMPL_IF is-straight-pull-hub -->
+     <tr>
+      <td class="label">
+       <span class="info">
+	Spoke Hole Offset
+	<span class="info-text">
+	 The spoke length correction for straight pull hubs.
+	</span>
+       </span>
+      </td>
+      <td class="unit" class="unit">mm</td>
+      <td class="value" colspan="2"><!-- TMPL_VAR hub-spoke-hole-offset --></td>
+     </tr>
+     <!-- /TMPL_IF -->
+     <tr>
+      <th colspan="4">Rim<!-- TMPL_IF rim-label -->&nbsp;<!-- TMPL_VAR rim-label --><!-- /TMPL_IF --></th>
+     </tr>
+     <!-- TMPL_IF rim-inner-diameter -->
+     <tr>
+      <td class="label">
+       <span class="info">
+	Inner Diameter
+	<span class="info-text">
+	 The inner diameter of the rim (do not subtract the height of
+	 the spoke hole eyelet).
+	</span>
+       </span>
+      </td>
+      <td class="unit">mm</td>
+      <td class="value" colspan="2"><!-- TMPL_VAR rim-inner-diameter --></td>
+     </tr>
+     <!-- /TMPL_IF -->
+     <!-- TMPL_IF rim-thickness -->
+     <tr>
+      <td class="label">
+       <span class="info">
+	Rim Thickness
+	<span class="info-text">
+	 The thickness of the rim at the spoke holes (including the
+	 height of the eyelet).
+	</span>
+       </span>
+      </td>
+      <td class="unit">mm</td>
+      <td class="value" colspan="2"><!-- TMPL_VAR rim-thickness --></td>
+     </tr>
+     <!-- /TMPL_IF -->
+     <!-- TMPL_IF rim-base-diameter -->
+     <tr>
+      <td class="label">
+       <span class="info">
+	Base Diameter
+	<span class="info-text">
+	 The base diameter, i.e. pitch circle diameter, of the spoke
+	 holes on the rim.
+	</span>
+       </span>
+      </td>
+      <td class="unit">mm</td>
+      <td class="value" colspan="2"><!-- TMPL_VAR rim-base-diameter --></td>
+     </tr>
+     <!-- /TMPL_IF -->
+     <!-- TMPL_IF washer-label -->
+     <tr>
+      <td class="label">
+       <span class="info">
+	Washer Thickness
+	<span class="info-text">
+	 The thickness of the washer.
+	</span>
+       </span>
+      </td>
+      <td class="unit">mm</td>
+      <td class="value" colspan="2"><!-- TMPL_VAR washer-thickness --></td>
+     </tr>
+     <!-- /TMPL_IF -->
+     <tr>
+      <td class="label">
+       <span class="info">
+	Pitch Circle Diameter
+	<span class="info-text">
+	 The effective pitch circle diameter of the spoke holes on the
+	 rim.
+	</span>
+       </span>
+      </td>
+      <td class="unit">mm</td>
+      <td class="value" colspan="2"><!-- TMPL_VAR rim-diameter --></td>
+     </tr>
+     <tr>
+      <td class="label">
+       <span class="info">
+	Pitch Circle Radius
+	<span class="info-text">
+	 The effective pitch circle radius of the spoke holes on the
+	 rim.
+	</span>
+       </span>
+      </td>
+      <td class="unit">mm</td>
+      <td class="value" colspan="2"><!-- TMPL_VAR rim-radius --></td>
+     </tr>
+     <tr>
+      <td class="label">
+       <span class="info">
+	Pitch Circle Distance
+	<span class="info-text">
+	 The distance from the middle of the rim to the pitch circle.
+	 A value of zero means, that the rim is symmetric.  A negative
+	 value means, that the offset is on the non-gear side.  A
+	 positive value means, that the offset is on the gear side.
+	</span>
+       </span>
+      </td>
+      <td class="unit">mm</td>
+      <td class="value" colspan="2"><!-- TMPL_VAR rim-offset --></td>
+     </tr>
+     <tr>
+      <th colspan="4">Wheel Assembly</th>
+     </tr>
+     <tr>
+      <td class="label">
+       <span class="info">
+	Number of Spokes
+	<span class="info-text">
+	 The total number of spokes.
+	</span>
+       </span>
+      </td>
+      <td class="unit"></td>
+      <td class="value" colspan="2"><!-- TMPL_VAR spoke-count --></td>
+     </tr>
+     <tr>
+      <td class="label">
+       <span class="info">
+	Spoke Crossings
+	<span class="info-text">
+	 The number of spoke crossings.
+	</span>
+       </span>
+      </td>
+      <td class="unit"></td>
+      <td class="value"><!-- TMPL_VAR spoke-crossings-left --></td>
+      <td class="value"><!-- TMPL_VAR spoke-crossings-right --></td>
+     </tr>
+     <tr>
+      <td class="label">
+       <span class="info">
+	Hub Holes
+	<span class="info-text">
+	 The number of spoke holes on the hub.
+	</span>
+       </span>
+      </td>
+      <td class="unit"></td>
+      <td class="value"><!-- TMPL_VAR spoke-count-left --></td>
+      <td class="value"><!-- TMPL_VAR spoke-count-right --></td>
+     </tr>
+     <tr>
+      <td class="label">
+       <span class="info">
+	Hub Sector Central Angle
+	<span class="info-text">
+	 The central angle of a hub sector between two adjacent spoke
+	 holes.
+	</span>
+       </span>
+      </td>
+      <td class="unit">°</td>
+      <td class="value"><!-- TMPL_VAR hub-sector-central-angle-left --></td>
+      <td class="value"><!-- TMPL_VAR hub-sector-central-angle-right --></td>
+     </tr>
+     <tr>
+      <td class="label">
+       <span class="info">
+	Hub Step Size
+	<span class="info-text">
+	 The number of spoke holes (step size) between similar spokes
+	 on the hub.
+	</span>
+       </span>
+      </td>
+      <td class="unit"></td>
+      <td class="value"><!-- TMPL_VAR hub-step-size-left --></td>
+      <td class="value"><!-- TMPL_VAR hub-step-size-right --></td>
+     </tr>
+     <tr>
+      <td class="label">
+       <span class="info">
+	Rim Holes
+	<span class="info-text">
+	 The number of spoke holes on the rim.
+	</span>
+       </span>
+      </td>
+      <td class="unit"></td>
+      <td class="value" colspan="2"><!-- TMPL_VAR spoke-count --></td>
+     </tr>
+     <tr>
+      <td class="label">
+       <span class="info">
+	Rim Sector Central Angle
+	<span class="info-text">
+	 The central angle of a rim sector between two adjacent spoke
+	 holes.
+	</span>
+       </span>
+      </td>
+      <td class="unit">°</td>
+      <td class="value" colspan="2"><!-- TMPL_VAR rim-sector-central-angle --></td>
+     </tr>
+     <tr>
+      <td class="label">
+       <span class="info">
+	Rim Step Size
+	<span class="info-text">
+	 The number of spoke holes (step size) between similar spokes
+	 on the rim.
+	</span>
+       </span>
+      </td>
+      <td class="unit"></td>
+      <td class="value" colspan="2"><!-- TMPL_VAR rim-step-size --></td>
+     </tr>
+     <tr>
+      <td class="label">
+       <span class="info">
+	Rim Spoke Pair Step Size
+	<span class="info-text">
+	 The number of spoke holes (step size) for a pair of leading
+	 and trailing spokes on the rim.
+	</span>
+       </span>
+      </td>
+      <td class="unit"></td>
+      <td class="value"><!-- TMPL_VAR rim-spoke-pair-step-size-left --></td>
+      <td class="value"><!-- TMPL_VAR rim-spoke-pair-step-size-right --></td>
+     </tr>
+     <tr>
+      <td class="label">
+       <span class="info">
+	Tension Angle
+	<span class="info-text">
+	 The angle between the spokes' tension force and the wheel
+	 plane.
+	</span>
+       </span>
+      </td>
+      <td class="unit">°</td>
+      <td class="value"><!-- TMPL_VAR tension-angle-left --></td>
+      <td class="value"><!-- TMPL_VAR tension-angle-right --></td>
+     </tr>
+     <tr>
+      <td class="label">
+       <span class="info">
+	Tension Ratio
+	<span class="info-text">
+	 The ratio of the non-gear side and gear side tension forces
+	 so that the lateral forces in the triange of forces are
+	 equal.
+	</span>
+       </span>
+      </td>
+      <td class="unit">%</td>
+      <td class="value"><!-- TMPL_VAR tension-ratio-left --></td>
+      <td class="value"><!-- TMPL_VAR tension-ratio-right --></td>
+     </tr>
+     <tr>
+      <td class="label">
+       <span class="info">
+	Spoke Tension
+	<span class="info-text">
+	 The tension force of a spoke (used to calculate the spoke
+	 elongation).  Can be checked with a spoke tensiometer.
+	 <!-- https://www.pklie.de/tensionmeter.html -->
+	 <!-- https://www.sapim.be/tools/spoke-tensiometer -->
+	 <!-- https://www.dtswiss.com/de/komponenten/proline-wheelbuilding/tensiometer -->
+	</span>
+       </span>
+      </td>
+      <td class="unit">kg</td>
+      <td class="value"><!-- TMPL_VAR spoke-tension-left --></td>
+      <td class="value"><!-- TMPL_VAR spoke-tension-right --></td>
+     </tr>
+     <tr>
+      <th colspan="4">Spoke<!-- TMPL_IF spoke-label -->&nbsp;<!-- TMPL_VAR spoke-label --><!-- /TMPL_IF --></th>
+     </tr>
+     <tr>
+      <td class="label">
+       <span class="info">
+	Spoke Distance
+	<span class="info-text">
+	 The geometric spoke length, i.e. the distance between the
+	 spoke hole center points on the hub and on the rim.
+	</span>
+       </span>
+      </td>
+      <td class="unit">mm</td>
+      <td class="value"><!-- TMPL_VAR spoke-distance-left --></td>
+      <td class="value"><!-- TMPL_VAR spoke-distance-right --></td>
+     </tr>
+     <tr>
+      <td class="label">
+       <span class="info">
+	Spoke Length
+	<span class="info-text">
+	 The actual spoke length excluding the nipple head extent.
+	</span>
+       </span>
+      </td>
+      <td class="unit">mm</td>
+      <td class="value"><!-- TMPL_VAR spoke-length-left --></td>
+      <td class="value"><!-- TMPL_VAR spoke-length-right --></td>
+     </tr>
+     <tr>
+      <td class="label">
+       <span class="info">
+	Spoke Elongation
+	<span class="info-text">
+	 The elongation of the spoke middle section due to the tension
+	 force.
+	</span>
+       </span>
+      </td>
+      <td class="unit">mm</td>
+      <td class="value"><!-- TMPL_VAR spoke-elongation-left --></td>
+      <td class="value"><!-- TMPL_VAR spoke-elongation-right --></td>
+     </tr>
+     <tr>
+      <td class="label">
+       <span class="info">
+	Minimum Spoke Length
+	<span class="info-text">
+	 The minimum spoke length considers half of the spoke
+	 elongation and a nipple head extent of 1&nbsp;mm (so that the
+	 thread is not visible with a 12&nbsp;mm standard nipple).
+	</span>
+       </span>
+      </td>
+      <td class="unit">mm</td>
+      <td class="value"><!-- TMPL_VAR minimum-spoke-length-left --></td>
+      <td class="value"><!-- TMPL_VAR minimum-spoke-length-right --></td>
+     </tr>
+     <tr>
+      <td class="label">
+       <span class="info">
+	Maximum Spoke Length
+	<span class="info-text">
+	 The maximum spoke length considers the full spoke elongation
+	 and a nipple head extent of 3.5&nbsp;mm (so there is still
+	 0.5&nbsp;mm, i.e. one round, until the thread blocks).
+	</span>
+       </span>
+      </td>
+      <td class="unit">mm</td>
+      <td class="value"><!-- TMPL_VAR maximum-spoke-length-left --></td>
+      <td class="value"><!-- TMPL_VAR maximum-spoke-length-right --></td>
+     </tr>
+     <!-- TMPL_IF washer-label -->
+     <tr>
+      <th colspan="4">Washer<!-- TMPL_IF washer-label -->&nbsp;<!-- TMPL_VAR washer-label --><!-- /TMPL_IF --></th>
+     </tr>
+     <tr>
+      <td class="label">
+       <span class="info">
+	Thickness
+	<span class="info-text">
+	 The thickness of the washer.
+	</span>
+       </span>
+      </td>
+      <td class="unit">mm</td>
+      <td class="value" colspan="2"><!-- TMPL_VAR washer-thickness --></td>
+     </tr>
+     <!-- /TMPL_IF -->
+     <!-- TMPL_IF nipple-label -->
+     <tr>
+      <th colspan="4">Nipple<!-- TMPL_IF nipple-label -->&nbsp;<!-- TMPL_VAR nipple-label --><!-- /TMPL_IF --></th>
+     </tr>
+     <tr>
+      <td class="label">
+       <span class="info">
+	Length
+	<span class="info-text">
+	 The total length of the nipple.
+	</span>
+       </span>
+      </td>
+      <td class="unit">mm</td>
+      <td class="value" colspan="2"><!-- TMPL_VAR nipple-length --></td>
+     </tr>
+     <tr>
+      <td class="label">
+       <span class="info">
+	Head Height
+	<span class="info-text">
+	 The height of the nipple head.
+	</span>
+       </span>
+      </td>
+      <td class="unit">mm</td>
+      <td class="value" colspan="2"><!-- TMPL_VAR nipple-head-height --></td>
+     </tr>
+     <!-- /TMPL_IF -->
+    </tbody>
+   </table>
+  </div>
+
+  <!-- TMPL_IF spokes -->
+  <div id="graphics">
+   <svg xmlns="http://www.w3.org/2000/svg" version="1.1"
+	width="720" height="960">
+    <text class="title" x="360" y="20">&lt;&lt;&lt;&emsp;Left Side&emsp;&lt;&lt;&lt;</text>
+    <g transform="matrix(-2, 0, 0, -2, 360, 720)">
+     <g class="back">
+      <!-- Trailing or radial spokes.  -->
+      <!-- TMPL_LOOP spokes --><!-- TMPL_IF is-right --><!-- TMPL_IF is-leading --><!-- TMPL_ELSE -->
+      <line class="spoke-right<!-- TMPL_IF is-leading -->-leading<!-- /TMPL_IF --><!-- TMPL_IF is-trailing -->-trailing<!-- /TMPL_IF --><!-- TMPL_IF is-radial -->-radial<!-- /TMPL_IF -->" x1="<!-- TMPL_VAR hub-x -->" y1="<!-- TMPL_VAR hub-y -->" x2="<!-- TMPL_VAR rim-x -->" y2="<!-- TMPL_VAR rim-y -->" />
+      <!-- /TMPL_IF --><!-- /TMPL_IF --><!-- /TMPL_LOOP -->
+
+      <!-- Hub flange.  -->
+      <circle class="hub-flange" cx="0" cy="0" r="<!-- TMPL_VAR hub-radius-right -->" />
+
+      <!-- Trailing or radial spoke heads.  -->
+      <!-- TMPL_LOOP spokes --><!-- TMPL_IF is-right --><!-- TMPL_IF is-leading --><!-- TMPL_ELSE -->
+      <circle class="spoke-right-trailing" cx="<!-- TMPL_VAR hub-x -->" cy="<!-- TMPL_VAR hub-y -->" r="2" />
+      <!-- /TMPL_IF --><!-- /TMPL_IF --><!-- /TMPL_LOOP -->
+
+      <!-- Leading spokes.  -->
+      <!-- TMPL_LOOP spokes --><!-- TMPL_IF is-right --><!-- TMPL_IF is-leading -->
+      <line class="spoke-right-leading" x1="<!-- TMPL_VAR hub-x -->" y1="<!-- TMPL_VAR hub-y -->" x2="<!-- TMPL_VAR rim-x -->" y2="<!-- TMPL_VAR rim-y -->" />
+      <!-- /TMPL_IF --><!-- /TMPL_IF --><!-- /TMPL_LOOP -->
+
+      <!-- Pitch circle.  -->
+      <circle class="center" cx="0" cy="0" r="<!-- TMPL_VAR hub-radius-right -->" />
+     </g>
+     <g class="front">
+      <!-- Leading spokes.  -->
+      <!-- TMPL_LOOP spokes --><!-- TMPL_IF is-left --><!-- TMPL_IF is-leading -->
+      <line class="spoke-left-leading" x1="<!-- TMPL_VAR hub-x -->" y1="<!-- TMPL_VAR hub-y -->" x2="<!-- TMPL_VAR rim-x -->" y2="<!-- TMPL_VAR rim-y -->" />
+      <!-- /TMPL_IF --><!-- /TMPL_IF --><!-- /TMPL_LOOP -->
+
+      <!-- Hub flange.  -->
+      <circle class="hub-flange" cx="0" cy="0" r="<!-- TMPL_VAR hub-radius-left -->" />
+
+      <!-- Leading spoke heads.  -->
+      <!-- TMPL_LOOP spokes --><!-- TMPL_IF is-left --><!-- TMPL_IF is-leading -->
+      <circle class="spoke-left-leading" cx="<!-- TMPL_VAR hub-x -->" cy="<!-- TMPL_VAR hub-y -->" r="2" />
+      <!-- /TMPL_IF --><!-- /TMPL_IF --><!-- /TMPL_LOOP -->
+
+      <!-- Trailing or radial spokes.  -->
+      <!-- TMPL_LOOP spokes --><!-- TMPL_IF is-left --><!-- TMPL_IF is-leading --><!-- TMPL_ELSE -->
+      <line class="spoke-left<!-- TMPL_IF is-leading -->-leading<!-- /TMPL_IF --><!-- TMPL_IF is-trailing -->-trailing<!-- /TMPL_IF --><!-- TMPL_IF is-radial -->-radial<!-- /TMPL_IF -->" x1="<!-- TMPL_VAR hub-x -->" y1="<!-- TMPL_VAR hub-y -->" x2="<!-- TMPL_VAR rim-x -->" y2="<!-- TMPL_VAR rim-y -->" />
+      <!-- /TMPL_IF --><!-- /TMPL_IF --><!-- /TMPL_LOOP -->
+
+      <!-- Pitch circle.  -->
+      <circle class="center" cx="0" cy="0" r="<!-- TMPL_VAR hub-radius-left -->" />
+     </g>
+
+     <!-- Wheel axle.  -->
+     <circle class="axle" cx="0" cy="0" r="6" />
+
+     <!-- Valve.  -->
+     <line class="valve" x1="0" y1="0" x2="0" y2="-30" transform="translate(0, <!-- TMPL_VAR valve-y -->)" />
+
+     <!-- Rim.  -->
+     <circle class="rim-base" cx="0" cy="0" r="<!-- TMPL_VAR rim-radius -->" />
+     <circle class="center" cx="0" cy="0" r="<!-- TMPL_VAR rim-radius -->" />
+    </g>
+   </svg>
+  </div>
+
+  <div id="graphics">
+   <svg xmlns="http://www.w3.org/2000/svg" version="1.1"
+	width="720" height="960">
+    <text class="title" x="360" y="20">&gt;&gt;&gt;&emsp;Right Side&emsp;&gt;&gt;&gt;</text>
+    <g transform="matrix(2, 0, 0, -2, 360, 720)">
+     <g class="back">
+      <!-- Trailing or radial spokes.  -->
+      <!-- TMPL_LOOP spokes --><!-- TMPL_IF is-left --><!-- TMPL_IF is-leading --><!-- TMPL_ELSE -->
+      <line class="spoke-left-trailing" x1="<!-- TMPL_VAR hub-x -->" y1="<!-- TMPL_VAR hub-y -->" x2="<!-- TMPL_VAR rim-x -->" y2="<!-- TMPL_VAR rim-y -->" />
+      <!-- /TMPL_IF --><!-- /TMPL_IF --><!-- /TMPL_LOOP -->
+
+      <!-- Hub flange.  -->
+      <circle class="hub-flange" cx="0" cy="0" r="<!-- TMPL_VAR hub-radius-left -->" />
+
+      <!-- Trailing or radial spoke heads.  -->
+      <!-- TMPL_LOOP spokes --><!-- TMPL_IF is-left --><!-- TMPL_IF is-leading --><!-- TMPL_ELSE -->
+      <circle class="spoke-left-trailing" cx="<!-- TMPL_VAR hub-x -->" cy="<!-- TMPL_VAR hub-y -->" r="2" />
+      <!-- /TMPL_IF --><!-- /TMPL_IF --><!-- /TMPL_LOOP -->
+
+      <!-- Leading spokes.  -->
+      <!-- TMPL_LOOP spokes --><!-- TMPL_IF is-left --><!-- TMPL_IF is-leading -->
+      <line class="spoke-left-leading" x1="<!-- TMPL_VAR hub-x -->" y1="<!-- TMPL_VAR hub-y -->" x2="<!-- TMPL_VAR rim-x -->" y2="<!-- TMPL_VAR rim-y -->" />
+      <!-- /TMPL_IF --><!-- /TMPL_IF --><!-- /TMPL_LOOP -->
+
+      <!-- Pitch circle.  -->
+      <circle class="center" cx="0" cy="0" r="<!-- TMPL_VAR hub-radius-left -->" />
+     </g>
+     <g class="front">
+      <!-- Leading spokes.  -->
+      <!-- TMPL_LOOP spokes --><!-- TMPL_IF is-right --><!-- TMPL_IF is-leading -->
+      <line class="spoke-right-leading" x1="<!-- TMPL_VAR hub-x -->" y1="<!-- TMPL_VAR hub-y -->" x2="<!-- TMPL_VAR rim-x -->" y2="<!-- TMPL_VAR rim-y -->" />
+      <!-- /TMPL_IF --><!-- /TMPL_IF --><!-- /TMPL_LOOP -->
+
+      <!-- Hub flange.  -->
+      <circle class="hub-flange" cx="0" cy="0" r="<!-- TMPL_VAR hub-radius-right -->" />
+
+      <!-- Leading spoke heads.  -->
+      <!-- TMPL_LOOP spokes --><!-- TMPL_IF is-right --><!-- TMPL_IF is-leading -->
+      <circle class="spoke-right-leading" cx="<!-- TMPL_VAR hub-x -->" cy="<!-- TMPL_VAR hub-y -->" r="2" />
+      <!-- /TMPL_IF --><!-- /TMPL_IF --><!-- /TMPL_LOOP -->
+
+      <!-- Trailing or radial spokes.  -->
+      <!-- TMPL_LOOP spokes --><!-- TMPL_IF is-right --><!-- TMPL_IF is-leading --><!-- TMPL_ELSE -->
+      <line class="spoke-right-trailing" x1="<!-- TMPL_VAR hub-x -->" y1="<!-- TMPL_VAR hub-y -->" x2="<!-- TMPL_VAR rim-x -->" y2="<!-- TMPL_VAR rim-y -->" />
+      <!-- /TMPL_IF --><!-- /TMPL_IF --><!-- /TMPL_LOOP -->
+
+      <!-- Pitch circle.  -->
+      <circle class="center" cx="0" cy="0" r="<!-- TMPL_VAR hub-radius-right -->" />
+     </g>
+
+     <!-- Wheel axle.  -->
+     <circle class="axle" cx="0" cy="0" r="6" />
+
+     <!-- Valve.  -->
+     <line class="valve" x1="0" y1="0" x2="0" y2="-30" transform="translate(0, <!-- TMPL_VAR valve-y -->)" />
+
+     <!-- Rim.  -->
+     <circle class="rim-base" cx="0" cy="0" r="<!-- TMPL_VAR rim-radius -->" />
+     <circle class="center" cx="0" cy="0" r="<!-- TMPL_VAR rim-radius -->" />
+    </g>
+   </svg>
+  </div>
+  <!-- /TMPL_IF -->
+ </body>
+</html>
