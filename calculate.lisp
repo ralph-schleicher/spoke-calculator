@@ -258,10 +258,12 @@ See also ‘hub’, ‘rim’, ‘washer’, ‘spoke’, and ‘nipple’."
                                  (aref array index 1) (* rim-radius (sind (float angle pi)))
                                  (aref array index 2) rim-offset))
                      array))
-         (hub-hole (let ((array (make-array (list rim-holes 5) :initial-element 0))
-                         (start-index (cond ((and (%left radialp) (not (%right radialp)))
-                                             ;; Triplet lacing.  Orientation of the
-                                             ;; spoke holes can be ignored.
+         (hub-hole (let ((start-index (cond ((and (%left radialp) (not (%right radialp)))
+                                             ;; Triplet lacing.  Orientation of the spoke
+                                             ;; holes can be ignored.  The crossed spokes
+                                             ;; must start at the first spoke hole.
+                                             ;; Otherwise, the start angle of the first
+                                             ;; spoke hole on the hub is wrong.
                                              (cons 2 0))
                                             ((and (%right radialp) (not (%left radialp)))
                                              (cons 0 2))
@@ -270,27 +272,26 @@ See also ‘hub’, ‘rim’, ‘washer’, ‘spoke’, and ‘nipple’."
                                              (cons 1 0))
                                             (t
                                              (cons 0 1)))))
-                     (spoke-pattern array
-                                    (%left start-index)
-                                    (%left crossings)
-                                    rim-holes
-                                    (%left hub-holes)
-                                    (%left hub-radius)
-                                    (- (%left hub-distance))
-                                    +left+)
-                     (spoke-pattern array
+                     ;; The ‘spoke-pattern’ function creates the array.
+                     (spoke-pattern (spoke-pattern nil
+                                                   (%left start-index)
+                                                   (%left crossings)
+                                                   rim-holes
+                                                   (%left hub-holes)
+                                                   (%left hub-radius)
+                                                   (- (%left hub-distance))
+                                                   +left+)
                                     (%right start-index)
                                     (%right crossings)
                                     rim-holes
                                     (%right hub-holes)
                                     (%right hub-radius)
                                     (+ (%right hub-distance))
-                                    +right+)
-                     array))
+                                    +right+)))
          ;; Geometric spoke length.
          (spoke-distance (cons (if (%left radialp)
                                    (hypot (%left hub-distance*)
-                                             (- rim-radius (%left hub-radius)))
+                                          (- rim-radius (%left hub-radius)))
                                  ;; Combine the cosine theorem and the
                                  ;; Pythagorean theorem to calculate the
                                  ;; square root only once.
@@ -303,7 +304,7 @@ See also ‘hub’, ‘rim’, ‘washer’, ‘spoke’, and ‘nipple’."
                                                      (* (%left crossings) (%left hub-angle))))))))
                                (if (%right radialp)
                                    (hypot (%right hub-distance*)
-                                             (- rim-radius (%right hub-radius)))
+                                          (- rim-radius (%right hub-radius)))
                                  (sqrt (- (+ (expt (%right hub-distance*) 2)
                                              (expt (%right hub-radius) 2)
                                              (expt rim-radius 2))
