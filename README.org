@@ -6,7 +6,7 @@ A spoke length calculator for bicycle wheels.
 ** Motivation
 
 I was always a bit unsure about the calculated spoke length of the
-freely available spoke calculators from, for example, Sapim oder DT
+freely available spoke calculators from, for example, Sapim or DT
 Swiss.  The problem is that there are not many stores where you can
 buy spokes in one millimeter increments.  Most stores only offer two
 millimeter increments.  That's why it is important for me to calculate
