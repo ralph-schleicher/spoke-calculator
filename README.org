@@ -43,7 +43,7 @@ $ xdg-open ~/spoke-calculator.html
 
 You should see something like that:
 
-file:demo/spoke-calculator.png
+[[demo/spoke-calculator.png]]
 
 
 ** Notes
