@@ -44,6 +44,7 @@
       (data (gather-doc
              :title "Spoke Calculator"
 	     :package :spoke-calculator
+             :generic-functions nil
              :undocumented t))
       (doc-dir (merge-pathnames
 		(make-pathname :directory '(:relative "doc"))
