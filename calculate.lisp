@@ -197,14 +197,14 @@ See also ‘hub’, ‘rim’, ‘washer’, ‘spoke’, and ‘nipple’."
                             ;; when the rim offset is either on the
                             ;; non-gear or gear side.  The smaller
                             ;; value has the better tension ratio.
-                            (let ((left (abs (- (atan (- (left hub-distance) rim-offset)
-                                                      (- rim-radius (left hub-radius)))
-                                                (atan (+ (right hub-distance) rim-offset)
-                                                      (- rim-radius (right hub-radius))))))
-                                  (right (abs (- (atan (+ (left hub-distance) rim-offset)
-                                                       (- rim-radius (left hub-radius)))
-                                                 (atan (- (right hub-distance) rim-offset)
-                                                       (- rim-radius (right hub-radius)))))))
+                            (let ((left (abs (- (atan (- (%left hub-distance) rim-offset)
+                                                      (- rim-radius (%left hub-radius)))
+                                                (atan (+ (%right hub-distance) rim-offset)
+                                                      (- rim-radius (%right hub-radius))))))
+                                  (right (abs (- (atan (+ (%left hub-distance) rim-offset)
+                                                       (- rim-radius (%left hub-radius)))
+                                                 (atan (- (%right hub-distance) rim-offset)
+                                                       (- rim-radius (%right hub-radius)))))))
                               (when (< left right)
                                 (setf rim-offset (- rim-offset)))))
                            (:right)))
