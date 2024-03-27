@@ -246,6 +246,20 @@ See also ‘hub’, ‘rim’, ‘washer’, ‘spoke’, and ‘nipple’."
          ;;  the order of the spoke holes on the rim.
          ;; The valve hole is between the first and last spoke hole.
          ;; The angle of the valve hole is 90° in the (x, y) plane.
+         (start-index (cond ((and (%left radialp) (not (%right radialp)))
+                             ;; Triplet lacing.  Orientation of the spoke
+                             ;; holes can be ignored.  The crossed spokes
+                             ;; must start at the first spoke hole.
+                             ;; Otherwise, the start angle of the first
+                             ;; spoke hole on the hub is wrong.
+                             (cons 2 0))
+                            ((and (%right radialp) (not (%left radialp)))
+                             (cons 0 2))
+                            ;; Both sides radial or both sides crossed.
+                            ((not (eq (first-spoke-hole rim) :left))
+                             (cons 1 0))
+                            (t
+                             (cons 0 1))))
          (valve-hole (let ((array (make-array (list 3) :initial-element 0)))
                        (setf (aref array 0) 0.0
                              (aref array 1) rim-radius
@@ -258,37 +272,24 @@ See also ‘hub’, ‘rim’, ‘washer’, ‘spoke’, and ‘nipple’."
                                  (aref array index 1) (* rim-radius (sind (float angle pi)))
                                  (aref array index 2) rim-offset))
                      array))
-         (hub-hole (let ((start-index (cond ((and (%left radialp) (not (%right radialp)))
-                                             ;; Triplet lacing.  Orientation of the spoke
-                                             ;; holes can be ignored.  The crossed spokes
-                                             ;; must start at the first spoke hole.
-                                             ;; Otherwise, the start angle of the first
-                                             ;; spoke hole on the hub is wrong.
-                                             (cons 2 0))
-                                            ((and (%right radialp) (not (%left radialp)))
-                                             (cons 0 2))
-                                            ;; Both sides radial or both sides crossed.
-                                            ((not (eq (first-spoke-hole rim) :left))
-                                             (cons 1 0))
-                                            (t
-                                             (cons 0 1)))))
-                     ;; The ‘spoke-pattern’ function creates the array.
-                     (spoke-pattern (spoke-pattern nil
-                                                   (%left start-index)
-                                                   (%left crossings)
-                                                   rim-holes
-                                                   (%left hub-holes)
-                                                   (%left hub-radius)
-                                                   (- (%left hub-distance))
-                                                   +left+)
-                                    (%right start-index)
-                                    (%right crossings)
-                                    rim-holes
-                                    (%right hub-holes)
-                                    (%right hub-radius)
-                                    (+ (%right hub-distance))
-                                    +right+)))
-         ;; Geometric spoke length.
+         ;; The ‘spoke-pattern’ function creates the array.
+         (hub-hole (spoke-pattern (spoke-pattern nil
+                                                 (%left start-index)
+                                                 (%left crossings)
+                                                 rim-holes
+                                                 (%left hub-holes)
+                                                 (%left hub-radius)
+                                                 (- (%left hub-distance))
+                                                 +left+)
+                                  (%right start-index)
+                                  (%right crossings)
+                                  rim-holes
+                                  (%right hub-holes)
+                                  (%right hub-radius)
+                                  (+ (%right hub-distance))
+                                  +right+))
+         ;; Geometric spoke length (keep the maths as a reference for
+         ;; the sanity check).
          (spoke-distance (cons (if (%left radialp)
                                    (hypot (%left hub-distance*)
                                           (- rim-radius (%left hub-radius)))
@@ -372,6 +373,21 @@ See also ‘hub’, ‘rim’, ‘washer’, ‘spoke’, and ‘nipple’."
          (maximum-length (let ((extent 3.5))
                            (cons (round-down (- (+ (%left spoke-length) extent) (%left spoke-elongation)) 1/10)
                                  (round-down (- (+ (%right spoke-length) extent) (%right spoke-elongation)) 1/10)))))
+    ;; Sanity check for the spoke pattern.
+    (let ((epsilon (* 4 double-float-epsilon)))
+      (iter (for index :from 0 :below rim-holes)
+            (for ref = (if (leftp (aref hub-hole index 3))
+                           (%left spoke-distance)
+                         (%right spoke-distance)))
+            (for length = (hypot3 (- (aref hub-hole index 0)
+                                     (aref rim-hole index 0))
+                                  (- (aref hub-hole index 1)
+                                     (aref rim-hole index 1))
+                                  (- (aref hub-hole index 2)
+                                     (aref rim-hole index 2))))
+            (for err = (abs (- 1.0 (/ ref length))))
+            (unless (< err epsilon)
+              (error "Length of spoke #~A is wrong, ~A ≠ ~A, rel. error ~A." index ref length err))))
     ;; Return value.
     (setf *data* (nconc
                   (when-let ((axle (wheel-axle hub)))
