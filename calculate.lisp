@@ -300,7 +300,7 @@ See also ‘hub’, ‘rim’, ‘washer’, ‘spoke’, and ‘nipple’."
                                              (expt rim-radius 2))
                                           (* 2 (%left hub-radius) rim-radius
                                              (cosd (if (%right radialp) ;triplet lacing
-                                                       (+ (* (- (%left crossings) 1/2) (%left hub-angle)) rim-angle)
+                                                       (- (* (+ (%left crossings) 1/2) (%left hub-angle)) rim-angle)
                                                      (* (%left crossings) (%left hub-angle))))))))
                                (if (%right radialp)
                                    (hypot (%right hub-distance*)
@@ -310,7 +310,7 @@ See also ‘hub’, ‘rim’, ‘washer’, ‘spoke’, and ‘nipple’."
                                              (expt rim-radius 2))
                                           (* 2 (%right hub-radius) rim-radius
                                              (cosd (if (%left radialp)
-                                                       (+ (* (- (%right crossings) 1/2) (%right hub-angle)) rim-angle)
+                                                       (- (* (+ (%right crossings) 1/2) (%right hub-angle)) rim-angle)
                                                      (* (%right crossings) (%right hub-angle))))))))))
          ;; Angle between the spokes' tension force and the (x, y) plane.
          ;; Mnemonic: α is the angle of attack in flight dynamics.
