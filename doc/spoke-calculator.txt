@@ -88,17 +88,9 @@ area-of-ellipse (width height)
 area-of-rectangle (width height &optional radius)
    Calculate the area of a rounded rectangle.
 
-                                                              [Generic Function]
-axle-diameter (object)
-   Not documented.
-
                                                                         [Method]
 axle-diameter ((axle axle))
    The diameter of the wheel axle.
-
-                                                              [Generic Function]
-axle-length (object)
-   Not documented.
 
                                                                         [Method]
 axle-length ((hub hub))
@@ -108,17 +100,9 @@ axle-length ((hub hub))
 axle-length ((axle axle))
    The over locknut distance of the wheel axle, i.e. the distance between the dropouts.
 
-                                                              [Generic Function]
-axle-thread (object)
-   Not documented.
-
                                                                         [Method]
 axle-thread ((thru-axle thru-axle))
    The thread specification.
-
-                                                              [Generic Function]
-base-diameter (object)
-   Not documented.
 
                                                                         [Method]
 base-diameter ((rim rim))
@@ -166,10 +150,6 @@ calculate (&key hub rim washer spoke nipple spoke-count spoke-crossings
    define the spoke's lacing pattern.
 
    See also ‘hub’, ‘rim’, ‘washer’, ‘spoke’, and ‘nipple’.
-
-                                                              [Generic Function]
-component-name (object)
-   Not documented.
 
                                                                         [Method]
 component-name ((component component))
@@ -259,10 +239,6 @@ dtswiss-standard-14.5
 dtswiss-standard-16
    Not documented.
 
-                                                              [Generic Function]
-elastic-modulus (object)
-   Not documented.
-
                                                                         [Method]
 elastic-modulus ((object null))
    Not documented.
@@ -273,10 +249,6 @@ elastic-modulus ((material material))
 
                                                                       [Function]
 find-material (name)
-   Not documented.
-
-                                                              [Generic Function]
-first-spoke-hole (object)
    Not documented.
 
                                                                         [Method]
@@ -339,10 +311,6 @@ make-rim-from-measurements (class &rest arguments &key inner-diameter thickness
 
    Return value is a rim object.
 
-                                                              [Generic Function]
-material-name (object)
-   Not documented.
-
                                                                         [Method]
 material-name ((object null))
    Not documented.
@@ -351,33 +319,17 @@ material-name ((object null))
 material-name ((material material))
    The material name.
 
-                                                              [Generic Function]
-nipple-head-height (object)
-   Not documented.
-
                                                                         [Method]
 nipple-head-height ((nipple nipple))
    The height of the nipple head.
-
-                                                              [Generic Function]
-nipple-length (object)
-   Not documented.
 
                                                                         [Method]
 nipple-length ((nipple nipple))
    The length of the nipple.
 
-                                                              [Generic Function]
-pitch-circle-diameter (object)
-   Not documented.
-
                                                                         [Method]
 pitch-circle-diameter ((hub hub))
    The pitch circle diameter of the spoke holes on the flange.
-
-                                                              [Generic Function]
-pitch-circle-distance (object)
-   Not documented.
 
                                                                         [Method]
 pitch-circle-distance ((rim rim))
@@ -508,17 +460,9 @@ sapim-up-side-down
 sind (number)
    Return the sine of NUMBER given in degree angle.
 
-                                                              [Generic Function]
-spoke-area (object)
-   Not documented.
-
                                                                         [Method]
 spoke-area ((spoke spoke))
    The cross-sectional area of the spoke on the middle section.
-
-                                                              [Generic Function]
-spoke-diameter (object)
-   Not documented.
 
                                                                         [Method]
 spoke-diameter ((spoke spoke))
@@ -542,49 +486,25 @@ spoke-elongation (spoke length tension)
    value is true if the corresponding stress is less than or equal to the
    spoke's strength.
 
-                                                              [Generic Function]
-spoke-hole-diameter (object)
-   Not documented.
-
                                                                         [Method]
 spoke-hole-diameter ((hub hub))
    The diameter of the spoke holes.
-
-                                                              [Generic Function]
-spoke-hole-offset (object)
-   Not documented.
 
                                                                         [Method]
 spoke-hole-offset ((straight-pull-hub straight-pull-hub))
    The spoke length correction for straight pull hubs.
 
-                                                              [Generic Function]
-spoke-material (object)
-   Not documented.
-
                                                                         [Method]
 spoke-material ((spoke spoke))
    The material identifier.
-
-                                                              [Generic Function]
-spoke-middle-section (object)
-   Not documented.
 
                                                                         [Method]
 spoke-middle-section ((spoke spoke))
    The length of the middle section.
 
-                                                              [Generic Function]
-spoke-strength (object)
-   Not documented.
-
                                                                         [Method]
 spoke-strength ((spoke spoke))
    The strength of the spoke on the middle section.
-
-                                                              [Generic Function]
-spoke-thread (object)
-   Not documented.
 
                                                                         [Method]
 spoke-thread ((spoke spoke))
@@ -638,17 +558,9 @@ thru-axle-20x100
 thru-axle-20x110
    Not documented.
 
-                                                              [Generic Function]
-washer-thickness (object)
-   Not documented.
-
                                                                         [Method]
 washer-thickness ((washer washer))
    The thickness of the washer.
-
-                                                              [Generic Function]
-wheel-axle (object)
-   Not documented.
 
                                                                         [Method]
 wheel-axle ((hub hub))
