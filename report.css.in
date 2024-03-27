@@ -137,15 +137,17 @@ text.title {
   text-align: center;
 }
 
-/* Center lines.  */
-line.center {
+line, circle {
   stroke: black;
   stroke-width: 0.5;
+  stroke-linecap: round;
+}
+
+/* Center lines.  */
+line.center {
   stroke-dasharray: 6 1.5 0.25 1.5;
 }
 circle.center {
-  stroke: black;
-  stroke-width: 0.5;
   stroke-dasharray: 6 1.5 0.25 1.5;
   fill: transparent;
 }
@@ -154,49 +156,39 @@ circle.center {
 line.spoke-left-trailing, line.spoke-left-radial {
   stroke: @blue;
   stroke-width: 2;
-  stroke-linecap: round;
 }
 line.spoke-left-leading {
   stroke: @magenta;
   stroke-width: 2;
-  stroke-linecap: round;
 }
 line.spoke-right-trailing, line.spoke-right-radial {
   stroke: @red;
   stroke-width: 2;
-  stroke-linecap: round;
 }
 line.spoke-right-leading {
   stroke: @yellow;
   stroke-width: 2;
-  stroke-linecap: round;
 }
 /* Spoke heads.  */
 circle.spoke-left-trailing, circle.spoke-left-radial {
-  stroke: black;
   stroke-width: 0.25;
   fill: @blue;
 }
 circle.spoke-left-leading {
-  stroke: black;
   stroke-width: 0.25;
   fill: @magenta;
 }
 circle.spoke-right-trailing, circle.spoke-right-radial {
-  stroke: black;
   stroke-width: 0.25;
   fill: @red;
 }
 circle.spoke-right-leading {
-  stroke: black;
   stroke-width: 0.25;
   fill: @yellow;
 }
 
 /* Wheel axle.  */
 circle.axle {
-  stroke: black;
-  stroke-width: 0.5;
   fill: @background;
 }
 
