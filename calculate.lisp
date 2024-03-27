@@ -243,7 +243,7 @@ See also ‘hub’, ‘rim’, ‘washer’, ‘spoke’, and ‘nipple’."
          ;; The hub's center (middle of the spin axle's centerline) is
          ;; at the origin of the coordinate system.
          ;; Spokes are numbered zero-based in clockwise direction in
-         ;;  the order of the spoke holes on the rim.
+         ;; the order of the spoke holes on the rim.
          ;; The valve hole is between the first and last spoke hole.
          ;; The angle of the valve hole is 90° in the (x, y) plane.
          (start-index (cond ((and (%left radialp) (not (%right radialp)))
