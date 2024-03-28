@@ -31,8 +31,6 @@
 ;; ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 ;; POSSIBILITY OF SUCH DAMAGE.
 
-;;; Commentary:
-
 ;;; Code:
 
 (in-package :spoke-calculator)
@@ -41,7 +39,7 @@
   (setf *read-default-float-format* 'double-float))
 
 (defvar *elastic-modulus* 180E+3
-  "Modulus of elasticity in megapascal.
+  "The default modulus of elasticity in megapascal.
 
 The value of this special variable is used if no spoke material
 is defined.  Most spokes are made of stainless steel according
@@ -56,17 +54,26 @@ a modulus of elasticity of 180 MPa.")
     :initform (error "Missing material name.")
     :type string)
    (elastic-modulus
-    :documentation "Modulus of elasticity in megapascal."
+    :documentation "The modulus of elasticity in megapascal."
     :accessor elastic-modulus
     :initarg :elastic-modulus
     :initform nil
-    :type (or null (real 0)))))
+    :type (or null (real 0))))
+  (:documentation "Class for a material.
+
+Class precedence list:
+
+     ‘material’, ‘standard-object’, ..."))
 
 (defmethod material-name ((object null))
+  "The material name of an undefined material."
   (declare (ignore object))
   "N.N.")
 
 (defmethod elastic-modulus ((object null))
+  "The modulus of elasticity of an undefined material.
+
+Return the value of the ‘*elastic-modulus*’ special variable."
   (declare (ignore object))
   *elastic-modulus*)
 
@@ -74,16 +81,35 @@ a modulus of elasticity of 180 MPa.")
   "The material database.")
 
 (defun find-material (name)
+  "Search for a material.
+
+Argument NAME is the material name (a string).  Material names are
+ case insensitive.
+
+Return the ‘material’ object associated with NAME or ‘nil’ if no
+material with that name exists."
   (check-type name string)
   (cdr (assoc name material-table :test #'string-equal)))
 
 (defun define-material (name &rest options &key elastic-modulus)
+  "Define a material.
+
+Argument NAME is the material name (a string).  Material names
+ are case insensitive.
+Keyword argument ELASTIC-MODULUS is the modulus of elasticity
+ in megapascal.
+
+If the material is already defined, update it.  Otherwise, create
+ a new ‘material’ object."
   (check-type name string)
   (check-type elastic-modulus (or null (real 0)))
   (let ((material (find-material name)))
     (if (null material)
         (push (cons name (apply #'make-instance 'material :name name options)) material-table)
-      (setf (elastic-modulus material) elastic-modulus)))
+      (progn
+        (setf (material-name material) name)
+        (when elastic-modulus
+          (setf (elastic-modulus material) elastic-modulus)))))
   (values))
 
 (define-material "X10CrNi18-8 cold drawn"
