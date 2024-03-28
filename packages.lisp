@@ -102,9 +102,11 @@
    #:calculate
    #:spoke-elongation
    ;; report.lisp
-   #:*html-template*
    #:*output-directory*
    #:*output-name*
+   #:*text-type*
+   #:*html-type*
+   #:*html-template*
    #:report
    ;; data/dtswiss.lisp
    #:dtswiss-revolite
