@@ -104,6 +104,7 @@
    ;; report.lisp
    #:*output-directory*
    #:*output-name*
+   #:*output-format*
    #:*text-type*
    #:*html-type*
    #:*html-template*
