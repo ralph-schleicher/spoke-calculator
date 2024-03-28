@@ -38,47 +38,62 @@
 (in-package :spoke-calculator)
 
 (defvar *output-directory* (user-homedir-pathname)
-  "The default directory for saving a report.")
+  "The default directory for saving a report.
+Default is the user's home directory.")
 
 (defvar *output-name* (make-pathname :name "spoke-calculator")
-  "The default file name of a report.")
+  "The default file name of a report.
+Default is ‘spoke-calculator’.")
 
 ;;;; Text
 
+(defvar *text-type* (make-pathname :type "txt")
+  "The file type of a text report.  Default is ‘txt’.")
+
 (defun text-report (data)
-  (let ((*read-default-float-format* 'double-float))
-    (terpri)
-    (format t "Hub~@[ ~A~]~%" (getf data :hub-label))
+  "Generate a text report."
+  (let ((*read-default-float-format* 'double-float)
+        (*print-case* :downcase))
+    (fresh-line)
+    (format t "~@[~A~%~]" (getf data :title))
+    (format t "~@[Hub ~A~%~]" (getf data :hub-label))
     (format t "Hub Diameter: ~S~%" (cons (getf data :hub-diameter-left) (getf data :hub-diameter-right)))
     (format t "Hub Radius: ~S~%" (cons (getf data :hub-radius-left) (getf data :hub-radius-right)))
     (format t "Hub Distance: ~S~%" (cons (getf data :hub-distance-left) (getf data :hub-distance-right)))
-    (format t "Installation Width: ~S~%" (getf data :hub-installation-width))
-    (format t "Flange Distance: ~S~%" (cons (getf data :hub-flange-distance-left) (getf data :hub-flange-distance-right)))
-    (format t "Rim ~A~%" (getf data :rim-label))
+    (format t "Hub Spoke Hole Diameter: ~S~%" (getf data :hub-spoke-hole-diameter))
+    (format t "Hub Spoke Hole Offset: ~S~%" (getf data :hub-spoke-hole-offset))
+    (format t "~@[Rim ~A~%~]" (getf data :rim-label))
+    (format t "Rim Inner Diameter: ~S~%" (getf data :rim-inner-diameter))
+    (format t "Rim Thickness: ~S~%" (getf data :rim-thickness))
     (format t "Rim Base Diameter: ~S~%" (getf data :rim-base-diameter))
     (format t "Washer Thickness: ~S~%" (getf data :washer-thickness))
-    (format t "Effective Rim Diameter: ~S~%" (getf data :rim-diameter))
+    (format t "Rim Diameter: ~S~%" (getf data :rim-diameter))
     (format t "Rim Radius: ~S~%" (getf data :rim-radius))
     (format t "Rim Offset: ~S~%" (getf data :rim-offset))
+    (format t "~@[Spoke ~A~%~]" (getf data :spoke-label))
     (format t "Number of Spokes: ~S~%" (getf data :spoke-count))
-    (format t "Spoke Crossings: ~S~%" (getf data :spoke-crossings))
+    (format t "Spoke Crossings: ~S~%" (cons (getf data :spoke-crossings-left) (getf data :spoke-crossings-right)))
     (format t "Hub Holes: ~S~%" (cons (getf data :spoke-count-left) (getf data :spoke-count-right)))
     (format t "Hub Sector Central Angle: ~S~%" (cons (getf data :hub-sector-central-angle-left) (getf data :hub-sector-central-angle-right)))
-    (format t "Hub Step: ~S~%" (cons (getf data :hub-step-size-left) (getf data :hub-step-size-right)))
+    (format t "Hub Step Size: ~S~%" (cons (getf data :hub-step-size-left) (getf data :hub-step-size-right)))
     (format t "Rim Holes: ~S~%" (getf data :spoke-count))
     (format t "Rim Sector Central Angle: ~S~%" (getf data :rim-sector-central-angle))
-    (format t "Rim Step: ~S~%" (getf data :rim-step-size))
-    (format t "Rim Sectors: ~S~%" (cons (getf data :rim-spoke-pair-step-size-left) (getf data :rim-spoke-pair-step-size-right)))
+    (format t "Rim Step Size: ~S~%" (getf data :rim-step-size))
+    (format t "Rim Spoke Pair Step Size: ~S~%" (cons (getf data :rim-spoke-pair-step-size-left) (getf data :rim-spoke-pair-step-size-right)))
     (format t "Tension Angle: ~S~%" (cons (getf data :tension-angle-left) (getf data :tension-angle-right)))
     (format t "Tension Ratio: ~S~%" (cons (getf data :tension-ratio-left) (getf data :tension-ratio-right)))
     (format t "Geometric Spoke Length: ~S~%" (cons (getf data :spoke-distance-left) (getf data :spoke-distance-right)))
     (format t "Actual Spoke Length: ~S~%" (cons (getf data :spoke-length-left) (getf data :spoke-length-right)))
-    (format t "Spoke Elongation: ~S, max. spoke tension ~S kg~%" (cons (getf data :spoke-elongation-left) (getf data :spoke-elongation-right)) (getf data :spoke-tension))
+    (format t "Spoke Tension: ~S~%" (cons (getf data :spoke-tension-left) (getf data :spoke-tension-right)))
+    (format t "Spoke Elongation: ~S~%" (cons (getf data :spoke-elongation-left) (getf data :spoke-elongation-right)))
     (format t "Minimum Spoke Length: ~S~%" (cons (getf data :minimum-spoke-length-left) (getf data :minimum-spoke-length-right)))
     (format t "Maximum Spoke Length: ~S~%" (cons (getf data :maximum-spoke-length-left) (getf data :maximum-spoke-length-right)))
     ()))
 
 ;;;; HTML
+
+(defvar *html-type* (make-pathname :type "html")
+  "The file type of a HTML report.  Default is ‘html’.")
 
 (defvar *html-template* (merge-pathnames
                          #P"report.html.in"
@@ -91,69 +106,89 @@ Edi Weitz's HTML-TEMPLATE library for filling in the documentation
 strings.  Below is the list of template tags together with their
 meaning.")
 
-(defun esc (object)
+(defun html-esc (object)
   (etypecase object
     ((or boolean integer)
      object)
     ((or float rational)
      (coerce object 'single-float))
     (string
-     (cl-who:escape-string-minimal
-      object))
+     (cl-who:escape-string-minimal object))
     (list
      (if (consp (first object))
-         (mapcar #'esc object)
+         (mapcar #'html-esc object)
        (iter (for (key value) :on object :by #'cddr)
-             (nconcing (list key (esc value))))))))
+             (nconcing (list key (html-esc value))))))))
 
 (defun html-report (data)
-  "Generate HTML."
-  (let ((html-template:*default-template-output* *standard-output*)
+  "Generate a HTML report."
+  (let ((html-template:*warn-on-creation* nil)
+        (html-template:*default-template-output* *standard-output*)
         (html-template:*string-modifier* #'identity)
         (html-template:*ignore-empty-lines* t))
-    (html-template:fill-and-print-template *html-template* (esc data))))
+    (html-template:fill-and-print-template *html-template* (html-esc data))))
 
-(defun report (data &key (output *output-directory*) (format :html))
+;;;; Common Interface
+
+(defun report (data &key (output *standard-output*) (format :text) title)
   "Generate a report.
 
 First argument DATA is a result data set of the ‘calculate’ function.
+ Default is the result data set stored in ‘*data*’.
+
 Keyword argument OUTPUT specifies the destination.  Value is either
- a stream, a pathname, or a string.  The special value ‘t’ means
- ‘*standard-output*’ and ‘nil’ returns a string.  If OUTPUT is a
- pathname, the special variables ‘*output-directory*’ and
- ‘*output-name*’ have an effect.
+ a stream, a pathname, a string, or ‘nil’.  Default is the value of
+ the ‘*standard-output*’ special variable.  If OUTPUT is a pathname,
+ the special variables ‘*output-directory*’, ‘*output-name*’,
+ ‘*text-type*’, and ‘*html-type*’ have an effect.  If OUTPUT is ‘t’,
+ use the special variables ‘*output-name*’ or ‘*output-directory*’.
+ If OUTPUT is ‘nil’, the return value is a string.
 Keyword argument FORMAT specifies the file format of the report.
- Value is either ‘:text’ or ‘:html’."
+ Value is either ‘:text’ or ‘:html’.  Default is ‘:text’.
+Keyword argument TITLE defines the title for the report (a string).
+
+Return value is ‘nil’ or a string."
+  (check-type format (member :text :html))
+  (check-type title (or null string))
+  (setf data (nconc (list :title title)
+                    (or data *data*)))
+  (when (eq output t)
+    (setf output (or *output-name*
+                     *output-directory*
+                     (user-homedir-pathname)))
+    (when (stringp output)
+      (setf output (uiop:parse-native-namestring output))))
   (let ((*read-default-float-format* 'single-float))
-    (labels ((ensure-dir (destination)
-               (ignore-errors
-                (ensure-directories-exist
-                 (make-pathname
-                  :directory (pathname-directory (pathname destination))))))
-             (generate ()
-               (ecase format
-                 (:text
-                  (text-report data))
-                 (:html
-                  (html-report data)))))
+    (flet ((ensure-dir (destination)
+             (ignore-errors
+              (ensure-directories-exist
+               (make-pathname
+                :directory (pathname-directory (pathname destination))))))
+           (generate ()
+             (ecase format
+               (:text
+                (text-report data))
+               (:html
+                (html-report data)))
+             ;; Return value.
+             nil))
       (etypecase output
-        ((member t)
-         (ensure-dir *standard-output*)
-         (generate))
         (stream
          (ensure-dir output)
          (let ((*standard-output* output))
            (generate)))
         (pathname
-         (unless (pathname-directory output)
-           (setf output (uiop:merge-pathnames*
-                         output *output-directory*)))
-         (unless (pathname-name output)
-           (setf output (uiop:merge-pathnames*
-                         output *output-name*)))
-         (unless (or (pathname-type output) (eq format :text))
-           (setf output (uiop:merge-pathnames*
-                         output (make-pathname :type (string-downcase format)))))
+         (unless (or (pathname-directory output) (null *output-directory*))
+           (setf output (uiop:merge-pathnames* output *output-directory*)))
+         (unless (or (pathname-name output) (null *output-name*))
+           (setf output (uiop:merge-pathnames* output *output-name*)))
+         (let ((type (ecase format
+                       (:text
+                        *text-type*)
+                       (:html
+                        *html-type*))))
+           (unless (or (pathname-type output) (null type))
+             (setf output (uiop:merge-pathnames* output type))))
          (ensure-dir output)
          (with-open-file (stream output
                                  :direction :output
@@ -161,12 +196,12 @@ Keyword argument FORMAT specifies the file format of the report.
                                  :if-does-not-exist :create)
            (let ((*standard-output* stream))
              (generate))))
-        (null
-         (with-output-to-string (stream)
-           (let ((*standard-output* stream))
-             (generate))))
         (string
          (with-output-to-string (stream output)
+           (let ((*standard-output* stream))
+             (generate))))
+        (null
+         (with-output-to-string (stream)
            (let ((*standard-output* stream))
              (generate))))))))
 
