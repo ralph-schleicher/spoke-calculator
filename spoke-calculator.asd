@@ -59,6 +59,7 @@
 	                     (:file "sapim")
 	                     (:file "standard")
 	                     (:file "syntace")))
+               (:file "documentation")
 	       (:file "restore")))
 
 ;;; spoke-calculator.asd ends here
