@@ -40,7 +40,30 @@
    <h1>Spoke Calculator</h1>
   </div>
   <div class="prologue">
-   <pre>A spoke length calculator for bicycle wheels.</pre>
+   <pre>A spoke length calculator for bicycle wheels.
+
+To use it, you need the basic dimensions of the hub and the rim and an
+idea about the spoke pattern.
+
+     (in-package :spoke-calculator-user)
+
+     (calculate :hub (make-instance
+                      'hub :pitch-circle-diameter (cons 56.0 54.0)
+                           :pitch-circle-distance (cons 32.0 21.0)
+                           :spoke-hole-diameter 2.5)
+                :rim (make-instance
+                      'rim :base-diameter 536.0)
+                :spoke sapim-race
+                :spoke-count 32
+                :spoke-crossings 3)
+
+     ;; Create a report from the last result data set.
+     (report *data*)
+
+The spoke calculator can handle the regular spoke patterns with no,
+one, two, three, or four spoke crossings.  The left-hand side and
+right-hand side of the wheel can have a different spoke pattern,
+e.g. for triplet lacing.</pre>
   </div>
   <div class="contents" id="contents">
    <h2>Contents</h2>
@@ -131,15 +154,33 @@
       </a>
      </li>
      <li>
+      <a href="#rfxklmxa">
+       <span class="category">Special Variable</span>
+       <span class="symbol">*html-type*</span>
+      </a>
+     </li>
+     <li>
       <a href="#eisc4onn">
        <span class="category">Special Variable</span>
        <span class="symbol">*output-directory*</span>
       </a>
      </li>
      <li>
+      <a href="#d4e3cxvx">
+       <span class="category">Special Variable</span>
+       <span class="symbol">*output-format*</span>
+      </a>
+     </li>
+     <li>
       <a href="#m3nqrm4f">
        <span class="category">Special Variable</span>
        <span class="symbol">*output-name*</span>
+      </a>
+     </li>
+     <li>
+      <a href="#pzgo8pvq">
+       <span class="category">Special Variable</span>
+       <span class="symbol">*text-type*</span>
       </a>
      </li>
      <li>
@@ -772,7 +813,11 @@
      </table>
     </div>
     <div class="documentation">
-     <pre>Not documented.</pre>
+     <pre>Class for a wheel axle.
+
+Class precedence list:
+
+     ‘axle’, ‘<a href="#udmoccvr"><span class="symbol">component</span></a>’, ...</pre>
     </div>
    </div>
    <div class="definition" id="udmoccvr">
@@ -793,7 +838,11 @@
      </table>
     </div>
     <div class="documentation">
-     <pre>Not documented.</pre>
+     <pre>Base class for a wheel component.
+
+Class precedence list:
+
+     ‘component’, ‘standard-object’, ...</pre>
     </div>
    </div>
    <div class="definition" id="smlax2hs">
@@ -814,7 +863,19 @@
      </table>
     </div>
     <div class="documentation">
-     <pre>Not documented.</pre>
+     <pre>Class for a hub.
+
+The ‘<a href="#vbv387ig"><span class="symbol">pitch-circle-diameter</span></a>’ and ‘<a href="#l8np84oj"><span class="symbol">pitch-circle-distance</span></a>’ slot is
+mandatory for spoke length calculations.  The ‘<a href="#l8huanqb"><span class="symbol">spoke-hole-diameter</span></a>’
+defaults to 2.5 mm.
+
+Class precedence list:
+
+     ‘hub’, ‘<a href="#udmoccvr"><span class="symbol">component</span></a>’, ...
+
+See also:
+
+     ‘<a href="#bki7pnrj"><span class="symbol">make-hub-from-measurements</span></a>’</pre>
     </div>
    </div>
    <div class="definition" id="yooqozcm">
@@ -835,7 +896,11 @@
      </table>
     </div>
     <div class="documentation">
-     <pre>Not documented.</pre>
+     <pre>Class for a nipple.
+
+Class precedence list:
+
+     ‘nipple’, ‘<a href="#udmoccvr"><span class="symbol">component</span></a>’, ...</pre>
     </div>
    </div>
    <div class="definition" id="ejyj7hju">
@@ -856,7 +921,17 @@
      </table>
     </div>
     <div class="documentation">
-     <pre>Not documented.</pre>
+     <pre>Class for a rim.
+
+The ‘<a href="#w7tdjftl"><span class="symbol">base-diameter</span></a>’ slot is mandatory for spoke length calculations.
+
+Class precedence list:
+
+     ‘rim’, ‘<a href="#udmoccvr"><span class="symbol">component</span></a>’, ...
+
+See also:
+
+     ‘<a href="#ixky5gmp"><span class="symbol">make-rim-from-measurements</span></a>’</pre>
     </div>
    </div>
    <div class="definition" id="tozvxukr">
@@ -877,7 +952,18 @@
      </table>
     </div>
     <div class="documentation">
-     <pre>Not documented.</pre>
+     <pre>Class for a spoke.
+
+The ‘<a href="#tkbpypic"><span class="symbol">spoke-material</span></a>’, ‘<a href="#cxchxrov"><span class="symbol">spoke-area</span></a>’, and ‘<a href="#pepsi8fc"><span class="symbol">spoke-middle-section</span></a>’ slot
+is mandatory for calculating the spoke elongation.
+
+Class precedence list:
+
+     ‘spoke’, ‘<a href="#udmoccvr"><span class="symbol">component</span></a>’, ...
+
+See also:
+
+     ‘<a href="#bjgmepy4"><span class="symbol">spoke-elongation</span></a>’</pre>
     </div>
    </div>
    <div class="definition" id="dwtuqk4t">
@@ -898,7 +984,11 @@
      </table>
     </div>
     <div class="documentation">
-     <pre>Not documented.</pre>
+     <pre>Class for a straight pull hub.
+
+Class precedence list:
+
+     ‘straight-pull-hub’, ‘<a href="#smlax2hs"><span class="symbol">hub</span></a>’, ‘<a href="#udmoccvr"><span class="symbol">component</span></a>’, ...</pre>
     </div>
    </div>
    <div class="definition" id="a8wr3kya">
@@ -919,7 +1009,11 @@
      </table>
     </div>
     <div class="documentation">
-     <pre>Not documented.</pre>
+     <pre>Class for a thru axle.
+
+Class precedence list:
+
+     ‘thru-axle’, ‘<a href="#jfaa2hyf"><span class="symbol">axle</span></a>’, ‘<a href="#udmoccvr"><span class="symbol">component</span></a>’, ...</pre>
     </div>
    </div>
    <div class="definition" id="olkxplry">
@@ -940,7 +1034,11 @@
      </table>
     </div>
     <div class="documentation">
-     <pre>Not documented.</pre>
+     <pre>Class for a nipple washer.
+
+Class precedence list:
+
+     ‘washer’, ‘<a href="#udmoccvr"><span class="symbol">component</span></a>’, ...</pre>
     </div>
    </div>
    <div class="definition" id="hdgdwxga">
@@ -1024,7 +1122,7 @@
      </table>
     </div>
     <div class="documentation">
-     <pre>Modulus of elasticity in megapascal.
+     <pre>The default modulus of elasticity in megapascal.
 
 The value of this special variable is used if no spoke material
 is defined.  Most spokes are made of stainless steel according
@@ -1058,6 +1156,27 @@ strings.  Below is the list of template tags together with their
 meaning.</pre>
     </div>
    </div>
+   <div class="definition" id="rfxklmxa">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">*html-type*</span></a></td>
+	<td class="lambda-list"></td>
+	<td class="category"><span class="category">Special Variable</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>The file type of a HTML report.  Default is ‘html’.</pre>
+    </div>
+   </div>
    <div class="definition" id="eisc4onn">
     <div class="signature">
      <table class="signature">
@@ -1076,7 +1195,30 @@ meaning.</pre>
      </table>
     </div>
     <div class="documentation">
-     <pre>The default directory for saving a report.</pre>
+     <pre>The default directory for saving a report.
+Default is the user's home directory.</pre>
+    </div>
+   </div>
+   <div class="definition" id="d4e3cxvx">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">*output-format*</span></a></td>
+	<td class="lambda-list"></td>
+	<td class="category"><span class="category">Special Variable</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>The default file format of a report.
+Default is ‘:text’.</pre>
     </div>
    </div>
    <div class="definition" id="m3nqrm4f">
@@ -1097,7 +1239,29 @@ meaning.</pre>
      </table>
     </div>
     <div class="documentation">
-     <pre>The default file name of a report.</pre>
+     <pre>The default file name of a report.
+Default is ‘spoke-calculator’.</pre>
+    </div>
+   </div>
+   <div class="definition" id="pzgo8pvq">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">*text-type*</span></a></td>
+	<td class="lambda-list"></td>
+	<td class="category"><span class="category">Special Variable</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>The file type of a text report.  Default is ‘txt’.</pre>
     </div>
    </div>
    <div class="definition" id="xgsbio7a">
@@ -1386,7 +1550,15 @@ See also ‘<a href="#smlax2hs"><span class="symbol">hub</span></a>’, ‘<a hr
      </table>
     </div>
     <div class="documentation">
-     <pre>Not documented.</pre>
+     <pre>Define a material.
+
+Argument NAME is the material name (a string).  Material names
+ are case insensitive.
+Keyword argument ELASTIC-MODULUS is the modulus of elasticity
+ in megapascal.
+
+If the material is already defined, update it.  Otherwise, create
+ a new ‘material’ object.</pre>
     </div>
    </div>
    <div class="definition" id="pa7pg37e">
@@ -1432,7 +1604,7 @@ Value is the corresponding angle given in degree.</pre>
      </table>
     </div>
     <div class="documentation">
-     <pre>Not documented.</pre>
+     <pre>A ‘<a href="#tozvxukr"><span class="symbol">spoke</span></a>’ object.</pre>
     </div>
    </div>
    <div class="definition" id="cblazkpx">
@@ -1453,7 +1625,7 @@ Value is the corresponding angle given in degree.</pre>
      </table>
     </div>
     <div class="documentation">
-     <pre>Not documented.</pre>
+     <pre>A ‘<a href="#tozvxukr"><span class="symbol">spoke</span></a>’ object.</pre>
     </div>
    </div>
    <div class="definition" id="ahlsskrj">
@@ -1474,7 +1646,7 @@ Value is the corresponding angle given in degree.</pre>
      </table>
     </div>
     <div class="documentation">
-     <pre>Not documented.</pre>
+     <pre>A ‘<a href="#tozvxukr"><span class="symbol">spoke</span></a>’ object.</pre>
     </div>
    </div>
    <div class="definition" id="sve2wl7u">
@@ -1495,7 +1667,7 @@ Value is the corresponding angle given in degree.</pre>
      </table>
     </div>
     <div class="documentation">
-     <pre>Not documented.</pre>
+     <pre>A ‘<a href="#tozvxukr"><span class="symbol">spoke</span></a>’ object.</pre>
     </div>
    </div>
    <div class="definition" id="xqsmjzo5">
@@ -1516,7 +1688,7 @@ Value is the corresponding angle given in degree.</pre>
      </table>
     </div>
     <div class="documentation">
-     <pre>Not documented.</pre>
+     <pre>A ‘<a href="#tozvxukr"><span class="symbol">spoke</span></a>’ object.</pre>
     </div>
    </div>
    <div class="definition" id="zjfawijr">
@@ -1537,7 +1709,7 @@ Value is the corresponding angle given in degree.</pre>
      </table>
     </div>
     <div class="documentation">
-     <pre>Not documented.</pre>
+     <pre>A ‘<a href="#tozvxukr"><span class="symbol">spoke</span></a>’ object.</pre>
     </div>
    </div>
    <div class="definition" id="q5suq3ub">
@@ -1558,7 +1730,7 @@ Value is the corresponding angle given in degree.</pre>
      </table>
     </div>
     <div class="documentation">
-     <pre>Not documented.</pre>
+     <pre>A ‘<a href="#yooqozcm"><span class="symbol">nipple</span></a>’ object.</pre>
     </div>
    </div>
    <div class="definition" id="ewy4c45x">
@@ -1579,7 +1751,7 @@ Value is the corresponding angle given in degree.</pre>
      </table>
     </div>
     <div class="documentation">
-     <pre>Not documented.</pre>
+     <pre>A ‘<a href="#olkxplry"><span class="symbol">washer</span></a>’ object.</pre>
     </div>
    </div>
    <div class="definition" id="pupxiuyx">
@@ -1600,7 +1772,7 @@ Value is the corresponding angle given in degree.</pre>
      </table>
     </div>
     <div class="documentation">
-     <pre>Not documented.</pre>
+     <pre>A ‘<a href="#yooqozcm"><span class="symbol">nipple</span></a>’ object.</pre>
     </div>
    </div>
    <div class="definition" id="dysblb5s">
@@ -1621,7 +1793,7 @@ Value is the corresponding angle given in degree.</pre>
      </table>
     </div>
     <div class="documentation">
-     <pre>Not documented.</pre>
+     <pre>A ‘<a href="#yooqozcm"><span class="symbol">nipple</span></a>’ object.</pre>
     </div>
    </div>
    <div class="definition" id="as4lcbl5">
@@ -1642,7 +1814,7 @@ Value is the corresponding angle given in degree.</pre>
      </table>
     </div>
     <div class="documentation">
-     <pre>Not documented.</pre>
+     <pre>A ‘<a href="#tozvxukr"><span class="symbol">spoke</span></a>’ object.</pre>
     </div>
    </div>
    <div class="definition" id="tcrytmr3">
@@ -1663,7 +1835,7 @@ Value is the corresponding angle given in degree.</pre>
      </table>
     </div>
     <div class="documentation">
-     <pre>Not documented.</pre>
+     <pre>A ‘<a href="#tozvxukr"><span class="symbol">spoke</span></a>’ object.</pre>
     </div>
    </div>
    <div class="definition" id="slu5tzcx">
@@ -1684,7 +1856,7 @@ Value is the corresponding angle given in degree.</pre>
      </table>
     </div>
     <div class="documentation">
-     <pre>Not documented.</pre>
+     <pre>A ‘<a href="#yooqozcm"><span class="symbol">nipple</span></a>’ object.</pre>
     </div>
    </div>
    <div class="definition" id="guacym3t">
@@ -1705,7 +1877,7 @@ Value is the corresponding angle given in degree.</pre>
      </table>
     </div>
     <div class="documentation">
-     <pre>Not documented.</pre>
+     <pre>A ‘<a href="#yooqozcm"><span class="symbol">nipple</span></a>’ object.</pre>
     </div>
    </div>
    <div class="definition" id="pb3syhiw">
@@ -1726,7 +1898,7 @@ Value is the corresponding angle given in degree.</pre>
      </table>
     </div>
     <div class="documentation">
-     <pre>Not documented.</pre>
+     <pre>A ‘<a href="#yooqozcm"><span class="symbol">nipple</span></a>’ object.</pre>
     </div>
    </div>
    <div class="definition" id="p7bjvnpa">
@@ -1747,7 +1919,7 @@ Value is the corresponding angle given in degree.</pre>
      </table>
     </div>
     <div class="documentation">
-     <pre>Not documented.</pre>
+     <pre>A ‘<a href="#yooqozcm"><span class="symbol">nipple</span></a>’ object.</pre>
     </div>
    </div>
    <div class="definition" id="uztbrkb5">
@@ -1768,7 +1940,7 @@ Value is the corresponding angle given in degree.</pre>
      </table>
     </div>
     <div class="documentation">
-     <pre>Not documented.</pre>
+     <pre>A ‘<a href="#yooqozcm"><span class="symbol">nipple</span></a>’ object.</pre>
     </div>
    </div>
    <div class="definition" id="urtec8mr">
@@ -1789,7 +1961,9 @@ Value is the corresponding angle given in degree.</pre>
      </table>
     </div>
     <div class="documentation">
-     <pre>Not documented.</pre>
+     <pre>The modulus of elasticity of an undefined material.
+
+Return the value of the ‘<a href="#yoen4kcw"><span class="symbol">*elastic-modulus*</span></a>’ special variable.</pre>
     </div>
    </div>
    <div class="definition" id="v5bdtsx5">
@@ -1810,7 +1984,7 @@ Value is the corresponding angle given in degree.</pre>
      </table>
     </div>
     <div class="documentation">
-     <pre>Modulus of elasticity in megapascal.</pre>
+     <pre>The modulus of elasticity in megapascal.</pre>
     </div>
    </div>
    <div class="definition" id="vfhjdpzw">
@@ -1831,7 +2005,13 @@ Value is the corresponding angle given in degree.</pre>
      </table>
     </div>
     <div class="documentation">
-     <pre>Not documented.</pre>
+     <pre>Search for a material.
+
+Argument NAME is the material name (a string).  Material names are
+ case insensitive.
+
+Return the ‘material’ object associated with NAME or ‘nil’ if no
+material with that name exists.</pre>
     </div>
    </div>
    <div class="definition" id="rzxbd3t2">
@@ -2029,7 +2209,7 @@ Return value is a rim object.</pre>
      </table>
     </div>
     <div class="documentation">
-     <pre>Not documented.</pre>
+     <pre>The material name of an undefined material.</pre>
     </div>
    </div>
    <div class="definition" id="ru7ixow3">
@@ -2176,7 +2356,7 @@ Return value is a rim object.</pre>
      </table>
     </div>
     <div class="documentation">
-     <pre>Not documented.</pre>
+     <pre>A ‘<a href="#jfaa2hyf"><span class="symbol">axle</span></a>’ object.</pre>
     </div>
    </div>
    <div class="definition" id="samwonv7">
@@ -2197,7 +2377,7 @@ Return value is a rim object.</pre>
      </table>
     </div>
     <div class="documentation">
-     <pre>Not documented.</pre>
+     <pre>A ‘<a href="#jfaa2hyf"><span class="symbol">axle</span></a>’ object.</pre>
     </div>
    </div>
    <div class="definition" id="rgu7hoz4">
@@ -2218,7 +2398,7 @@ Return value is a rim object.</pre>
      </table>
     </div>
     <div class="documentation">
-     <pre>Not documented.</pre>
+     <pre>A ‘<a href="#jfaa2hyf"><span class="symbol">axle</span></a>’ object.</pre>
     </div>
    </div>
    <div class="definition" id="zbcra2ve">
@@ -2257,7 +2437,7 @@ Value is the corresponding angle given in radian.</pre>
       <tbody>
        <tr>
 	<td class="symbol"><a href="#contents"><span class="symbol">report</span></a></td>
-	<td class="lambda-list"><span class="lambda-list">(<span class="variable">data</span> <span class="lambda-list-keyword">&amp;key</span> <span class="variable">output</span> <span class="variable">format</span>)</span></td>
+	<td class="lambda-list"><span class="lambda-list">(<span class="variable">data</span> <span class="lambda-list-keyword">&amp;key</span> <span class="variable">output</span> <span class="variable">format</span> <span class="variable">title</span>)</span></td>
 	<td class="category"><span class="category">Function</span></td>
        </tr>
       </tbody>
@@ -2267,13 +2447,21 @@ Value is the corresponding angle given in radian.</pre>
      <pre>Generate a report.
 
 First argument DATA is a result data set of the ‘<a href="#ogd5qrgr"><span class="symbol">calculate</span></a>’ function.
+ Default is the result data set stored in ‘<a href="#hdgdwxga"><span class="symbol">*data*</span></a>’.
+
 Keyword argument OUTPUT specifies the destination.  Value is either
- a stream, a pathname, or a string.  The special value ‘t’ means
- ‘*standard-output*’ and ‘nil’ returns a string.  If OUTPUT is a
- pathname, the special variables ‘<a href="#eisc4onn"><span class="symbol">*output-directory*</span></a>’ and
- ‘<a href="#m3nqrm4f"><span class="symbol">*output-name*</span></a>’ have an effect.
+ a stream, a pathname, a string, or ‘nil’.  Default is the value of
+ the ‘*standard-output*’ special variable.  If OUTPUT is a pathname,
+ the special variables ‘<a href="#eisc4onn"><span class="symbol">*output-directory*</span></a>’, ‘<a href="#m3nqrm4f"><span class="symbol">*output-name*</span></a>’,
+ ‘<a href="#pzgo8pvq"><span class="symbol">*text-type*</span></a>’, and ‘<a href="#rfxklmxa"><span class="symbol">*html-type*</span></a>’ have an effect.  If OUTPUT is ‘t’,
+ use the special variables ‘<a href="#m3nqrm4f"><span class="symbol">*output-name*</span></a>’ or ‘<a href="#eisc4onn"><span class="symbol">*output-directory*</span></a>’.
+ If OUTPUT is ‘nil’, the return value is a string.
 Keyword argument FORMAT specifies the file format of the report.
- Value is either ‘:text’ or ‘:html’.</pre>
+ Value is either ‘:text’ or ‘:html’.  Default is the value of the
+ ‘<a href="#d4e3cxvx"><span class="symbol">*output-format*</span></a>’ special variable.
+Keyword argument TITLE defines the title for the report (a string).
+
+Return value is ‘nil’ or a string.</pre>
     </div>
    </div>
    <div class="definition" id="xd5nltyq">
@@ -2378,7 +2566,7 @@ Keyword argument FORMAT specifies the file format of the report.
      </table>
     </div>
     <div class="documentation">
-     <pre>Not documented.</pre>
+     <pre>A ‘<a href="#tozvxukr"><span class="symbol">spoke</span></a>’ object.</pre>
     </div>
    </div>
    <div class="definition" id="xo3r4g3m">
@@ -2399,7 +2587,7 @@ Keyword argument FORMAT specifies the file format of the report.
      </table>
     </div>
     <div class="documentation">
-     <pre>Not documented.</pre>
+     <pre>A ‘<a href="#tozvxukr"><span class="symbol">spoke</span></a>’ object.</pre>
     </div>
    </div>
    <div class="definition" id="mecqqean">
@@ -2420,7 +2608,7 @@ Keyword argument FORMAT specifies the file format of the report.
      </table>
     </div>
     <div class="documentation">
-     <pre>Not documented.</pre>
+     <pre>A ‘<a href="#tozvxukr"><span class="symbol">spoke</span></a>’ object.</pre>
     </div>
    </div>
    <div class="definition" id="srhh5vzl">
@@ -2441,7 +2629,7 @@ Keyword argument FORMAT specifies the file format of the report.
      </table>
     </div>
     <div class="documentation">
-     <pre>Not documented.</pre>
+     <pre>A ‘<a href="#yooqozcm"><span class="symbol">nipple</span></a>’ object.</pre>
     </div>
    </div>
    <div class="definition" id="piz8h7bs">
@@ -2462,7 +2650,7 @@ Keyword argument FORMAT specifies the file format of the report.
      </table>
     </div>
     <div class="documentation">
-     <pre>Not documented.</pre>
+     <pre>A ‘<a href="#olkxplry"><span class="symbol">washer</span></a>’ object.</pre>
     </div>
    </div>
    <div class="definition" id="kue5vpm3">
@@ -2483,7 +2671,7 @@ Keyword argument FORMAT specifies the file format of the report.
      </table>
     </div>
     <div class="documentation">
-     <pre>Not documented.</pre>
+     <pre>A ‘<a href="#yooqozcm"><span class="symbol">nipple</span></a>’ object.</pre>
     </div>
    </div>
    <div class="definition" id="ppu2m3ol">
@@ -2504,7 +2692,7 @@ Keyword argument FORMAT specifies the file format of the report.
      </table>
     </div>
     <div class="documentation">
-     <pre>Not documented.</pre>
+     <pre>A ‘<a href="#olkxplry"><span class="symbol">washer</span></a>’ object.</pre>
     </div>
    </div>
    <div class="definition" id="vg3ome4a">
@@ -2525,7 +2713,7 @@ Keyword argument FORMAT specifies the file format of the report.
      </table>
     </div>
     <div class="documentation">
-     <pre>Not documented.</pre>
+     <pre>A ‘<a href="#tozvxukr"><span class="symbol">spoke</span></a>’ object.</pre>
     </div>
    </div>
    <div class="definition" id="ykndqbay">
@@ -2546,7 +2734,7 @@ Keyword argument FORMAT specifies the file format of the report.
      </table>
     </div>
     <div class="documentation">
-     <pre>Not documented.</pre>
+     <pre>A ‘<a href="#olkxplry"><span class="symbol">washer</span></a>’ object.</pre>
     </div>
    </div>
    <div class="definition" id="e8qwuomv">
@@ -2567,7 +2755,7 @@ Keyword argument FORMAT specifies the file format of the report.
      </table>
     </div>
     <div class="documentation">
-     <pre>Not documented.</pre>
+     <pre>A ‘<a href="#olkxplry"><span class="symbol">washer</span></a>’ object.</pre>
     </div>
    </div>
    <div class="definition" id="lfimsjqo">
@@ -2588,7 +2776,7 @@ Keyword argument FORMAT specifies the file format of the report.
      </table>
     </div>
     <div class="documentation">
-     <pre>Not documented.</pre>
+     <pre>A ‘<a href="#olkxplry"><span class="symbol">washer</span></a>’ object.</pre>
     </div>
    </div>
    <div class="definition" id="qv2czace">
@@ -2609,7 +2797,7 @@ Keyword argument FORMAT specifies the file format of the report.
      </table>
     </div>
     <div class="documentation">
-     <pre>Not documented.</pre>
+     <pre>A ‘<a href="#olkxplry"><span class="symbol">washer</span></a>’ object.</pre>
     </div>
    </div>
    <div class="definition" id="tgnvi8vw">
@@ -2630,7 +2818,7 @@ Keyword argument FORMAT specifies the file format of the report.
      </table>
     </div>
     <div class="documentation">
-     <pre>Not documented.</pre>
+     <pre>A ‘<a href="#yooqozcm"><span class="symbol">nipple</span></a>’ object.</pre>
     </div>
    </div>
    <div class="definition" id="yqzioiuf">
@@ -2651,7 +2839,7 @@ Keyword argument FORMAT specifies the file format of the report.
      </table>
     </div>
     <div class="documentation">
-     <pre>Not documented.</pre>
+     <pre>A ‘<a href="#tozvxukr"><span class="symbol">spoke</span></a>’ object.</pre>
     </div>
    </div>
    <div class="definition" id="gtp8zlzw">
@@ -2672,7 +2860,7 @@ Keyword argument FORMAT specifies the file format of the report.
      </table>
     </div>
     <div class="documentation">
-     <pre>Not documented.</pre>
+     <pre>A ‘<a href="#yooqozcm"><span class="symbol">nipple</span></a>’ object.</pre>
     </div>
    </div>
    <div class="definition" id="llfym8vm">
@@ -2693,7 +2881,7 @@ Keyword argument FORMAT specifies the file format of the report.
      </table>
     </div>
     <div class="documentation">
-     <pre>Not documented.</pre>
+     <pre>A ‘<a href="#tozvxukr"><span class="symbol">spoke</span></a>’ object.</pre>
     </div>
    </div>
    <div class="definition" id="ebw7wxqp">
@@ -2714,7 +2902,7 @@ Keyword argument FORMAT specifies the file format of the report.
      </table>
     </div>
     <div class="documentation">
-     <pre>Not documented.</pre>
+     <pre>A ‘<a href="#yooqozcm"><span class="symbol">nipple</span></a>’ object.</pre>
     </div>
    </div>
    <div class="definition" id="p8cgjol5">
@@ -2959,7 +3147,7 @@ spoke's strength.</pre>
      </table>
     </div>
     <div class="documentation">
-     <pre>Not documented.</pre>
+     <pre>A ‘<a href="#a8wr3kya"><span class="symbol">thru-axle</span></a>’ object.</pre>
     </div>
    </div>
    <div class="definition" id="eu3gktyt">
@@ -2980,7 +3168,7 @@ spoke's strength.</pre>
      </table>
     </div>
     <div class="documentation">
-     <pre>Not documented.</pre>
+     <pre>A ‘<a href="#a8wr3kya"><span class="symbol">thru-axle</span></a>’ object.</pre>
     </div>
    </div>
    <div class="definition" id="q4oxaskk">
@@ -3001,7 +3189,7 @@ spoke's strength.</pre>
      </table>
     </div>
     <div class="documentation">
-     <pre>Not documented.</pre>
+     <pre>A ‘<a href="#a8wr3kya"><span class="symbol">thru-axle</span></a>’ object.</pre>
     </div>
    </div>
    <div class="definition" id="zvc3zdgx">
@@ -3022,7 +3210,7 @@ spoke's strength.</pre>
      </table>
     </div>
     <div class="documentation">
-     <pre>Not documented.</pre>
+     <pre>A ‘<a href="#a8wr3kya"><span class="symbol">thru-axle</span></a>’ object.</pre>
     </div>
    </div>
    <div class="definition" id="pveuxpws">
@@ -3043,7 +3231,7 @@ spoke's strength.</pre>
      </table>
     </div>
     <div class="documentation">
-     <pre>Not documented.</pre>
+     <pre>A ‘<a href="#jfaa2hyf"><span class="symbol">axle</span></a>’ object.</pre>
     </div>
    </div>
    <div class="definition" id="u4iasj84">
@@ -3064,7 +3252,7 @@ spoke's strength.</pre>
      </table>
     </div>
     <div class="documentation">
-     <pre>Not documented.</pre>
+     <pre>A ‘<a href="#jfaa2hyf"><span class="symbol">axle</span></a>’ object.</pre>
     </div>
    </div>
    <div class="definition" id="dwbnxkoh">
@@ -3085,7 +3273,7 @@ spoke's strength.</pre>
      </table>
     </div>
     <div class="documentation">
-     <pre>Not documented.</pre>
+     <pre>A ‘<a href="#jfaa2hyf"><span class="symbol">axle</span></a>’ object.</pre>
     </div>
    </div>
    <div class="definition" id="cmfwqeaq">
@@ -3106,7 +3294,7 @@ spoke's strength.</pre>
      </table>
     </div>
     <div class="documentation">
-     <pre>Not documented.</pre>
+     <pre>A ‘<a href="#jfaa2hyf"><span class="symbol">axle</span></a>’ object.</pre>
     </div>
    </div>
    <div class="definition" id="trrq8saz">
@@ -3127,7 +3315,7 @@ spoke's strength.</pre>
      </table>
     </div>
     <div class="documentation">
-     <pre>Not documented.</pre>
+     <pre>A ‘<a href="#jfaa2hyf"><span class="symbol">axle</span></a>’ object.</pre>
     </div>
    </div>
    <div class="definition" id="g4oad8ec">
@@ -3148,7 +3336,7 @@ spoke's strength.</pre>
      </table>
     </div>
     <div class="documentation">
-     <pre>Not documented.</pre>
+     <pre>A ‘<a href="#jfaa2hyf"><span class="symbol">axle</span></a>’ object.</pre>
     </div>
    </div>
    <div class="definition" id="ljpuxvuu">
@@ -3169,7 +3357,7 @@ spoke's strength.</pre>
      </table>
     </div>
     <div class="documentation">
-     <pre>Not documented.</pre>
+     <pre>A ‘<a href="#jfaa2hyf"><span class="symbol">axle</span></a>’ object.</pre>
     </div>
    </div>
    <div class="definition" id="dsiq53zi">
@@ -3190,7 +3378,7 @@ spoke's strength.</pre>
      </table>
     </div>
     <div class="documentation">
-     <pre>Not documented.</pre>
+     <pre>A ‘<a href="#jfaa2hyf"><span class="symbol">axle</span></a>’ object.</pre>
     </div>
    </div>
    <div class="definition" id="ncupl2lb">
