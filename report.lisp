@@ -45,6 +45,10 @@ Default is the user's home directory.")
   "The default file name of a report.
 Default is ‘spoke-calculator’.")
 
+(defvar *output-format* :text
+  "The default file format of a report.
+Default is ‘:text’.")
+
 ;;;; Text
 
 (defvar *text-type* (make-pathname :type "txt")
@@ -130,7 +134,7 @@ meaning.")
 
 ;;;; Common Interface
 
-(defun report (data &key (output *standard-output*) (format :text) title)
+(defun report (data &key (output *standard-output*) (format *output-format*) title)
   "Generate a report.
 
 First argument DATA is a result data set of the ‘calculate’ function.
@@ -144,7 +148,8 @@ Keyword argument OUTPUT specifies the destination.  Value is either
  use the special variables ‘*output-name*’ or ‘*output-directory*’.
  If OUTPUT is ‘nil’, the return value is a string.
 Keyword argument FORMAT specifies the file format of the report.
- Value is either ‘:text’ or ‘:html’.  Default is ‘:text’.
+ Value is either ‘:text’ or ‘:html’.  Default is the value of the
+ ‘*output-format*’ special variable.
 Keyword argument TITLE defines the title for the report (a string).
 
 Return value is ‘nil’ or a string."
