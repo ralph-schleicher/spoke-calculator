@@ -46,7 +46,12 @@
     :accessor component-name
     :initarg :name
     :initform nil
-    :type (or null string))))
+    :type (or null string)))
+  (:documentation "Base class for a wheel component.
+
+Class precedence list:
+
+     ‘component’, ‘standard-object’, ..."))
 
 (defmethod initialize-instance :after ((object component) &key)
   (iter (with class = (class-of object))
@@ -72,7 +77,12 @@
     :accessor axle-length
     :initarg :length
     :initform 0
-    :type (real 0))))
+    :type (real 0)))
+  (:documentation "Class for a wheel axle.
+
+Class precedence list:
+
+     ‘axle’, ‘component’, ..."))
 
 (defclass thru-axle (axle)
   ((thread
@@ -80,7 +90,12 @@
     :accessor axle-thread
     :initarg :thread
     :initform nil
-    :type (or null string))))
+    :type (or null string)))
+  (:documentation "Class for a thru axle.
+
+Class precedence list:
+
+     ‘thru-axle’, ‘axle’, ‘component’, ..."))
 
 (defclass hub (component)
   ((pitch-circle-diameter
@@ -126,7 +141,20 @@
     :accessor flange-thickness
     :initarg :flange-thickness
     :initform nil
-    :type (or null (real 0) (cons (real 0) (real 0))))))
+    :type (or null (real 0) (cons (real 0) (real 0)))))
+  (:documentation "Class for a hub.
+
+The ‘pitch-circle-diameter’ and ‘pitch-circle-distance’ slot is
+mandatory for spoke length calculations.  The ‘spoke-hole-diameter’
+defaults to 2.5 mm.
+
+Class precedence list:
+
+     ‘hub’, ‘component’, ...
+
+See also:
+
+     ‘make-hub-from-measurements’"))
 
 (defclass straight-pull-hub (hub)
   ((spoke-hole-offset
@@ -134,7 +162,12 @@
     :accessor spoke-hole-offset
     :initarg :spoke-hole-offset
     :initform 0
-    :type (or real (cons real real)))))
+    :type (or real (cons real real))))
+  (:documentation "Class for a straight pull hub.
+
+Class precedence list:
+
+     ‘straight-pull-hub’, ‘hub’, ‘component’, ..."))
 
 (defclass rim (component)
   ((base-diameter
@@ -168,7 +201,18 @@
     :accessor thickness
     :initarg :thickness
     :initform nil
-    :type (or null (real 0)))))
+    :type (or null (real 0))))
+  (:documentation "Class for a rim.
+
+The ‘base-diameter’ slot is mandatory for spoke length calculations.
+
+Class precedence list:
+
+     ‘rim’, ‘component’, ...
+
+See also:
+
+     ‘make-rim-from-measurements’"))
 
 (defclass spoke (component)
   ((diameter
@@ -206,7 +250,19 @@
     :accessor spoke-thread
     :initarg :thread
     :initform "14G"
-    :type (or string symbol))))
+    :type (or string symbol)))
+  (:documentation "Class for a spoke.
+
+The ‘spoke-material’, ‘spoke-area’, and ‘spoke-middle-section’ slot
+is mandatory for calculating the spoke elongation.
+
+Class precedence list:
+
+     ‘spoke’, ‘component’, ...
+
+See also:
+
+     ‘spoke-elongation’"))
 
 (defclass nipple (component)
   ((length
@@ -220,7 +276,12 @@
     :accessor nipple-head-height
     :initarg :head-height
     :initform 3.0
-    :type (real 0))))
+    :type (real 0)))
+  (:documentation "Class for a nipple.
+
+Class precedence list:
+
+     ‘nipple’, ‘component’, ..."))
 
 (defclass washer (component)
   ((thickness
@@ -228,7 +289,12 @@
     :accessor washer-thickness
     :initarg :thickness
     :initform 0
-    :type (real 0))))
+    :type (real 0)))
+  (:documentation "Class for a nipple washer.
+
+Class precedence list:
+
+     ‘washer’, ‘component’, ..."))
 
 ;;;; Utilities
 
@@ -260,7 +326,7 @@ Return value is a hub object."
         (flange-thickness-right (right flange-thickness)))
     (apply #'make-instance class
            :axle-length axle-length
-           :flange-distance flange-distance 
+           :flange-distance flange-distance
            :flange-thickness flange-thickness
            :pitch-circle-distance (cons (- (/ axle-length 2) flange-distance-left (/ flange-thickness-left 2))
                                         (- (/ axle-length 2) flange-distance-right (/ flange-thickness-right 2)))
