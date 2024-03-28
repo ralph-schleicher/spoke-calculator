@@ -38,10 +38,10 @@
 (defpackage #:de.ralph-schleicher.spoke-calculator
   (:nicknames :spoke-calculator)
   (:use :common-lisp
-	:iterate)
+        :iterate)
   (:import-from #:alexandria
-		#:when-let
-		#:when-let*)
+                #:when-let
+                #:when-let*)
   (:export
    ;; common.lisp
    #:gn
@@ -162,7 +162,30 @@
    #:syntace-x12-148
    #:syntace-x12-157)
   (:documentation
-   "A spoke length calculator for bicycle wheels."))
+   "A spoke length calculator for bicycle wheels.
+
+To use it, you need the basic dimensions of the hub and the rim and an
+idea about the spoke pattern.
+
+     (in-package :spoke-calculator-user)
+
+     (calculate :hub (make-instance
+                      'hub :pitch-circle-diameter (cons 56.0 54.0)
+                           :pitch-circle-distance (cons 32.0 21.0)
+                           :spoke-hole-diameter 2.5)
+                :rim (make-instance
+                      'rim :base-diameter 536.0)
+                :spoke sapim-race
+                :spoke-count 32
+                :spoke-crossings 3)
+
+     ;; Create a report from the last result data set.
+     (report *data*)
+
+The spoke calculator can handle the regular spoke patterns with no,
+one, two, three, or four spoke crossings.  The left-hand side and
+right-hand side of the wheel can have a different spoke pattern,
+e.g. for triplet lacing."))
 
 (defpackage #:de.ralph-schleicher.spoke-calculator-user
   (:nicknames :spoke-calculator-user)
