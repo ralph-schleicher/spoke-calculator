@@ -402,7 +402,6 @@ See also ‘hub’, ‘rim’, ‘washer’, ‘spoke’, and ‘nipple’."
                         :hub-radius-right (%right hub-radius)
                         :hub-distance-left (%left hub-distance)
                         :hub-distance-right (%right hub-distance)
-                        :hub-distance-right (%right hub-distance)
                         :hub-spoke-hole-diameter (spoke-hole-diameter hub)
                         :hub-spoke-hole-offset (when (typep hub 'straight-pull-hub) (spoke-hole-offset hub))
                         :is-straight-pull-hub (when (typep hub 'straight-pull-hub) t)
